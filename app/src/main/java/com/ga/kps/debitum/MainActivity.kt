@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
 
         anadirDeudadFAB.setOnClickListener {
-
+            val nav = Intent(this@MainActivity,AddDebt::class.java)
+            startActivity(nav)
         }
 
 
