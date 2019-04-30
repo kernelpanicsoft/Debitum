@@ -11,7 +11,8 @@ import android.support.v4.view.ViewPager
 import android.view.Menu
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
+
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         anadirDeudadFAB.setOnClickListener {
-            val nav = Intent(this@MainActivity,AddDebt::class.java)
+            val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
             startActivity(nav)
         }
 
