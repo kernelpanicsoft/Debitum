@@ -14,6 +14,6 @@ class AddDebtActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.anadir_nueva_deuda)
+        title = "Hola"
     }
 }
