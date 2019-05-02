@@ -8,10 +8,11 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(foreignKeys = arrayOf(
     ForeignKey(entity =  Deuda::class,
     parentColumns = arrayOf("id"),
-    childColumns = arrayOf("id"),
+    childColumns = arrayOf("deuda_ID"),
     onDelete = ForeignKey.CASCADE)
 ))
 class Pago (@PrimaryKey(autoGenerate = true) var id: Int,
             var monto: Float? = 0f,
             var fecha: String? = null,
-            var nota: String? = null)
+            var nota: String? = null,
+            var deuda_ID: Int? = null)
