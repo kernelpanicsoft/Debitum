@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Debitum</string>
     <string name="anadir_nueva_deuda">Añadir nueva deuda</string>
+    <string name="titulo_de_la_deuda">Titulo de la deuda</string>
+    <string name="tipo_de_deuda">Tipo de deuda:</string>
+    <string name="monto">Monto:</string>
+    <string name="nota">Nota:</string>
+    <string name="fecha_de_adquisicion">Fecha de adquisición:</string>
+
+    <array name="tipo_deuda">
+        <item>Yo adeudo</item>
+        <item>Me adeudan</item>
+    </array>
 </resources>
