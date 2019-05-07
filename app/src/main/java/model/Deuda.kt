@@ -15,7 +15,8 @@ class Deuda(@PrimaryKey(autoGenerate = true) var id: Int,
             var titulo: String? = null,
             var monto: Float? = 0f,
             var fecha_adquision: String? = null,
-            var saldo: Float? = 0f,
+            var pagado: Float? = 0f,
             var nota: String? = null,
+            var estado: Int? = null,
             var cuenta_id: Int? = null
             )
