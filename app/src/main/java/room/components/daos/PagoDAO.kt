@@ -19,7 +19,7 @@ interface PagoDAO {
     fun deleteAllPagos()
 
     @Query("SELECT * FROM Pago")
-    fun getAllPagos(): LiveData<Pago>
+    fun getAllPagos(): LiveData<List<Pago>>
 
     @Query("SELECT * FROM Pago WHERE Pago.id = :id")
     fun getPago(id: Int?): LiveData<Pago>

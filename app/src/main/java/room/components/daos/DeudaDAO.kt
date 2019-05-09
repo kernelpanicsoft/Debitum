@@ -7,7 +7,7 @@ import model.Deuda
 @Dao
 interface DeudaDAO {
     @Insert
-    fun inser(deuda: Deuda)
+    fun insert(deuda: Deuda)
 
     @Update
     fun update(deuda: Deuda)
@@ -21,6 +21,7 @@ interface DeudaDAO {
     @Query("SELECT * FROM Deuda")
     fun getAllDeudas(): LiveData<List<Deuda>>
 
-
+    @Query("SELECT * FROM Deuda WHERE Deuda.id = :id")
+    fun getDeuda(id: Int): LiveData<Deuda>
 
 }
