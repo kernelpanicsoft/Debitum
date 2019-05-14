@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class actualDebts: Fragment() {
+class PassDebtsFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
-        val v = inflater!!.inflate(R.layout.fragment_actual_debts, container, false)
+        val v = inflater!!.inflate(R.layout.fragment_pass_debts,container, false)
 
         return v
+
     }
 }

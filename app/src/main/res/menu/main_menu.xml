@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemAdd"
+        android:id="@+id/itemSettings"
         android:icon="@drawable/ic_settings_white_24dp"
         android:title="@string/anadir_nueva_deuda"
         app:showAsAction="always"/>

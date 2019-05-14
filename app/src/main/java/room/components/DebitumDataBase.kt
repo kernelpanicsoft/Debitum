@@ -1,5 +1,7 @@
 package room.components
 
+import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
@@ -9,6 +11,7 @@ import room.components.daos.CuentaDAO
 import room.components.daos.DeudaDAO
 import room.components.daos.PagoDAO
 import room.components.daos.RecordatorioPagoDAO
+import room.components.viewModels.CuentaViewModel
 
 @Database(entities = arrayOf(Cuenta::class,
     Deuda::class,
@@ -32,6 +35,13 @@ abstract class DebitumDataBase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
                 Room.databaseBuilder(context.applicationContext,
                     DebitumDataBase::class.java, "Debitum.db")
+                   /* .addCallback( object : RoomDatabase.Callback(){
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            instance?.cuentaDao()?.insert(Cuenta(0,0f))
+                        }
+                    }
+
+                    )*/
                     .build()
     }
 }

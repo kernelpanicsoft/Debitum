@@ -13,10 +13,11 @@ import android.arch.persistence.room.PrimaryKey
 ))
 class Deuda(@PrimaryKey(autoGenerate = true) var id: Int,
             var titulo: String? = null,
+            var tipo: Int? = 0,
             var monto: Float? = 0f,
+            var nota: String? = null,
             var fecha_adquision: String? = null,
             var pagado: Float? = 0f,
-            var nota: String? = null,
             var estado: Int? = null,
             var cuenta_id: Int? = null
             )
