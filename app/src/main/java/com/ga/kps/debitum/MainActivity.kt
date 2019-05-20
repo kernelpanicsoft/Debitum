@@ -1,6 +1,7 @@
 package com.ga.kps.debitum
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -30,21 +31,20 @@ class MainActivity : AppCompatActivity(){
         setSupportActionBar(toolbar)
         title = "Debitum"
 
-        viewPager = findViewById(R.id.ViewPagerPrincipal)
-        setupViewPager(viewPager!!)
 
-        tabLayout = findViewById(R.id.TabLayoutPrincipal)
-        tabLayout!!.setupWithViewPager(viewPager)
+        setupViewPager(ViewPagerPrincipal)
+
+        TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
 
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
 
 
         anadirDeudadFAB.setOnClickListener {
-           // val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
-           // startActivity(nav)
+            val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
+            startActivity(nav)
 
-            deudaViewModel.insert(Deuda(0,"Sears",1,123.0f,"Prueba de deuda","12/5/2019",23.5f,1,1))
+            //deudaViewModel.insert(Deuda(0,"Sears",1,123.0f,"Prueba de deuda","12/5/2019",23.5f,1,1))
         }
 
 

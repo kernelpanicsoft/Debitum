@@ -23,4 +23,5 @@ interface CuentaDAO {
 
     @Query("SELECT * FROM Cuenta WHERE Cuenta.id = :id")
     fun getCuenta(id: Int?) : LiveData<Cuenta>
+
 }

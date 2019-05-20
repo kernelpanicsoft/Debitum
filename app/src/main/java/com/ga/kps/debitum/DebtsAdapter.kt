@@ -10,7 +10,7 @@ import android.widget.TextView
 
 import model.Deuda
 
-class DeudasAdapter : ListAdapter<Deuda, DeudasAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
+class DebtsAdapter : ListAdapter<Deuda, DebtsAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
 
     class DIFF_CALLBACK: DiffUtil.ItemCallback<Deuda>(){
@@ -25,8 +25,8 @@ class DeudasAdapter : ListAdapter<Deuda, DeudasAdapter.ViewHolder>(DIFF_CALLBACK
 
     inner class ViewHolder(v: View): RecyclerView.ViewHolder(v){
         val tituloDeuda = v.findViewById<TextView>(R.id.tituloDeudaET)
-        val montoRestanteDeuda = v.findViewById<TextView>(R.id.DeudaTV)
-        val fechaDeuda = v.findViewById<TextView>(R.id.fechaDeudaTV)
+        val montoRestanteDeuda = v.findViewById<TextView>(R.id.montoPagoTV)
+        val fechaDeuda = v.findViewById<TextView>(R.id.fechaPagoTV)
     }
 
 
@@ -56,4 +56,6 @@ class DeudasAdapter : ListAdapter<Deuda, DeudasAdapter.ViewHolder>(DIFF_CALLBACK
     override fun onClick(v: View?) {
         listener!!.onClick(v)
     }
+
+
 }

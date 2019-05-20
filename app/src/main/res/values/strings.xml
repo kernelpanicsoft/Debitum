@@ -7,6 +7,8 @@
     <string name="nota">Nota:</string>
     <string name="fecha_de_adquisicion">Fecha de adquisición:</string>
     <string name="detalles_de_la_deuda">Detalles de la deuda</string>
+    <string name="resumen">Resumen</string>
+    <string name="historial_de_pagos">Historial de pagos</string>
 
     <array name="tipo_deuda">
         <item>Yo adeudo</item>
