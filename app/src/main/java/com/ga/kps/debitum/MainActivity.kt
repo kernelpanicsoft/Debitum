@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -20,10 +21,9 @@ import room.components.viewModels.DeudaViewModel
 class MainActivity : AppCompatActivity(){
 
 
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
 
     lateinit var deudaViewModel : DeudaViewModel
+    lateinit var cuentaViewModel: CuentaViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity(){
 
         TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
 
+        cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+
 
 
 
@@ -47,13 +49,19 @@ class MainActivity : AppCompatActivity(){
             //deudaViewModel.insert(Deuda(0,"Sears",1,123.0f,"Prueba de deuda","12/5/2019",23.5f,1,1))
         }
 
+        cuentaViewModel.getCuenta(1).observe(this, Observer {
+            val simboloMoneda = "$"
+            cantidadDeudaTotalTV.text = getString(R.string.simboloMoneda,simboloMoneda,it?.deuda_total)
+        })
+
+
 
     }
 
     private fun setupViewPager(pager: ViewPager){
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ActualDebtsFragment(),"Actuales")
-        adapter.addFragment(PassDebtsFragment(),"Pasadas")
+        adapter.addFragment(ActualDebtsFragment(),getString(R.string.actuales))
+        adapter.addFragment(PassDebtsFragment(),getString(R.string.pasadas))
 
         pager.adapter = adapter
 

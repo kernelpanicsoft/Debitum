@@ -9,6 +9,15 @@
     <string name="detalles_de_la_deuda">Detalles de la deuda</string>
     <string name="resumen">Resumen</string>
     <string name="historial_de_pagos">Historial de pagos</string>
+    <string name="deuda_actual">Deuda actual:</string>
+    <string name="pagado">Pagado</string>
+    <string name="restante">Restante:</string>
+    <string name="de">de</string>
+    <string name="actuales">Actuales</string>
+    <string name="pasadas">Pasadas</string>
+    <string name="simboloPorcentaje">%1$d%%</string>
+    <string name="simboloMoneda">%1$s%2$.2f</string>
+
 
     <array name="tipo_deuda">
         <item>Yo adeudo</item>

@@ -33,7 +33,7 @@ class ActualDebtsFragment: Fragment() {
 
 
 
-        val adapter = DebtsAdapter()
+        val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         deudasViewModel.getAllDeudas().observe(this, Observer {
             adapter.submitList(it)

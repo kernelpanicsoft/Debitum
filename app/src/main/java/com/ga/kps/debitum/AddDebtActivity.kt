@@ -14,10 +14,13 @@ import room.components.viewModels.DeudaViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import helpcodes.estatusDeuda;
+import model.Cuenta
+import room.components.viewModels.CuentaViewModel
 
 
 class AddDebtActivity : AppCompatActivity() {
     lateinit var deudaViewModel : DeudaViewModel
+    lateinit var cuentaViewModel: CuentaViewModel
     var tipo = 0
     var fecha = ""
     val calendario = Calendar.getInstance()
@@ -34,6 +37,8 @@ class AddDebtActivity : AppCompatActivity() {
         title = getString(R.string.anadir_nueva_deuda)
 
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+        cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
+
 
 
         tipoDeudaSP.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_deuda))
@@ -64,11 +69,18 @@ class AddDebtActivity : AppCompatActivity() {
         }
 
 
+
         guardarDeudaFAB.setOnClickListener {
             val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoDeudaET.text.toString().toFloat(),notaDeudaET.text.toString(),fechaDeudaBT.text.toString(),0f,estatusDeuda.ACTIVA,1)
+
             deudaViewModel.insert(deuda)
+            actualizaDeudaTotal(deuda.monto)
             finish()
         }
 
+    }
+
+    fun actualizaDeudaTotal(monto: Float){
+        cuentaViewModel.updateDeudaTotal(monto)
     }
 }

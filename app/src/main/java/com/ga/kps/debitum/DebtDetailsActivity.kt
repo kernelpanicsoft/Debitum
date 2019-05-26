@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager
 import kotlinx.android.synthetic.main.activity_debt_details.*
 
 class DebtDetailsActivity : AppCompatActivity() {
+    var debtID: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +22,9 @@ class DebtDetailsActivity : AppCompatActivity() {
 
 
         setupViewPager(ViewPagerDetallesDeuda)
-
         tabLayoutDebtTomas.setupWithViewPager(ViewPagerDetallesDeuda)
+
+        debtID = intent.getIntExtra("DEBT_ID", -1)
 
     }
 

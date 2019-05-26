@@ -9,15 +9,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import model.Pago
 
-class DebtPaymentsAdapter : ListAdapter<Pago, DebtPaymentsAdapter.ViewHolder>(DIFF_CALLBACK()) {
 
-    class DIFF_CALLBACK: DiffUtil.ItemCallback<Pago>(){
+class PaymentDetailsAdapter : ListAdapter<Pago, PaymentDetailsAdapter.ViewHolder>(DIFF_CALlBACK()), View.OnClickListener {
+    private var listener: View.OnClickListener? = null
+
+    class DIFF_CALlBACK: DiffUtil.ItemCallback<Pago>(){
         override fun areItemsTheSame(oldItem: Pago, newItem: Pago): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Pago, newItem: Pago): Boolean {
-            return oldItem.fecha == newItem.fecha && oldItem.monto == newItem.monto
+        override fun areContentsTheSame(oldItem: Pago, newITem: Pago): Boolean {
+            return oldItem.monto == newITem.monto && oldItem.fecha.equals(newITem.fecha)
         }
     }
 
@@ -29,15 +31,26 @@ class DebtPaymentsAdapter : ListAdapter<Pago, DebtPaymentsAdapter.ViewHolder>(DI
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_payment_details, parent, false)
+        v.setOnClickListener(this)
 
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pagoActual = getItem(position)
-
         holder.montoPago.text = pagoActual.monto.toString()
         holder.fechaPago.text = pagoActual.fecha
+    }
 
+    fun getPaymentAt(position: Int): Pago{
+        return getItem(position)
+    }
+
+    fun setOnClickListener(listener: View.OnClickListener){
+        this.listener = listener
+    }
+
+    override fun onClick(v: View?){
+        listener?.onClick(v)
     }
 }

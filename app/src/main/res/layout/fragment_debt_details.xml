@@ -18,21 +18,115 @@
         android:textSize="@dimen/title"/>
 
     <TextView
+        android:id="@+id/fechaDeudaLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Fecha de adquisición:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloDeudaTV"
+        />
+
+    <TextView
+        android:id="@+id/fechaDeudaTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="21/05/2019 08:15 am"
+        app:layout_constraintBottom_toBottomOf="@+id/fechaDeudaLabelTV"
+        app:layout_constraintStart_toEndOf="@+id/fechaDeudaLabelTV"
+        app:layout_constraintTop_toTopOf="@+id/fechaDeudaLabelTV"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/montoDeudaTotalLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Deuda total:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fechaDeudaLabelTV" />
+
+    <TextView
         android:id="@+id/montoDeudaTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
         android:text="0000"
-        app:layout_constraintTop_toBottomOf="@+id/tituloDeudaTV"
-        tools:layout_editor_absoluteX="256dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/montoDeudaTotalLabelTV"
+        app:layout_constraintStart_toEndOf="@+id/montoDeudaTotalLabelTV"
+        app:layout_constraintTop_toTopOf="@+id/montoDeudaTotalLabelTV"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/montoPagadoLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Pagado:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/montoDeudaTotalLabelTV" />
 
     <TextView
         android:id="@+id/montoPagadoTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         android:text="000"
-        app:layout_constraintTop_toBottomOf="@+id/tituloDeudaTV"
-        tools:layout_editor_absoluteX="133dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/montoPagadoLabelTV"
+        app:layout_constraintStart_toEndOf="@+id/montoPagadoLabelTV"
+        app:layout_constraintTop_toTopOf="@+id/montoPagadoLabelTV"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/montoRestanteLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Resta:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/montoPagadoLabelTV" />
+
+    <TextView
+        android:id="@+id/montoRestanteTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="000"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/montoRestanteLabelTV"
+        app:layout_constraintStart_toEndOf="@+id/montoRestanteLabelTV"
+        app:layout_constraintTop_toTopOf="@+id/montoRestanteLabelTV" />
+
+    <TextView
+        android:id="@+id/notaLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+
+        android:text="Nota:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/montoRestanteLabelTV" />
+
+    <TextView
+        android:id="@+id/notaDeudaTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="HOla mundo"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/notaLabelTV"
+        app:layout_constraintStart_toEndOf="@+id/notaLabelTV"
+        app:layout_constraintTop_toTopOf="@+id/notaLabelTV" />
 
 </android.support.constraint.ConstraintLayout>

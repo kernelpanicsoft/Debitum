@@ -23,6 +23,10 @@ class CuentaRepository (application: Application) {
         UpdateCuentaAsyncTask(cuentaDao).execute(cuenta)
     }
 
+    fun updateDeudaTotal(monto: Float){
+        UpdateDeudaTotalAsyncTask(cuentaDao).execute(monto)
+    }
+
     fun delete(cuenta: Cuenta){
         DeleteCuentaAsyncTask(cuentaDao).execute(cuenta)
     }
@@ -67,5 +71,13 @@ class CuentaRepository (application: Application) {
             cuentaDao.deleteAllCuentas()
             return null
         }
+    }
+
+    private class UpdateDeudaTotalAsyncTask constructor(private val cuentaDao: CuentaDAO) : AsyncTask<Float,Void, Void>(){
+        override fun doInBackground(vararg params: Float?): Void? {
+            cuentaDao.updateDeudaTotal(params[0]!!)
+            return null
+        }
+
     }
 }

@@ -33,4 +33,8 @@ class CuentaViewModel (application: Application) : AndroidViewModel(application)
     fun getAllCuentas() : LiveData<List<Cuenta>>{
         return repository.getAllCuentas()
     }
+
+    fun updateDeudaTotal(monto: Float){
+        repository.updateDeudaTotal(monto)
+    }
 }

@@ -17,11 +17,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Hola"
+            android:text="Deuda en Sears con una cadena larga que debe"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/title"
-            app:layout_constraintEnd_toStartOf="@+id/montoPagoTV"
+            app:layout_constraintEnd_toStartOf="@+id/fechaPagoTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,11 +29,11 @@
             android:id="@+id/montoPagoTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
             android:text="$10310"
-            android:textSize="@dimen/title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tituloDeudaET" />
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/deTV"
+            app:layout_constraintTop_toTopOf="@+id/deTV" />
 
         <TextView
             android:id="@+id/fechaPagoTV"
@@ -41,11 +41,85 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:text="03/05/2019"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:progress="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/montoPagoTV" />
+
+        <TextView
+            android:id="@+id/porcentajeDeudaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="25%"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/montoPagoTV" />
+
+        <TextView
+            android:id="@+id/deudaPagadaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="$250"
+            app:layout_constraintStart_toEndOf="@+id/padagoTV"
+            app:layout_constraintTop_toTopOf="@+id/padagoTV" />
+
+        <TextView
+            android:id="@+id/deTV"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/de"
+            app:layout_constraintStart_toEndOf="@+id/deudaPagadaTV"
+            app:layout_constraintTop_toTopOf="@+id/deudaPagadaTV" />
+
+        <TextView
+            android:id="@+id/padagoTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/pagado"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloDeudaET" />
+
+        <TextView
+            android:id="@+id/restanteTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/restante"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deudaRestanteTV"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+        <TextView
+            android:id="@+id/deudaRestanteTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="$34564"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/restanteTV"
+            android:textColor="@color/colorPrimaryDark"/>
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
