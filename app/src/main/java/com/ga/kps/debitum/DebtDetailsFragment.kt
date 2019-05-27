@@ -39,7 +39,7 @@ class DebtDetailsFragment: Fragment() {
             populateDebtUI(it)
         })
 
-        Toast.makeText(context,"ID de la toma: " + (activity as DebtDetailsActivity).debtID, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context,"ID de la toma: " + (activity as DebtDetailsActivity).debtID, Toast.LENGTH_SHORT).show()
         return v
     }
 

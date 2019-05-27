@@ -33,5 +33,8 @@ class PagoViewModel (application: Application) : AndroidViewModel(application) {
         return repository.getAllPagos()
     }
 
+    fun getAllPagosDeuda(id: Int): LiveData<List<Pago>>{
+        return repository.getAllPagosDeuda(id)
+    }
 
 }

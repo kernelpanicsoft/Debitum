@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -26,6 +27,10 @@ class DebtDetailsActivity : AppCompatActivity() {
 
         debtID = intent.getIntExtra("DEBT_ID", -1)
 
+        anadirPagoDeudadFAB.setOnClickListener {
+            val nav = Intent(this@DebtDetailsActivity, AddDebtPaymentActivity::class.java)
+            startActivity(nav)
+        }
     }
 
     private fun setupViewPager(pager: ViewPager){

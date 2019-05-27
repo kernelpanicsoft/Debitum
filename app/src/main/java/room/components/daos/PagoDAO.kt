@@ -23,4 +23,7 @@ interface PagoDAO {
 
     @Query("SELECT * FROM Pago WHERE Pago.id = :id")
     fun getPago(id: Int?): LiveData<Pago>
+
+    @Query("SELECT * FROM Pago WHERE Pago.deuda_ID = :deudaID")
+    fun getAllPagosDeuda(deudaID: Int): LiveData<List<Pago>>
 }

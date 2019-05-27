@@ -7,14 +7,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_debt.*
 import model.Deuda
 import room.components.viewModels.DeudaViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import helpcodes.estatusDeuda;
-import model.Cuenta
 import room.components.viewModels.CuentaViewModel
 
 
@@ -53,15 +51,15 @@ class AddDebtActivity : AppCompatActivity() {
 
         }
 
-        fechaDeudaBT.text = sdf.format(calendario.time)
+        fechaPagoBT.text = sdf.format(calendario.time)
 
-        fechaDeudaBT.setOnClickListener {
+        fechaPagoBT.setOnClickListener {
             val datePickerFragment = DatePickerDialog(this@AddDebtActivity, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 calendario.set(Calendar.YEAR, year)
                 calendario.set(Calendar.MONTH, month)
                 calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 //Toast.makeText(this@AnadirCitaMedicaActivity,"Fecha seleccionada: " + sdf.format(calendario.time), Toast.LENGTH_SHORT).show()
-                fechaDeudaBT.text = sdf.format(calendario.time)
+                fechaPagoBT.text = sdf.format(calendario.time)
 
             }, calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH))
             datePickerFragment.show()
@@ -71,7 +69,7 @@ class AddDebtActivity : AppCompatActivity() {
 
 
         guardarDeudaFAB.setOnClickListener {
-            val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoDeudaET.text.toString().toFloat(),notaDeudaET.text.toString(),fechaDeudaBT.text.toString(),0f,estatusDeuda.ACTIVA,1)
+            val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoPagoET.text.toString().toFloat(),notaPagoET.text.toString(),fechaPagoBT.text.toString(),0f,estatusDeuda.ACTIVA,1)
 
             deudaViewModel.insert(deuda)
             actualizaDeudaTotal(deuda.monto)

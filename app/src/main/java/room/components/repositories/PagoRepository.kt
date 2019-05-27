@@ -39,6 +39,10 @@ class PagoRepository (application: Application) {
         return pagoDao.getAllPagos()
     }
 
+    fun getAllPagosDeuda(id: Int) : LiveData<List<Pago>>{
+        return pagoDao.getAllPagosDeuda(id)
+    }
+
     private class InsertPagoAsyncTask constructor(private val pagoDAO: PagoDAO) : AsyncTask<Pago, Void, Void>(){
         override fun doInBackground(vararg params: Pago): Void? {
             pagoDAO.insert(params[0])

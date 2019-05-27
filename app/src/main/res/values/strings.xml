@@ -17,6 +17,8 @@
     <string name="pasadas">Pasadas</string>
     <string name="simboloPorcentaje">%1$d%%</string>
     <string name="simboloMoneda">%1$s%2$.2f</string>
+    <string name="fecha_de_pago">Fecha de pago:</string>
+    <string name="anadir_pago">Añadir pago</string>
 
 
     <array name="tipo_deuda">
