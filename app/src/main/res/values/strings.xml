@@ -19,10 +19,16 @@
     <string name="simboloMoneda">%1$s%2$.2f</string>
     <string name="fecha_de_pago">Fecha de pago:</string>
     <string name="anadir_pago">Añadir pago</string>
+    <string name="editar">Editar</string>
 
 
     <array name="tipo_deuda">
         <item>Yo adeudo</item>
         <item>Me adeudan</item>
+    </array>
+    
+    <array name="editar">
+        <item>Editar</item>
+        <item>Eliminar</item>
     </array>
 </resources>

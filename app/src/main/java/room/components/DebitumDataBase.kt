@@ -35,13 +35,13 @@ abstract class DebitumDataBase : RoomDatabase() {
         private fun buildDatabase(context: Context) =
                 Room.databaseBuilder(context.applicationContext,
                     DebitumDataBase::class.java, "Debitum.db")
-                   /* .addCallback( object : RoomDatabase.Callback(){
+                    .addCallback( object : RoomDatabase.Callback(){
                         override fun onCreate(db: SupportSQLiteDatabase) {
-                            instance?.cuentaDao()?.insert(Cuenta(0,0f))
+                           // instance?.cuentaDao()?.insert(Cuenta(0,0f))
+                            db.execSQL("INSERT INTO Cuenta VALUES (1,0.0);")
                         }
                     }
-
-                    )*/
+                    )
                     .build()
     }
 }

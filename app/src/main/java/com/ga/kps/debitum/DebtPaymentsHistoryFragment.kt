@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,13 +25,13 @@ class DebtPaymentsHistoryFragment: Fragment() {
         mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
-        val adapter = DebtPaymentsAdapter()
+        val adapter = DebtPaymentsAdapter(context)
         pagosViewModel = ViewModelProviders.of(this).get(PagoViewModel::class.java)
         pagosViewModel.getAllPagosDeuda((activity as DebtDetailsActivity).debtID).observe(this, Observer {
             adapter.submitList(it)
         })
 
-
+        RV.adapter = adapter
         return v
     }
 

@@ -33,6 +33,7 @@ class ActualDebtsFragment: Fragment() {
 
 
 
+
         val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         deudasViewModel.getAllDeudas().observe(this, Observer {
@@ -48,5 +49,7 @@ class ActualDebtsFragment: Fragment() {
 
 
         RV.adapter = adapter
+
     }
+
 }

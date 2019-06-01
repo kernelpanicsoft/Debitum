@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import helpcodes.estatusDeuda;
 import room.components.viewModels.CuentaViewModel
+import java.text.DateFormat
 
 
 class AddDebtActivity : AppCompatActivity() {
@@ -21,8 +24,8 @@ class AddDebtActivity : AppCompatActivity() {
     lateinit var cuentaViewModel: CuentaViewModel
     var tipo = 0
     var fecha = ""
-    val calendario = Calendar.getInstance()
-    val sdf = SimpleDateFormat.getDateTimeInstance()
+    private val calendario: Calendar = Calendar.getInstance()
+    private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,5 +83,15 @@ class AddDebtActivity : AppCompatActivity() {
 
     fun actualizaDeudaTotal(monto: Float){
         cuentaViewModel.updateDeudaTotal(monto)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

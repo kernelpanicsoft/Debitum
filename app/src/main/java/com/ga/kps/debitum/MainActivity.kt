@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(){
         TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
 
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
-        deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+        //deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
 
 

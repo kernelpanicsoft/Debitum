@@ -24,4 +24,7 @@ interface DeudaDAO {
     @Query("SELECT * FROM Deuda WHERE Deuda.id = :id")
     fun getDeuda(id: Int): LiveData<Deuda>
 
+    @Query("UPDATE Deuda SET pagado = pagado+:monto where Deuda.id = :id")
+    fun updateMontoDeuda(id: Int, monto: Float)
+
 }

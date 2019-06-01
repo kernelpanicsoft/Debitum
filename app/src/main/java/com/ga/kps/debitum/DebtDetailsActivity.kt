@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_debt_details.*
 
 class DebtDetailsActivity : AppCompatActivity() {
@@ -29,6 +32,7 @@ class DebtDetailsActivity : AppCompatActivity() {
 
         anadirPagoDeudadFAB.setOnClickListener {
             val nav = Intent(this@DebtDetailsActivity, AddDebtPaymentActivity::class.java)
+            nav.putExtra("DEBT_ID", debtID)
             startActivity(nav)
         }
     }
@@ -62,6 +66,40 @@ class DebtDetailsActivity : AppCompatActivity() {
             return mFragmentTitleList[position]
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_edit,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+                return true
+            }
+            R.id.itemEditDelete ->{
+                val builder = AlertDialog.Builder(this@DebtDetailsActivity)
+                builder.setItems(R.array.editar){ _, which ->
+                    when(which){
+                        0 ->{
+
+                        }
+                        1 ->{
+
+                        }
+                    }
+
+                }
+                val alertDialog = builder.create()
+                alertDialog.show()
+                return true
+            }
+
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

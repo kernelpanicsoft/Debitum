@@ -17,10 +17,13 @@ class DebtDetailsFragment: Fragment() {
 
     lateinit var RV: RecyclerView
     lateinit var deudasViewModel: DeudaViewModel
+    val simboloMoneda = "$"
 
     var tituloDeudaTextView: TextView? = null
     var fechaDeudaTextView: TextView? = null
     var deudaTotalTextView: TextView? = null
+    var montoPagadoTextView: TextView? = null
+    var montoRestanteTextView: TextView? = null
 
 
 
@@ -30,6 +33,8 @@ class DebtDetailsFragment: Fragment() {
         tituloDeudaTextView = v.findViewById(R.id.tituloDeudaTV)
         fechaDeudaTextView = v.findViewById(R.id.fechaDeudaTV)
         deudaTotalTextView = v.findViewById(R.id.montoDeudaTV)
+        montoPagadoTextView = v.findViewById(R.id.montoPagadoTV)
+        montoRestanteTextView = v.findViewById(R.id.montoRestanteTV)
 
 
 
@@ -46,7 +51,9 @@ class DebtDetailsFragment: Fragment() {
     fun populateDebtUI(debt: Deuda?){
         tituloDeudaTextView?.text = debt?.titulo.toString()
         fechaDeudaTextView?.text = debt?.fecha_adquision
-        deudaTotalTextView?.text = debt?.monto.toString()
+        deudaTotalTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.monto)
+        montoPagadoTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.pagado)
+        montoRestanteTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,(debt!!.monto - debt.pagado))
 
     }
 

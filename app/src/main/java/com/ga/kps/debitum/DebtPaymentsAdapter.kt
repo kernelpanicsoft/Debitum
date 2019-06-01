@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Context
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -9,7 +10,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import model.Pago
 
-class DebtPaymentsAdapter : ListAdapter<Pago, DebtPaymentsAdapter.ViewHolder>(DIFF_CALLBACK()) {
+class DebtPaymentsAdapter(val context: Context?) : ListAdapter<Pago, DebtPaymentsAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener  {
+    private var listener: View.OnClickListener? = null
 
     class DIFF_CALLBACK: DiffUtil.ItemCallback<Pago>(){
         override fun areItemsTheSame(oldItem: Pago, newItem: Pago): Boolean {
@@ -30,14 +32,28 @@ class DebtPaymentsAdapter : ListAdapter<Pago, DebtPaymentsAdapter.ViewHolder>(DI
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_payment_details, parent, false)
 
+        v.setOnClickListener(this)
+
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pagoActual = getItem(position)
-
-        holder.montoPago.text = pagoActual.monto.toString()
+        val simboloMoneda = "$"
+        holder.montoPago.text = context?.getString(R.string.simboloMoneda,simboloMoneda,pagoActual.monto)
         holder.fechaPago.text = pagoActual.fecha
 
+    }
+
+    fun getPaymentAt(position: Int): Pago{
+        return getItem(position)
+    }
+
+    fun setOnClickListener(listener: View.OnClickListener){
+        this.listener = listener
+    }
+
+    override fun onClick(v: View?){
+        listener?.onClick(v)
     }
 }
