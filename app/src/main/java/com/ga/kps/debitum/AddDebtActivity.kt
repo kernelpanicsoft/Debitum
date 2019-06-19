@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -72,11 +73,28 @@ class AddDebtActivity : AppCompatActivity() {
 
 
         guardarDeudaFAB.setOnClickListener {
-            val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoPagoET.text.toString().toFloat(),notaPagoET.text.toString(),fechaPagoBT.text.toString(),0f,EstatusDeuda.ACTIVA,1)
-
-            deudaViewModel.insert(deuda)
-            actualizaDeudaTotal(deuda.monto)
-            finish()
+            if(tituloDeudaET.text.isNullOrEmpty() || montoPagoET.text.isNullOrEmpty()){
+                Snackbar.make(it,getString(R.string.titulo_y_monto_requerido), Snackbar.LENGTH_LONG).show()
+            }else {
+                if(Integer.parseInt(montoPagoET.text.toString()) == 0){
+                    Snackbar.make(it, getString(R.string.monto_mayor_cero), Snackbar.LENGTH_LONG).show()
+                }else{
+                    val deuda = Deuda(
+                        0,
+                        tituloDeudaET.text.toString(),
+                        tipo,
+                        montoPagoET.text.toString().toFloat(),
+                        notaPagoET.text.toString(),
+                        fechaPagoBT.text.toString(),
+                        0f,
+                        EstatusDeuda.ACTIVA,
+                        1
+                    )
+                    deudaViewModel.insert(deuda)
+                    actualizaDeudaTotal(deuda.monto)
+                    finish()
+                }
+            }
         }
 
     }
