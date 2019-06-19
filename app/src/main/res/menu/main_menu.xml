@@ -7,5 +7,10 @@
         android:icon="@drawable/ic_settings_white_24dp"
         android:title="@string/anadir_nueva_deuda"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/itemAddDebt"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="@string/anadir_nueva_deuda"
+        app:showAsAction="always"/>
 
 </menu>

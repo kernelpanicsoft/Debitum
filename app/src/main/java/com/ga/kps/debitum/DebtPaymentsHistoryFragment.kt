@@ -11,11 +11,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import room.components.viewModels.PagoViewModel
 
 class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var pagosViewModel: PagoViewModel
     lateinit var RV: RecyclerView
+    val simboloMoneda = "$"
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_debt_payments_history, container,false)
@@ -34,9 +37,25 @@ class DebtPaymentsHistoryFragment: Fragment() {
 
 
         adapter.setOnClickListener(View.OnClickListener {
+            val selectPayment = adapter.getPaymentAt(RV.getChildAdapterPosition(it))
+
             val paymentDetails = AlertDialog.Builder(context!!)
             paymentDetails.setTitle(getString(R.string.detalles_de_pago))
             paymentDetails.setView(R.layout.payment_details_dialog)
+
+            val inflater = requireActivity().layoutInflater
+            val dialogView : View = inflater.inflate(R.layout.payment_details_dialog,null)
+            val montoPagoTextView = dialogView.findViewById<TextView>(R.id.montoPagoTV)
+            val fechaPagoTextView = dialogView.findViewById<TextView>(R.id.FechaPagoTV)
+            val notaPagoTextView = dialogView.findViewById<TextView>(R.id.NotaTV)
+
+            montoPagoTextView.text = context?.getString(R.string.simboloMoneda,simboloMoneda,selectPayment.monto)
+            fechaPagoTextView.text = selectPayment.fecha
+            notaPagoTextView.text = selectPayment.nota
+            paymentDetails.setView(dialogView)
+            paymentDetails.setPositiveButton(getString(R.string.entendido)){ dialog, id->
+
+            }
             val paymentDetailsDialog = paymentDetails.create()
             paymentDetailsDialog.show()
         })

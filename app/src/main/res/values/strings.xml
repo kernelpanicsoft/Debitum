@@ -22,6 +22,7 @@
     <string name="editar">Editar</string>
     <string name="pagado_arc">PAGADO</string>
     <string name="detalles_de_pago">Detalles de pago</string>
+    <string name="entendido">Entendido</string>
 
 
     <array name="tipo_deuda">

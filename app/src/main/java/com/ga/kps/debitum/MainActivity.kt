@@ -42,12 +42,7 @@ class MainActivity : AppCompatActivity(){
 
 
 
-        anadirDeudadFAB.setOnClickListener {
-            val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
-            startActivity(nav)
 
-            //deudaViewModel.insert(Deuda(0,"Sears",1,123.0f,"Prueba de deuda","12/5/2019",23.5f,1,1))
-        }
 
         cuentaViewModel.getCuenta(1).observe(this, Observer {
             val simboloMoneda = "$"
@@ -101,6 +96,10 @@ class MainActivity : AppCompatActivity(){
             R.id.itemSettings ->{
                 val cuentaViewmodel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
                 cuentaViewmodel.insert(Cuenta(0,0f))
+            }
+            R.id.itemAddDebt ->{
+                val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
+                startActivity(nav)
             }
         }
         return super.onOptionsItemSelected(item)
