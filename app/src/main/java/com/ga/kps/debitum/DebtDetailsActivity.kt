@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,8 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import helpcodes.ANADIR_PAGO_DEUDA
 import kotlinx.android.synthetic.main.activity_debt_details.*
 
 class DebtDetailsActivity : AppCompatActivity() {
@@ -33,7 +36,7 @@ class DebtDetailsActivity : AppCompatActivity() {
         anadirPagoDeudadFAB.setOnClickListener {
             val nav = Intent(this@DebtDetailsActivity, AddDebtPaymentActivity::class.java)
             nav.putExtra("DEBT_ID", debtID)
-            startActivity(nav)
+            startActivityForResult(nav, ANADIR_PAGO_DEUDA)
         }
     }
 
@@ -100,6 +103,16 @@ class DebtDetailsActivity : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode){
+            ANADIR_PAGO_DEUDA ->{
+                if(resultCode == Activity.RESULT_OK){
+
+                }
+            }
+        }
     }
 
 }

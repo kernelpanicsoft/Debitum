@@ -45,5 +45,7 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version" // use kapt for Kotlin
 
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+
 
 }

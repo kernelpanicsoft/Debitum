@@ -1,256 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tituloDeudaTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Tenis en Liverpool"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="@dimen/title"/>
+        <TextView
+            android:id="@+id/tituloDeudaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="@dimen/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.github.lzyzsd.circleprogress.ArcProgress
+            android:id="@+id/arc_progress"
+            app:arc_bottom_text="@string/pagado_arc"
+            app:arc_progress="0"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tituloDeudaTV"
+            app:arc_unfinished_color="@android:color/darker_gray"
+            app:arc_finished_color="@color/colorPrimary"
+            app:arc_text_color="@color/colorPrimary"
+            app:arc_bottom_text_size="@dimen/arc_bottom_text"
+            app:arc_text_size="50sp"
+            app:arc_suffix_text_size="25sp"
+            app:arc_stroke_width="10dp"
+            />
 
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/debtAmmountCV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloDeudaTV"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
-
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/debtAmmountCV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/arc_progress">
 
-            <TextView
-                android:id="@+id/montoDeudaTotalLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Deuda total:"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/montoDeudaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="0000"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/montoDeudaTotalLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/montoDeudaTotalLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/montoDeudaTotalLabelTV" />
+                <TextView
+                    android:id="@+id/montoDeudaTotalLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Deuda total:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/montoPagadoLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="Pagado:"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/montoDeudaTotalLabelTV" />
+                <TextView
+                    android:id="@+id/montoDeudaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="0000"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/montoDeudaTotalLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/montoDeudaTotalLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/montoDeudaTotalLabelTV" />
 
-            <TextView
-                android:id="@+id/montoPagadoTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="000"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/montoPagadoLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/montoPagadoLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/montoPagadoLabelTV" />
+                <TextView
+                    android:id="@+id/montoPagadoLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Pagado:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/montoDeudaTotalLabelTV" />
 
-            <TextView
-                android:id="@+id/montoRestanteLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="Resta:"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/montoPagadoLabelTV" />
+                <TextView
+                    android:id="@+id/montoPagadoTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="000"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/montoPagadoLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/montoPagadoLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/montoPagadoLabelTV" />
 
-            <TextView
-                android:id="@+id/montoRestanteTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="000"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/montoRestanteLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/montoRestanteLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/montoRestanteLabelTV" />
+                <TextView
+                    android:id="@+id/montoRestanteLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Resta:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/montoPagadoLabelTV" />
+
+                <TextView
+                    android:id="@+id/montoRestanteTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="000"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/montoRestanteLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/montoRestanteLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/montoRestanteLabelTV" />
 
 
-        </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/FechaDeudaCV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/debtAmmountCV">
-
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/FechaDeudaCV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/debtAmmountCV">
 
-            <TextView
-                android:id="@+id/fechaDeudaLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Fecha de adquisición:"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/fechaDeudaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="21/05/2019 08:15 am"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/fechaDeudaLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/fechaDeudaLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/fechaDeudaLabelTV" />
+                <TextView
+                    android:id="@+id/fechaDeudaLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Fecha de adquisición:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/fechaDeudaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/fechaDeudaLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/fechaDeudaLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/fechaDeudaLabelTV" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/NotaDeudaCV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FechaDeudaCV">
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/NotaDeudaCV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FechaDeudaCV">
 
-            <TextView
-                android:id="@+id/notaLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Nota:"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/notaLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
 
-            <TextView
-                android:id="@+id/notaDeudaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="HOla mundo"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/notaLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/notaLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/notaLabelTV" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Nota:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/notaDeudaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/notaLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/notaLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/notaLabelTV" />
 
-    </android.support.v7.widget.CardView>
+            </android.support.constraint.ConstraintLayout>
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/tipoDeudaCV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NotaDeudaCV"
-        app:layout_constraintVertical_bias="0.0"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tipoDeudaLabelTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/tipo_de_deuda"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-
-            <TextView
-                android:id="@+id/tipoDeudaTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Propia"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/tipoDeudaLabelTV"
-                app:layout_constraintStart_toEndOf="@+id/tipoDeudaLabelTV"
-                app:layout_constraintTop_toTopOf="@+id/tipoDeudaLabelTV" />
-        </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
 
 
-    </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/tipoDeudaCV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NotaDeudaCV"
+            app:layout_constraintVertical_bias="0.0"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tipoDeudaLabelTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/tipo_de_deuda"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tipoDeudaTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/tipoDeudaLabelTV"
+                    app:layout_constraintStart_toEndOf="@+id/tipoDeudaLabelTV"
+                    app:layout_constraintTop_toTopOf="@+id/tipoDeudaLabelTV" />
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.v7.widget.CardView>
 
 
 
 
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

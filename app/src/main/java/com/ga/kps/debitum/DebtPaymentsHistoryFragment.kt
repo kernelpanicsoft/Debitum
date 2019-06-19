@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -29,6 +30,15 @@ class DebtPaymentsHistoryFragment: Fragment() {
         pagosViewModel = ViewModelProviders.of(this).get(PagoViewModel::class.java)
         pagosViewModel.getAllPagosDeuda((activity as DebtDetailsActivity).debtID).observe(this, Observer {
             adapter.submitList(it)
+        })
+
+
+        adapter.setOnClickListener(View.OnClickListener {
+            val paymentDetails = AlertDialog.Builder(context!!)
+            paymentDetails.setTitle(getString(R.string.detalles_de_pago))
+            paymentDetails.setView(R.layout.payment_details_dialog)
+            val paymentDetailsDialog = paymentDetails.create()
+            paymentDetailsDialog.show()
         })
 
         RV.adapter = adapter

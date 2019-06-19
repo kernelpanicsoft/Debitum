@@ -20,6 +20,8 @@
     <string name="fecha_de_pago">Fecha de pago:</string>
     <string name="anadir_pago">Añadir pago</string>
     <string name="editar">Editar</string>
+    <string name="pagado_arc">PAGADO</string>
+    <string name="detalles_de_pago">Detalles de pago</string>
 
 
     <array name="tipo_deuda">

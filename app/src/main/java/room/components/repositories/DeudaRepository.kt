@@ -27,6 +27,10 @@ class DeudaRepository(application: Application) {
         UpdateMontoDeudaAsyncTask(id,deudaDao).execute(monto)
     }
 
+    fun updateEstatusCuenta(id: Int, estado: Int){
+        UpdateEstatusDeudaAsyncTask(id,deudaDao).execute(estado)
+    }
+
     fun delete(deuda: Deuda){
         DeleteDeudaAsyncTask(deudaDao).execute(deuda)
     }
@@ -41,6 +45,10 @@ class DeudaRepository(application: Application) {
 
     fun getDeuda(id: Int) : LiveData<Deuda>{
         return deudaDao.getDeuda(id)
+    }
+
+    fun getAllDeudasByEstado(estado: Int) : LiveData<List<Deuda>>{
+        return deudaDao.getDeudasByState(estado)
     }
 
 
@@ -75,6 +83,13 @@ class DeudaRepository(application: Application) {
     private class UpdateMontoDeudaAsyncTask constructor(private val id: Int,private val deudaDAO: DeudaDAO) : AsyncTask<Float,Void, Void>(){
         override fun doInBackground(vararg params: Float?): Void? {
             deudaDAO.updateMontoDeuda(id,params[0]!!)
+            return null
+        }
+    }
+
+    private class UpdateEstatusDeudaAsyncTask constructor(private val id: Int, private val deudaDAO: DeudaDAO) : AsyncTask<Int,Void,Void>(){
+        override fun doInBackground(vararg params: Int?): Void? {
+            deudaDAO.updateStatusDeuda(id,params[0]!!)
             return null
         }
     }

@@ -27,4 +27,7 @@ interface CuentaDAO {
     @Query("UPDATE Cuenta SET deuda_total = deuda_total+:monto" )
     fun updateDeudaTotal( monto: Float)
 
+    @Query("SELECT max(id) FROM Cuenta")
+    fun getLastAccountID() : LiveData<Long>
+
 }

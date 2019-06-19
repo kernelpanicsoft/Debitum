@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/montoPagoTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="$0"
+        app:layout_constraintStart_toEndOf="@+id/iconoPago"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FechaPagoTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="18/06/2019"
+        app:layout_constraintStart_toEndOf="@+id/iconoFecha"
+        app:layout_constraintTop_toBottomOf="@+id/iconoPago" />
+
+    <TextView
+        android:id="@+id/NotaTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Hola mundo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoNota"
+        app:layout_constraintTop_toBottomOf="@+id/iconoFecha"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/iconoFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_today_black_24dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/FechaPagoTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/FechaPagoTV" />
+
+    <ImageView
+        android:id="@+id/iconoPago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_monetization_on_black_24dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/montoPagoTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/montoPagoTV" />
+
+    <ImageView
+        android:id="@+id/iconoNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_description_black_24dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/NotaTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/NotaTV"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

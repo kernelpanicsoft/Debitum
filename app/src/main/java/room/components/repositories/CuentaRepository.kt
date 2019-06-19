@@ -43,6 +43,9 @@ class CuentaRepository (application: Application) {
         return cuentaDao.getCuenta(id)
     }
 
+    fun getLastCuentaID() : LiveData<Long>{
+        return cuentaDao.getLastAccountID()
+    }
 
     private class InsertCuentaAsyncTask constructor(private val cuentaDao: CuentaDAO) : AsyncTask<Cuenta, Void, Void>(){
         override fun doInBackground(vararg params: Cuenta): Void? {
@@ -80,4 +83,6 @@ class CuentaRepository (application: Application) {
         }
 
     }
+
+
 }

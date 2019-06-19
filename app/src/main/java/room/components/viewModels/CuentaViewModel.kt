@@ -37,4 +37,8 @@ class CuentaViewModel (application: Application) : AndroidViewModel(application)
     fun updateDeudaTotal(monto: Float){
         repository.updateDeudaTotal(monto)
     }
+
+    fun getLasAccountID() : LiveData<Long>{
+        return repository.getLastCuentaID()
+    }
 }

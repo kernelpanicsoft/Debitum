@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import helpcodes.EstatusDeuda
 import room.components.viewModels.DeudaViewModel
 
 class ActualDebtsFragment: Fragment() {
@@ -36,7 +37,7 @@ class ActualDebtsFragment: Fragment() {
 
         val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
-        deudasViewModel.getAllDeudas().observe(this, Observer {
+        deudasViewModel.getAllDeudasByState(EstatusDeuda.ACTIVA).observe(this, Observer {
             adapter.submitList(it)
         })
         adapter.setOnClickListener(View.OnClickListener {

@@ -14,7 +14,7 @@ import model.Deuda
 import room.components.viewModels.DeudaViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import helpcodes.estatusDeuda;
+import helpcodes.EstatusDeuda
 import room.components.viewModels.CuentaViewModel
 import java.text.DateFormat
 
@@ -72,7 +72,7 @@ class AddDebtActivity : AppCompatActivity() {
 
 
         guardarDeudaFAB.setOnClickListener {
-            val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoPagoET.text.toString().toFloat(),notaPagoET.text.toString(),fechaPagoBT.text.toString(),0f,estatusDeuda.ACTIVA,1)
+            val deuda = Deuda(0,tituloDeudaET.text.toString(),tipo,montoPagoET.text.toString().toFloat(),notaPagoET.text.toString(),fechaPagoBT.text.toString(),0f,EstatusDeuda.ACTIVA,1)
 
             deudaViewModel.insert(deuda)
             actualizaDeudaTotal(deuda.monto)
@@ -81,7 +81,7 @@ class AddDebtActivity : AppCompatActivity() {
 
     }
 
-    fun actualizaDeudaTotal(monto: Float){
+    private fun actualizaDeudaTotal(monto: Float){
         cuentaViewModel.updateDeudaTotal(monto)
     }
 
