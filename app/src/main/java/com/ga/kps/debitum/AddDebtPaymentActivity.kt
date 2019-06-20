@@ -53,16 +53,21 @@ class AddDebtPaymentActivity : AppCompatActivity() {
         }
 
         saveDebtPaymentFAB.setOnClickListener {
-            if(montoPagoET.text.toString().toFloat() <= 0f){
-                Snackbar.make(it,getString(R.string.el_monto_del_pago), Snackbar.LENGTH_LONG).show()
+            if(montoPagoET.text.isNullOrEmpty()){
+                Snackbar.make(it,getString(R.string.especifique_monto_pago),Snackbar.LENGTH_LONG).show()
             }else{
-                val pago = Pago(0)
-                pago.deuda_ID = intent.getIntExtra("DEBT_ID",-1)
-                pago.fecha = fechaPagoBT.text.toString()
-                pago.monto = montoPagoET.text.toString().toFloat()
-                pago.nota = notaPagoET.text.toString()
-                savePaymentToDB(pago)
+                if(montoPagoET.text.toString().toFloat() <= 0f){
+                    Snackbar.make(it,getString(R.string.el_monto_del_pago), Snackbar.LENGTH_LONG).show()
+                }else{
+                    val pago = Pago(0)
+                    pago.deuda_ID = intent.getIntExtra("DEBT_ID",-1)
+                    pago.fecha = fechaPagoBT.text.toString()
+                    pago.monto = montoPagoET.text.toString().toFloat()
+                    pago.nota = notaPagoET.text.toString()
+                    savePaymentToDB(pago)
+                }
             }
+
 
         }
     }
