@@ -23,6 +23,8 @@
     <string name="pagado_arc">PAGADO</string>
     <string name="detalles_de_pago">Detalles de pago</string>
     <string name="entendido">Entendido</string>
+    <string name="titulo_y_monto_requerido">Es necesario especificar el titulo y monto para guardar una nueva deuda</string>
+    <string name="monto_mayor_cero">Es necesario que el monto sea mayor a cero para guardar una nueva deuda</string>
 
 
     <array name="tipo_deuda">
