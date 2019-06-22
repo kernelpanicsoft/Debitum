@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,13 +15,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.github.lzyzsd.circleprogress.ArcProgress
 import helpcodes.EstatusDeuda
+import helpcodes.EstatusDeuda.ACTIVA
 import model.Deuda
+import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
 
 class DebtDetailsFragment: Fragment() {
 
     lateinit var RV: RecyclerView
     lateinit var deudasViewModel: DeudaViewModel
+    lateinit var deudaActualLive : LiveData<Deuda>
     val simboloMoneda = "$"
 
     var tituloDeudaTextView: TextView? = null
@@ -49,7 +53,8 @@ class DebtDetailsFragment: Fragment() {
 
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
-        deudasViewModel.getDeuda((activity as DebtDetailsActivity).debtID).observe(this, Observer {
+        deudaActualLive = deudasViewModel.getDeuda((activity as DebtDetailsActivity).debtID)
+        deudaActualLive.observe(this, Observer {
             populateDebtUI(it)
         })
 
@@ -66,17 +71,17 @@ class DebtDetailsFragment: Fragment() {
         arcoProgresso?.progress = ((debt!!.pagado * 100f) / debt.monto).toInt()
 
         val tipoDeudaArray = context?.resources?.getStringArray(R.array.tipo_deuda)
-        tipoDeudaTextView?.text =  tipoDeudaArray?.get(debt?.tipo!!)
+        tipoDeudaTextView?.text =  tipoDeudaArray?.get(debt.tipo)
 
 
-        if((debt!!.pagado >= debt.monto) && debt.estado == EstatusDeuda.ACTIVA){
+        if((debt.pagado >= debt.monto) && debt.estado == EstatusDeuda.ACTIVA){
             val builder = AlertDialog.Builder(context!!)
-            builder.setTitle("Deuda pagada")
-                .setMessage("La deuda ha sido pagada en su totalidad, ¿Desea cambiar su estado a \"Pagada\"? ")
-                .setPositiveButton("Cambiar estado"){_, _ ->
+            val negativeButton = builder.setTitle(getString(R.string.deuda_pagado))
+                .setMessage(getString(R.string.deuda_ha_sido_pagada))
+                .setPositiveButton(getString(R.string.cambiar_estado)) { _, _ ->
                     deudasViewModel.updateEstatusDeuda((activity as DebtDetailsActivity).debtID, EstatusDeuda.PAGADA)
                 }
-                .setNegativeButton("Seguir Pagando"){ _, _ ->
+                .setNegativeButton(getString(R.string.seguir_pagando)) { _, _ ->
 
                 }
             val dialog = builder.create()
@@ -87,5 +92,26 @@ class DebtDetailsFragment: Fragment() {
 
     }
 
+    fun deleteDebt(){
+        if(deudaActualLive.value?.estado == ACTIVA) {
+            actualizaDeudaTotal(deudaActualLive.value?.monto!! - deudaActualLive.value?.pagado!!)
+        }
+        removeObservers()
+        val deudaAux = Deuda((activity as DebtDetailsActivity).debtID)
+        deudasViewModel.delete(deudaAux)
+    }
+
+    private fun removeObservers(){
+
+        if(deudaActualLive.hasActiveObservers()){
+            deudaActualLive.removeObservers(this)
+        }
+        Log.d("TEXT", "EStas llamando a removeObservers " + deudaActualLive.value?.monto)
+    }
+
+    private fun actualizaDeudaTotal(monto: Float){
+        var cuentaViewModel: CuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
+        cuentaViewModel.updateDeudaTotal(-monto)
+    }
 
 }

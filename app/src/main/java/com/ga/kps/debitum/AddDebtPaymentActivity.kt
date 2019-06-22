@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
@@ -73,17 +74,10 @@ class AddDebtPaymentActivity : AppCompatActivity() {
     }
 
     fun savePaymentToDB(payment: Pago){
-        deudaViewModel.getDeuda(deudaID).observe(this, android.arch.lifecycle.Observer {
-            Log.d("PAGAS",(payment.monto + it!!.pagado).toString() + "TOTAL: " + it.monto )
-           // if(payment.monto + it!!.pagado >= it.monto ){
-              //  Toast.makeText(this,"con esto pagas la deuda" + payment.monto + it!!.pagado, Toast.LENGTH_SHORT).show()
-            //    Log.d("PAGAS","" +payment.monto + it!!.pagado + " " + it.monto)
-              //  title = " " + payment.monto + it!!.pagado
-          //  }
-        })
         pagoViewModel.insert(payment)
         actualizaDeuda(deudaID, payment.monto)
         actualizaDeudaTotal(-payment.monto)
+        setResult(Activity.RESULT_OK)
         finish()
     }
 

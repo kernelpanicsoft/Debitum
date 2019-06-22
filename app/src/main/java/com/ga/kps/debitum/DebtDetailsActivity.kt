@@ -1,6 +1,7 @@
 package com.ga.kps.debitum
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -14,11 +15,15 @@ import android.view.MenuItem
 import android.widget.Toast
 import helpcodes.ANADIR_PAGO_DEUDA
 import kotlinx.android.synthetic.main.activity_debt_details.*
+import model.Deuda
+import room.components.viewModels.CuentaViewModel
+import room.components.viewModels.DeudaViewModel
 
 class DebtDetailsActivity : AppCompatActivity() {
     var debtID: Int = -1
+    private lateinit var adapter : ViewPagerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_debt_details)
 
@@ -41,7 +46,7 @@ class DebtDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(pager: ViewPager){
-        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(DebtDetailsFragment(),getString(R.string.resumen))
         adapter.addFragment(DebtPaymentsHistoryFragment(),getString(R.string.historial_de_pagos))
 
@@ -90,7 +95,21 @@ class DebtDetailsActivity : AppCompatActivity() {
 
                         }
                         1 ->{
+                            val builder = AlertDialog.Builder(this)
+                            builder.setTitle(getString(R.string.eliminar_deuda))
+                            builder.setMessage(getString(R.string.esta_seguro_eliminar_deuda))
+                            builder.setPositiveButton(getString(R.string.eliminar)){
+                                _, _ ->
+                                deleteDebt()
 
+                            }
+
+                            builder.setNegativeButton(getString(R.string.cancelar)){
+                                _,_ ->
+                            }
+
+                            val dialog = builder.create()
+                            dialog.show()
                         }
                     }
 
@@ -109,10 +128,18 @@ class DebtDetailsActivity : AppCompatActivity() {
         when(requestCode){
             ANADIR_PAGO_DEUDA ->{
                 if(resultCode == Activity.RESULT_OK){
-
+                    Toast.makeText(this,getString(R.string.pago_registrado), Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
+    private fun deleteDebt(){
+        val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
+        detailsFragment.deleteDebt()
+        Toast.makeText(this,getString(R.string.deuda_eliminada), Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
 
 }

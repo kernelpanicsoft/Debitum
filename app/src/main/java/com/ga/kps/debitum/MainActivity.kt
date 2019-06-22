@@ -39,11 +39,6 @@ class MainActivity : AppCompatActivity(){
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         //deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
-
-
-
-
-
         cuentaViewModel.getCuenta(1).observe(this, Observer {
             val simboloMoneda = "$"
             cantidadDeudaTotalTV.text = getString(R.string.simboloMoneda,simboloMoneda,it?.deuda_total)
