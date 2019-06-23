@@ -3,6 +3,7 @@ package room.components.daos
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import model.Deuda
+import helpcodes.EstatusDeuda
 
 @Dao
 interface DeudaDAO {
@@ -30,6 +31,11 @@ interface DeudaDAO {
     @Query("SELECT * FROM DEUDA WHERE Deuda.estado = :estado")
     fun getDeudasByState(estado: Int) : LiveData<List<Deuda>>
 
+    @Query("SELECT * FROM Deuda WHERE Deuda.estado = " + EstatusDeuda.ACTIVA + " OR Deuda.estado =" + EstatusDeuda.SEGUIR)
+    fun getAllDeudasActivas() : LiveData<List<Deuda>>
+
     @Query("UPDATE Deuda SET estado = :estado WHERE Deuda.id = :id")
     fun updateStatusDeuda(id: Int, estado: Int)
+
+
 }

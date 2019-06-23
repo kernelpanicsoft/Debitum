@@ -53,7 +53,10 @@ class DebtPaymentsHistoryFragment: Fragment() {
             fechaPagoTextView.text = selectPayment.fecha
             notaPagoTextView.text = selectPayment.nota
             paymentDetails.setView(dialogView)
-            paymentDetails.setPositiveButton(getString(R.string.entendido)){ dialog, id->
+            paymentDetails.setPositiveButton(getString(R.string.entendido)){ _, _->
+
+            }
+            paymentDetails.setNeutralButton(getString(R.string.modificar)){ _, _ ->
 
             }
             val paymentDetailsDialog = paymentDetails.create()

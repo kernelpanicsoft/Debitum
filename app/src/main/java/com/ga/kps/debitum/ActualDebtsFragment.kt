@@ -37,7 +37,7 @@ class ActualDebtsFragment: Fragment() {
 
         val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
-        deudasViewModel.getAllDeudasByState(EstatusDeuda.ACTIVA).observe(this, Observer {
+        deudasViewModel.getAllDeudasActivas().observe(this, Observer {
             adapter.submitList(it)
         })
         adapter.setOnClickListener(View.OnClickListener {

@@ -82,7 +82,7 @@ class DebtDetailsFragment: Fragment() {
                     deudasViewModel.updateEstatusDeuda((activity as DebtDetailsActivity).debtID, EstatusDeuda.PAGADA)
                 }
                 .setNegativeButton(getString(R.string.seguir_pagando)) { _, _ ->
-
+                    deudasViewModel.updateEstatusDeuda((activity as DebtDetailsActivity).debtID, EstatusDeuda.SEGUIR)
                 }
             val dialog = builder.create()
             dialog.show()
@@ -106,7 +106,7 @@ class DebtDetailsFragment: Fragment() {
         if(deudaActualLive.hasActiveObservers()){
             deudaActualLive.removeObservers(this)
         }
-        Log.d("TEXT", "EStas llamando a removeObservers " + deudaActualLive.value?.monto)
+        //Log.d("TEXT", "EStas llamando a removeObservers " + deudaActualLive.value?.monto)
     }
 
     private fun actualizaDeudaTotal(monto: Float){

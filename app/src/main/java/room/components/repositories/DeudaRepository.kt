@@ -43,6 +43,10 @@ class DeudaRepository(application: Application) {
         return deudaDao.getAllDeudas()
     }
 
+    fun getAllDeudasActivas() : LiveData<List<Deuda>>{
+        return deudaDao.getAllDeudasActivas()
+    }
+
     fun getDeuda(id: Int) : LiveData<Deuda>{
         return deudaDao.getDeuda(id)
     }

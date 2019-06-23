@@ -37,6 +37,10 @@
     <string name="deuda_pagado">Deuda pagada</string>
     <string name="deuda_eliminada">Deuda eliminada correctamente</string>
     <string name="deuda_ha_sido_pagada">La deuda ha sido pagada en su totalidad, ¿Desea cambiar su estado a "Pagada"?</string>
+    <string name="opciones_de_deuda">Opciones de deuda</string>
+    <string name="modificar">Modificar</string>
+    <string name="cerrar_deuda">Cerrar deuda</string>
+    <string name="abrir_deuda">Abrir deuda</string>
 
 
     <array name="tipo_deuda">

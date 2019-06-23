@@ -1,6 +1,7 @@
 package com.ga.kps.debitum
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,10 +11,12 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import helpcodes.ANADIR_PAGO_DEUDA
+import helpcodes.EstatusDeuda
 import kotlinx.android.synthetic.main.activity_debt_details.*
 import model.Deuda
 import room.components.viewModels.CuentaViewModel
@@ -89,6 +92,7 @@ class DebtDetailsActivity : AppCompatActivity() {
             }
             R.id.itemEditDelete ->{
                 val builder = AlertDialog.Builder(this@DebtDetailsActivity)
+                builder.setTitle(getString(R.string.opciones_de_deuda))
                 builder.setItems(R.array.editar){ _, which ->
                     when(which){
                         0 ->{
@@ -122,6 +126,24 @@ class DebtDetailsActivity : AppCompatActivity() {
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val lockDebtItem = menu?.findItem(R.id.itemLockDebt)
+        val unlockDebtItem = menu?.findItem(R.id.itemUnlockDebt)
+
+        val deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+        deudaViewModel.getDeuda(debtID).observe(this, Observer {
+            if(it?.estado == EstatusDeuda.PAGADA){
+                lockDebtItem?.setVisible(false)
+                unlockDebtItem?.setVisible(true)
+            }else{
+                lockDebtItem?.setVisible(true)
+                unlockDebtItem?.setVisible(false)
+            }
+        })
+
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
