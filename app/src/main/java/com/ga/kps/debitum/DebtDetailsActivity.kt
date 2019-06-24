@@ -122,6 +122,35 @@ class DebtDetailsActivity : AppCompatActivity() {
                 alertDialog.show()
                 return true
             }
+            R.id.itemLockDebt->{
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.cerrar_deuda))
+                    .setMessage("Cerrar la deuda toma los valores actuales de la deuda y cambia su estado a pagada, no será posible registrar pagos a menos de que vuelva a abrir la deuda")
+                    .setPositiveButton(getString(R.string.cerrar)){ _, _ ->
+                        val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
+                        detailsFragment.changeDebtStatus(debtID,EstatusDeuda.PAGADA)
+                    }
+                    .setNegativeButton(getString(R.string.cancelar)){ _,_ ->
+                    }
+                val alertDialog = builder.create()
+                alertDialog.show()
+            }
+            R.id.itemUnlockDebt->{
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.abrir_deuda))
+                builder.setMessage("Abrir la deuda permitirá seguir realizando pagos a esta así ya se haya cubierto el monto inicial ¿Deseá abrir la deuda?")
+                builder.setPositiveButton(getString(R.string.abrir)){ _, _ ->
+                    val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
+                    detailsFragment.changeDebtStatus(debtID,EstatusDeuda.ACTIVA)
+                }
+                builder.setNegativeButton(getString(R.string.cancelar)){ _, _ ->
+
+                }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
+
+            }
 
 
         }
@@ -135,11 +164,11 @@ class DebtDetailsActivity : AppCompatActivity() {
         val deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         deudaViewModel.getDeuda(debtID).observe(this, Observer {
             if(it?.estado == EstatusDeuda.PAGADA){
-                lockDebtItem?.setVisible(false)
-                unlockDebtItem?.setVisible(true)
+                lockDebtItem?.isVisible = false
+                unlockDebtItem?.isVisible = true
             }else{
-                lockDebtItem?.setVisible(true)
-                unlockDebtItem?.setVisible(false)
+                lockDebtItem?.isVisible = true
+                unlockDebtItem?.isVisible = false
             }
         })
 

@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.github.lzyzsd.circleprogress.ArcProgress
 import helpcodes.EstatusDeuda
 import helpcodes.EstatusDeuda.ACTIVA
@@ -94,7 +92,7 @@ class DebtDetailsFragment: Fragment() {
 
     fun deleteDebt(){
         if(deudaActualLive.value?.estado == ACTIVA) {
-            actualizaDeudaTotal(deudaActualLive.value?.monto!! - deudaActualLive.value?.pagado!!)
+            updateTotalDebt(deudaActualLive.value?.monto!! - deudaActualLive.value?.pagado!!)
         }
         removeObservers()
         val deudaAux = Deuda((activity as DebtDetailsActivity).debtID)
@@ -109,9 +107,14 @@ class DebtDetailsFragment: Fragment() {
         //Log.d("TEXT", "EStas llamando a removeObservers " + deudaActualLive.value?.monto)
     }
 
-    private fun actualizaDeudaTotal(monto: Float){
+    private fun updateTotalDebt(monto: Float){
         var cuentaViewModel: CuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         cuentaViewModel.updateDeudaTotal(-monto)
     }
+
+    fun changeDebtStatus(id: Int, status: Int){
+        deudasViewModel.updateEstatusDeuda(id,status)
+    }
+
 
 }

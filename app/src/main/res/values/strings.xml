@@ -41,6 +41,10 @@
     <string name="modificar">Modificar</string>
     <string name="cerrar_deuda">Cerrar deuda</string>
     <string name="abrir_deuda">Abrir deuda</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="cerrar_deuda">Cerrar deuda</string>
+    <string name="abrir_deuda">Abrir deuda</string>
+    <string name="abrir">Abrir</string>
 
 
     <array name="tipo_deuda">
