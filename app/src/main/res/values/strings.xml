@@ -29,7 +29,7 @@
     <string name="especifique_monto_pago">Por favor especifique una cantidad para el monto del pago</string>
     <string name="pago_registrado">Pago registrado correctamente</string>
     <string name="eliminar_deuda">Eliminar deuda</string>
-    <string name="esta_seguro_eliminar_deuda">¿Está seguro de que desea eliminar la deuda?, Al eliminar esta deuda puede que la deuda total cambie, esta acción es irreversible</string>
+    <string name="esta_seguro_eliminar_deuda">¿Está seguro de que desea eliminar la deuda?, Al eliminarla puede que la deuda total cambie, esta acción es irreversible.</string>
     <string name="eliminar">Eliminar</string>
     <string name="cancelar">Cancelar</string>
     <string name="seguir_pagando">Seguir Pagando</string>
@@ -42,8 +42,6 @@
     <string name="cerrar_deuda">Cerrar deuda</string>
     <string name="abrir_deuda">Abrir deuda</string>
     <string name="cerrar">Cerrar</string>
-    <string name="cerrar_deuda">Cerrar deuda</string>
-    <string name="abrir_deuda">Abrir deuda</string>
     <string name="abrir">Abrir</string>
 
 
