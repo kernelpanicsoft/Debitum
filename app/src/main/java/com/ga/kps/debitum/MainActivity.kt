@@ -89,8 +89,9 @@ class MainActivity : AppCompatActivity(){
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.itemSettings ->{
-                val cuentaViewmodel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
-                cuentaViewmodel.insert(Cuenta(0,0f))
+                val settingIntent = Intent(this,SettingsActivity::class.java)
+                startActivity(settingIntent)
+
             }
             R.id.itemAddDebt ->{
                 val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
