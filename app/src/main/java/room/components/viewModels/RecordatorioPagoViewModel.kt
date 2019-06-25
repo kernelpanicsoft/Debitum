@@ -1,7 +1,7 @@
 package room.components.viewModels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import model.RecordatorioPago
 import room.components.repositories.RecordatorioPagoRepository
 

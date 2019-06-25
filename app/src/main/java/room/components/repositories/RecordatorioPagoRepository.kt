@@ -1,7 +1,7 @@
 package room.components.repositories
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import android.os.AsyncTask
 import model.RecordatorioPago
 import room.components.DebitumDataBase

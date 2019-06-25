@@ -2,10 +2,10 @@ package com.ga.kps.debitum
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
@@ -55,7 +55,8 @@ class AddDebtPaymentActivity : AppCompatActivity() {
 
         saveDebtPaymentFAB.setOnClickListener {
             if(montoPagoET.text.isNullOrEmpty()){
-                Snackbar.make(it,getString(R.string.especifique_monto_pago),Snackbar.LENGTH_LONG).show()
+                Snackbar.make(it,getString(R.string.especifique_monto_pago),
+                    Snackbar.LENGTH_LONG).show()
             }else{
                 if(montoPagoET.text.toString().toFloat() <= 0f){
                     Snackbar.make(it,getString(R.string.el_monto_del_pago), Snackbar.LENGTH_LONG).show()

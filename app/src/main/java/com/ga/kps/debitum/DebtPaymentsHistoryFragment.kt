@@ -1,12 +1,12 @@
 package com.ga.kps.debitum
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +25,11 @@ class DebtPaymentsHistoryFragment: Fragment() {
         RV = v.findViewById(R.id.RecViewHistorialDePagos)
         RV.setHasFixedSize(true)
 
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,true)
+        val mLayoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            true
+        )
         mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
