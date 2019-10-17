@@ -18,8 +18,6 @@ import android.widget.Toast
 import helpcodes.ANADIR_PAGO_DEUDA
 import helpcodes.EstatusDeuda
 import kotlinx.android.synthetic.main.activity_debt_details.*
-import model.Deuda
-import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
 
 class DebtDetailsActivity : AppCompatActivity() {
@@ -27,25 +25,17 @@ class DebtDetailsActivity : AppCompatActivity() {
     private lateinit var adapter : ViewPagerAdapter
 
         override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_debt_details)
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_debt_details)
 
-        setSupportActionBar(toolbar)
-        val ab = supportActionBar
-        ab!!.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.detalles_de_la_deuda)
+            setSupportActionBar(toolbar)
+            val ab = supportActionBar
+            ab!!.setDisplayHomeAsUpEnabled(true)
+            title = getString(R.string.detalles_de_la_deuda)
 
-
-        setupViewPager(ViewPagerDetallesDeuda)
-        tabLayoutDebtTomas.setupWithViewPager(ViewPagerDetallesDeuda)
-
-        debtID = intent.getIntExtra("DEBT_ID", -1)
-
-        anadirPagoDeudadFAB.setOnClickListener {
-            val nav = Intent(this@DebtDetailsActivity, AddDebtPaymentActivity::class.java)
-            nav.putExtra("DEBT_ID", debtID)
-            startActivityForResult(nav, ANADIR_PAGO_DEUDA)
-        }
+            setupViewPager(ViewPagerDetallesDeuda)
+            tabLayoutDebtTomas.setupWithViewPager(ViewPagerDetallesDeuda)
+            debtID = intent.getIntExtra("DEBT_ID", -1)
     }
 
     private fun setupViewPager(pager: ViewPager){
@@ -125,7 +115,7 @@ class DebtDetailsActivity : AppCompatActivity() {
             R.id.itemLockDebt->{
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(getString(R.string.cerrar_deuda))
-                    .setMessage("Cerrar la deuda toma los valores actuales de la deuda y cambia su estado a pagada, no será posible registrar pagos a menos de que vuelva a abrir la deuda")
+                    .setMessage(getString(R.string.cerrar_la_deuda_dialog))
                     .setPositiveButton(getString(R.string.cerrar)){ _, _ ->
                         val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
                         detailsFragment.changeDebtStatus(debtID,EstatusDeuda.PAGADA)
@@ -138,10 +128,10 @@ class DebtDetailsActivity : AppCompatActivity() {
             R.id.itemUnlockDebt->{
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(getString(R.string.abrir_deuda))
-                builder.setMessage("Abrir la deuda permitirá seguir realizando pagos a esta así ya se haya cubierto el monto inicial ¿Deseá abrir la deuda?")
+                builder.setMessage(getString(R.string.abrir_la_deuda_dialog))
                 builder.setPositiveButton(getString(R.string.abrir)){ _, _ ->
                     val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
-                    detailsFragment.changeDebtStatus(debtID,EstatusDeuda.ACTIVA)
+                    detailsFragment.changeDebtStatus(debtID,EstatusDeuda.SEGUIR)
                 }
                 builder.setNegativeButton(getString(R.string.cancelar)){ _, _ ->
 
@@ -176,13 +166,14 @@ class DebtDetailsActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when(requestCode){
-            ANADIR_PAGO_DEUDA ->{
-                if(resultCode == Activity.RESULT_OK){
-                    Toast.makeText(this,getString(R.string.pago_registrado), Toast.LENGTH_SHORT).show()
+        super.onActivityResult(requestCode, resultCode, data)
+            when(requestCode){
+                ANADIR_PAGO_DEUDA ->{
+                    if(resultCode == Activity.RESULT_OK){
+                        Toast.makeText(this,getString(R.string.pago_registrado), Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-        }
     }
 
     private fun deleteDebt(){

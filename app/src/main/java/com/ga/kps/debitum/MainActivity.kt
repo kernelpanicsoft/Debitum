@@ -18,11 +18,10 @@ import model.Deuda
 import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
 
-
-    lateinit var deudaViewModel : DeudaViewModel
+    lateinit var deudaViewModel: DeudaViewModel
     lateinit var cuentaViewModel: CuentaViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,55 +30,48 @@ class MainActivity : AppCompatActivity(){
         setSupportActionBar(toolbar)
         title = "Debitum"
 
+        val manager = supportFragmentManager
 
-        setupViewPager(ViewPagerPrincipal)
 
-        TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
+        //setupViewPager(ViewPagerPrincipal)
+
+        //TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
 
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
-        //deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+        deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
+
+        /*
         cuentaViewModel.getCuenta(1).observe(this, Observer {
             val simboloMoneda = "$"
-            cantidadDeudaTotalTV.text = getString(R.string.simboloMoneda,simboloMoneda,it?.deuda_total)
+            cantidadDeudaTotalTV.text =
+                getString(R.string.simboloMoneda, simboloMoneda, it?.deuda_total)
         })
-
-
-
-    }
-
-    private fun setupViewPager(pager: ViewPager){
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ActualDebtsFragment(),getString(R.string.actuales))
-        adapter.addFragment(PassDebtsFragment(),getString(R.string.pasadas))
-
-        pager.adapter = adapter
-
-
-    }
-
-    private inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){
-        private val mFragmentList = ArrayList<Fragment>()
-        private val mFragmentTitleList = ArrayList<String>()
-
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
+        */
+        if(savedInstanceState == null){
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, DebtsFragment(), "Estadisticas").commit()
         }
 
-        override fun getCount(): Int {
-            return mFragmentTitleList.size
-        }
+        bnv.setOnNavigationItemSelectedListener {item ->
+            val transaction = manager.beginTransaction()
 
-        fun addFragment(fragment: Fragment, title: String){
-            mFragmentList.add(fragment)
-            mFragmentTitleList.add(title)
-        }
-
-        override fun getPageTitle(position: Int): CharSequence{
-            return mFragmentTitleList[position]
+            when(item.itemId){
+                R.id.debtsItem ->{
+                    transaction.replace(R.id.fragmentContainer, DebtsFragment(), "Deudas").commit()
+                }
+                R.id.calendarItem ->{
+                    transaction.replace(R.id.fragmentContainer, ScheduleFragment(), "Calendario").commit()
+                }
+                R.id.statsItem ->{
+                    transaction.replace(R.id.fragmentContainer, StatsFragment(), "Estadisticas").commit()
+                }
+            }
+            return@setOnNavigationItemSelectedListener true
         }
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)

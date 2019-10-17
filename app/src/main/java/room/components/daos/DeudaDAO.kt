@@ -37,5 +37,10 @@ interface DeudaDAO {
     @Query("UPDATE Deuda SET estado = :estado WHERE Deuda.id = :id")
     fun updateStatusDeuda(id: Int, estado: Int)
 
+    @Query("UPDATE Deuda SET monto = :montoNuevo WHERE Deuda.id = :id")
+    fun updateMontoOriginal(id: Int, montoNuevo: Float)
+
+    @Query("SELECT (SUM(monto) - SUM(pagado)) FROM DEUDA")
+    fun getSumaDeudas() : LiveData<Float>
 
 }

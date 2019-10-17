@@ -9,6 +9,8 @@ import com.google.android.material.snackbar.Snackbar
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.add_debt_payment_activity.*
 import model.Pago
 import room.components.viewModels.CuentaViewModel
@@ -17,6 +19,9 @@ import room.components.viewModels.PagoViewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
+import helpcodes.EstatusDeuda
+import model.Deuda
 
 class AddDebtPaymentActivity : AppCompatActivity() {
     lateinit var pagoViewModel: PagoViewModel
@@ -25,6 +30,7 @@ class AddDebtPaymentActivity : AppCompatActivity() {
     private val calendario: Calendar = Calendar.getInstance()
     private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
     private var deudaID: Int = 0
+    lateinit var deuda : LiveData<Deuda>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +45,10 @@ class AddDebtPaymentActivity : AppCompatActivity() {
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         deudaID = intent.getIntExtra("DEBT_ID",-1)
+        deuda = deudaViewModel.getDeuda(deudaID)
+        deuda.observe(this, Observer{
+            
+        })
 
         fechaPagoBT.text = sdf.format(calendario.time)
         fechaPagoBT.setOnClickListener {
@@ -53,28 +63,72 @@ class AddDebtPaymentActivity : AppCompatActivity() {
             datePickerFragment.show()
         }
 
-        saveDebtPaymentFAB.setOnClickListener {
+        saveDebtPaymentFAB.setOnClickListener { it ->
+
             if(montoPagoET.text.isNullOrEmpty()){
                 Snackbar.make(it,getString(R.string.especifique_monto_pago),
                     Snackbar.LENGTH_LONG).show()
             }else{
                 if(montoPagoET.text.toString().toFloat() <= 0f){
                     Snackbar.make(it,getString(R.string.el_monto_del_pago), Snackbar.LENGTH_LONG).show()
-                }else{
-                    val pago = Pago(0)
-                    pago.deuda_ID = intent.getIntExtra("DEBT_ID",-1)
-                    pago.fecha = fechaPagoBT.text.toString()
-                    pago.monto = montoPagoET.text.toString().toFloat()
-                    pago.nota = notaPagoET.text.toString()
-                    savePaymentToDB(pago)
+                }
+                else{
+                   // Toast.makeText(this,"Valor: " + deuda.value?.titulo, Toast.LENGTH_SHORT).show()
+
+                        val pago = Pago(0)
+                        pago.deuda_ID = intent.getIntExtra("DEBT_ID",-1)
+                        pago.fecha = fechaPagoBT.text.toString()
+                        pago.monto = montoPagoET.text.toString().toFloat()
+                        pago.nota = notaPagoET.text.toString()
+
+
+                    when {
+                        pago.monto + deuda.value!!.pagado > deuda.value!!.monto && deuda.value!!.estado == EstatusDeuda.ACTIVA -> {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setTitle(getString(R.string.liquidacion_de_la_deuda))
+                            builder.setMessage(getString(R.string.pago_ingresado_liquida_superando_monto_inicial))
+                            builder.setPositiveButton(getString(R.string.cerrar)){ _, _ ->
+                                deudaViewModel.updateEstatusDeuda(deudaID, EstatusDeuda.PAGADA)
+                                deudaViewModel.updateMontoOriginalDeuda(deudaID,pago.monto + deuda.value!!.pagado)
+                                savePaymentToDB(pago)
+                            }
+                            builder.setNegativeButton(getString(R.string.continuar_pagando)){ _, _ ->
+                                deudaViewModel.updateEstatusDeuda(deudaID, EstatusDeuda.SEGUIR)
+                                deudaViewModel.updateMontoOriginalDeuda(deudaID,pago.monto + deuda.value!!.pagado)
+                                savePaymentToDB(pago)
+
+                            }
+                            val alertDialog = builder.create()
+                            alertDialog.show()
+
+                        }
+                        pago.monto + deuda.value!!.pagado == deuda.value!!.monto -> {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setTitle(getString(R.string.liquidacion_de_la_deuda))
+                            builder.setMessage(getString(R.string.pago_ingresado_liquida_deuda))
+                            builder.setPositiveButton(getString(R.string.cerrar)){ _, _ ->
+                                deudaViewModel.updateEstatusDeuda(deudaID, EstatusDeuda.PAGADA)
+                                savePaymentToDB(pago)
+                            }
+                            builder.setNegativeButton(getString(R.string.continuar_pagando)){ _, _ ->
+                                deudaViewModel.updateEstatusDeuda(deudaID, EstatusDeuda.SEGUIR)
+                                savePaymentToDB(pago)
+                            }
+                            val alertDialog = builder.create()
+                            alertDialog.show()
+                        }
+                        pago.monto + deuda.value!!.pagado > deuda.value!!.monto && deuda.value!!.estado == EstatusDeuda.SEGUIR -> {
+                            deudaViewModel.updateMontoOriginalDeuda(deudaID,pago.monto + deuda.value!!.pagado)
+                            savePaymentToDB(pago)
+                        }
+                        else -> savePaymentToDB(pago)
+                    }
                 }
             }
-
-
         }
     }
 
-    fun savePaymentToDB(payment: Pago){
+    private fun savePaymentToDB(payment: Pago){
         pagoViewModel.insert(payment)
         actualizaDeuda(deudaID, payment.monto)
         actualizaDeudaTotal(-payment.monto)
@@ -92,11 +146,11 @@ class AddDebtPaymentActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun actualizaDeuda(id: Int, monto: Float){
+    private fun actualizaDeuda(id: Int, monto: Float){
         deudaViewModel.updateDeuda(id,monto)
     }
 
-    fun actualizaDeudaTotal(monto: Float){
+    private fun actualizaDeudaTotal(monto: Float){
         cuentaViewModel.updateDeudaTotal(monto)
     }
 }

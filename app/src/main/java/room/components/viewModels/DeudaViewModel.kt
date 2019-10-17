@@ -48,4 +48,12 @@ class DeudaViewModel (application: Application) : AndroidViewModel(application) 
     fun updateEstatusDeuda(id: Int, estatus: Int){
         repository.updateEstatusCuenta(id,estatus)
     }
+
+    fun updateMontoOriginalDeuda(id: Int, monto: Float){
+        repository.updateMontoOriginalDeuda(id,monto)
+    }
+
+    fun getSumaDeudas() : LiveData<Float>{
+        return repository.getSumaCuentas()
+    }
 }

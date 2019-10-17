@@ -13,5 +13,6 @@ import androidx.room.PrimaryKey
 class RecordatorioPago (@PrimaryKey(autoGenerate = true) var id: Int,
                         var fecha: String? = null,
                         var nota: String? = null,
+                        var monto: Float? = null,
                         var deudaID: Int? = null
                         )

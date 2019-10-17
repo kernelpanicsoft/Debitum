@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,9 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.github.lzyzsd.circleprogress.ArcProgress
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import helpcodes.EstatusDeuda
 import helpcodes.EstatusDeuda.ACTIVA
+import helpcodes.ANADIR_PAGO_DEUDA
+import helpcodes.EstatusDeuda.PAGADA
 import model.Deuda
 import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
@@ -23,6 +28,7 @@ class DebtDetailsFragment: Fragment() {
     lateinit var RV: RecyclerView
     lateinit var deudasViewModel: DeudaViewModel
     lateinit var deudaActualLive : LiveData<Deuda>
+
     val simboloMoneda = "$"
 
     var tituloDeudaTextView: TextView? = null
@@ -47,16 +53,27 @@ class DebtDetailsFragment: Fragment() {
         tipoDeudaTextView = v.findViewById(R.id.tipoDeudaTV)
         arcoProgresso = v.findViewById(R.id.arc_progress)
 
-
+        val fab = (activity as DebtDetailsActivity).findViewById<FloatingActionButton>(R.id.anadirPagoDeudadFAB)
+        fab.setOnClickListener {
+            val nav = Intent(context, AddDebtPaymentActivity::class.java)
+            nav.putExtra("DEBT_ID", (activity as DebtDetailsActivity).debtID)
+            startActivityForResult(nav, ANADIR_PAGO_DEUDA)
+        }
 
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
         deudaActualLive = deudasViewModel.getDeuda((activity as DebtDetailsActivity).debtID)
         deudaActualLive.observe(this, Observer {
             populateDebtUI(it)
+
+            if(it.estado == PAGADA){
+                fab.hide()
+            }else{
+                fab.show()
+            }
         })
 
-        //Toast.makeText(context,"ID de la toma: " + (activity as DebtDetailsActivity).debtID, Toast.LENGTH_SHORT).show()
+
         return v
     }
 
@@ -72,6 +89,7 @@ class DebtDetailsFragment: Fragment() {
         tipoDeudaTextView?.text =  tipoDeudaArray?.get(debt.tipo)
 
 
+        /*
         if((debt.pagado >= debt.monto) && debt.estado == EstatusDeuda.ACTIVA){
             val builder = AlertDialog.Builder(context!!)
             val negativeButton = builder.setTitle(getString(R.string.deuda_pagado))
@@ -84,9 +102,9 @@ class DebtDetailsFragment: Fragment() {
                 }
             val dialog = builder.create()
             dialog.show()
-
-
         }
+
+         */
 
     }
 
@@ -114,6 +132,11 @@ class DebtDetailsFragment: Fragment() {
 
     fun changeDebtStatus(id: Int, status: Int){
         deudasViewModel.updateEstatusDeuda(id,status)
+
+        if(status == PAGADA){
+            deudasViewModel.updateMontoOriginalDeuda(id,deudaActualLive.value?.pagado!!)
+
+        }
     }
 
 
