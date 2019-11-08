@@ -23,4 +23,6 @@ interface RecordatorioPagoDAO {
 
     @Query("SELECT * FROM RecordatorioPago WHERE RecordatorioPago.id = :id")
     fun getRecordatorioPago(id: Int?) : LiveData<RecordatorioPago>
+
+
 }

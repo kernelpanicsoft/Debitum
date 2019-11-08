@@ -2,6 +2,7 @@ package room.components.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import model.RecordatorioPago
 import room.components.repositories.RecordatorioPagoRepository
 
@@ -24,7 +25,11 @@ class RecordatorioPagoViewModel (application : Application) : AndroidViewModel(a
         repository.deleteAllRecordatoriosPago()
     }
 
-    fun getRecordatorioPago(id: Int){
-        repository.getAllRecordatoriosPago()
+    fun getAllRecordatorios() : LiveData<List<RecordatorioPago>>{
+       return repository.getAllRecordatoriosPago()
+    }
+
+    fun getRecordatorio(id: Int) : LiveData<RecordatorioPago>{
+        return repository.getRecordatorioPago(id)
     }
 }

@@ -6,6 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
+import android.util.Log
 import model.*
 import room.components.daos.CuentaDAO
 import room.components.daos.DeudaDAO
@@ -39,6 +40,7 @@ abstract class DebitumDataBase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                            // instance?.cuentaDao()?.insert(Cuenta(0,0f))
                             db.execSQL("INSERT INTO Cuenta VALUES (1,0.0);")
+                            Log.d("DATABASE","Base de datos creada");
                         }
                     }
                     )

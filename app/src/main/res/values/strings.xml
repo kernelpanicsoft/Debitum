@@ -62,4 +62,9 @@
     <string name="deudas">Deudas</string>
 
     <string name="gasto_mensual">Gasto mensual:</string>
+    <string name="a_adir_nuevo_recordatorio_de_pago">Añadir nuevo recordatorio de pago</string>
+    <string name="anadir_recordatorio_de_pago">Añanadir recordatorio de pago</string>
+    <string name="deuda_asociada">Deuda asociada</string>
+    <string name="fecha_de_recordatorio">Fecha de recordatorio</string>
+    <string name="elegir_deuda">Elegir deuda</string>
 </resources>

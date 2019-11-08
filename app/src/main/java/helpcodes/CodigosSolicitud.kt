@@ -7,3 +7,4 @@ object EstatusDeuda{
 }
 
 const val ANADIR_PAGO_DEUDA = 2
+const val ELEGIR_DEUDA = 3

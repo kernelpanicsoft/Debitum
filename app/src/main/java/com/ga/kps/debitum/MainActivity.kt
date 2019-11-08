@@ -32,11 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         val manager = supportFragmentManager
 
-
-        //setupViewPager(ViewPagerPrincipal)
-
-        //TabLayoutPrincipal.setupWithViewPager(ViewPagerPrincipal)
-
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
@@ -84,10 +79,6 @@ class MainActivity : AppCompatActivity() {
                 val settingIntent = Intent(this,SettingsActivity::class.java)
                 startActivity(settingIntent)
 
-            }
-            R.id.itemAddDebt ->{
-                val nav = Intent(this@MainActivity,AddDebtActivity::class.java)
-                startActivity(nav)
             }
         }
         return super.onOptionsItemSelected(item)
