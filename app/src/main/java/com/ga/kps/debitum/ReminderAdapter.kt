@@ -8,24 +8,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import model.JoinDeudaRecordatorio
 import model.RecordatorioPago
 
-class ReminderAdapter (val context: Context) : ListAdapter<RecordatorioPago, ReminderAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
+class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio, ReminderAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
 
-    class DIFF_CALLBACK : DiffUtil.ItemCallback<RecordatorioPago>(){
+    class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinDeudaRecordatorio>(){
         override fun areItemsTheSame(
-            oldItem: RecordatorioPago,
-            newItem: RecordatorioPago
+            oldItem: JoinDeudaRecordatorio,
+            newItem: JoinDeudaRecordatorio
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.recordatorioID == newItem.recordatorioID
         }
 
         override fun areContentsTheSame(
-            oldItem: RecordatorioPago,
-            newItem: RecordatorioPago
+            oldItem: JoinDeudaRecordatorio,
+            newItem: JoinDeudaRecordatorio
         ): Boolean {
-            return oldItem.monto == newItem.monto && oldItem.fecha.equals(newItem.fecha)
+            return oldItem.tituloDeuda == newItem.tituloDeuda && oldItem.fechaRecordatorio.equals(newItem.fechaRecordatorio)
         }
     }
 
@@ -46,10 +47,10 @@ class ReminderAdapter (val context: Context) : ListAdapter<RecordatorioPago, Rem
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val recordatorioPago = getItem(position)
         val simboloMoneda = "$"
-        holder.tituloRecordatorio.text = recordatorioPago.nota
-        holder.deudaVinculada.text = recordatorioPago.deudaID.toString()
-        holder.fechaRecordatorio.text = recordatorioPago.fecha
-        holder.montoRecordatorio.text = simboloMoneda + " " + recordatorioPago.monto.toString()
+        holder.tituloRecordatorio.text = recordatorioPago.notaRecordatorio
+        holder.deudaVinculada.text = recordatorioPago.tituloDeuda.toString()
+        holder.fechaRecordatorio.text = recordatorioPago.fechaRecordatorio
+        holder.montoRecordatorio.text = simboloMoneda + " " + recordatorioPago.montoRecordatorio.toString()
 
     }
 
@@ -59,5 +60,9 @@ class ReminderAdapter (val context: Context) : ListAdapter<RecordatorioPago, Rem
 
     override fun onClick(v: View?) {
         listener!!.onClick(v)
+    }
+
+    fun getReminderAt(position: Int): JoinDeudaRecordatorio{
+        return getItem(position)
     }
 }

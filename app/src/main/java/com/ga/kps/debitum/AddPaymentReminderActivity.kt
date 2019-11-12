@@ -6,6 +6,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -55,22 +57,27 @@ class AddPaymentReminderActivity : AppCompatActivity() {
         saveReminderFAB.setOnClickListener {
             paymentReminder.nota = notaRecordatorioET.text.toString()
             paymentReminder.monto =  montoRecordatorioET.text.toString().toFloat()
-            paymentReminder.fecha = FechaRecordatorioButton.text.toString()
+            paymentReminder.fecha = periodicidiadSpinner.selectedItem.toString()
 
             reminderViewModel.insert(paymentReminder)
             finish()
         }
 
-        FechaRecordatorioButton.setOnClickListener {
-            val datePickerFragment = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                calendario.set(Calendar.YEAR, year)
-                calendario.set(Calendar.MONTH, month)
-                calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                //Toast.makeText(this@AnadirCitaMedicaActivity,"Fecha seleccionada: " + sdf.format(calendario.time), Toast.LENGTH_SHORT).show()
-                FechaRecordatorioButton.text = sdf.format(calendario.time)
 
-            }, calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH))
-            datePickerFragment.show()
+
+        val adapterWeekly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfWeek))
+        val adapterMonthly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfMonth))
+        periodicidiadSpinner.adapter = adapterMonthly
+
+        PeriodicidadGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.mensualRB ->{
+                    periodicidiadSpinner.adapter = adapterMonthly
+                }
+                R.id.semanalRB ->{
+                    periodicidiadSpinner.adapter = adapterWeekly
+                }
+            }
         }
     }
 
@@ -101,6 +108,7 @@ class AddPaymentReminderActivity : AppCompatActivity() {
 
     private fun populateDebtCard(debtID : Int?){
         val simboloMoneda = "$"
+        cardView.visibility = View.VISIBLE
 
         debtViewModel.getDeuda(debtID!!).observe(this, Observer{ deudaActual ->
 

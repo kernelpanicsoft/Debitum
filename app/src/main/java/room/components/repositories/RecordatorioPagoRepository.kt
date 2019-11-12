@@ -3,6 +3,7 @@ package room.components.repositories
 import android.app.Application
 import androidx.lifecycle.LiveData
 import android.os.AsyncTask
+import model.JoinDeudaRecordatorio
 import model.RecordatorioPago
 import room.components.DebitumDataBase
 import room.components.daos.RecordatorioPagoDAO
@@ -23,6 +24,10 @@ class RecordatorioPagoRepository (application: Application) {
         UpdateRecordatorioPagoAsyncTask(recordatorioPagoDAO).execute(recordatorioPago)
     }
 
+    fun getSumaRecordatorios() : LiveData<Float>{
+        return recordatorioPagoDAO.getSumaRecordatorios()
+    }
+
     fun delete(recordatorioPago: RecordatorioPago){
         DeleteRecordatorioPagoAsyncTask(recordatorioPagoDAO).execute(recordatorioPago)
     }
@@ -37,6 +42,10 @@ class RecordatorioPagoRepository (application: Application) {
 
     fun getAllRecordatoriosPago() : LiveData<List<RecordatorioPago>>{
         return recordatorioPagoDAO.getAllRecordatoriosPago()
+    }
+
+    fun getRecordatoriosPagoDeuda() : LiveData<List<JoinDeudaRecordatorio>>{
+        return recordatorioPagoDAO.getRecordatoriosPagoDeuda()
     }
 
     private class InsertRecordatorioPagoAsyncTask constructor(private val recordatorioPagoDAO: RecordatorioPagoDAO) : AsyncTask<RecordatorioPago, Void, Void>(){

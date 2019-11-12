@@ -2,6 +2,7 @@ package room.components.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import model.JoinDeudaRecordatorio
 import model.RecordatorioPago
 
 @Dao
@@ -24,5 +25,9 @@ interface RecordatorioPagoDAO {
     @Query("SELECT * FROM RecordatorioPago WHERE RecordatorioPago.id = :id")
     fun getRecordatorioPago(id: Int?) : LiveData<RecordatorioPago>
 
+    @Query("SELECT SUM(monto) FROM RecordatorioPago")
+    fun getSumaRecordatorios() : LiveData<Float>
 
+    @Query("SELECT RecordatorioPago.nota, RecordatorioPago.fecha, RecordatorioPago.monto, Deuda.titulo from RecordatorioPago JOIN Deuda ON Deuda.id = RecordatorioPago.deudaID")
+    fun getRecordatoriosPagoDeuda() : LiveData<List<JoinDeudaRecordatorio>>
 }
