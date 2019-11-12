@@ -72,6 +72,9 @@
     <string name="mensual">Mensual</string>
     <string name="dia">Día:</string>
     <string name="detalles_de_recordatorio">Detalles de recordatorio</string>
+    <string name="periodo_de_pago">Periodo de pago:</string>
+    <string name="pr_ximo_pago">Próximo pago:</string>
+    <string name="d_as_hasta_pr_ximo_pago">Días hasta próximo pago:</string>
 
     <string-array name="daysOfMonth">
         <item>1</item>

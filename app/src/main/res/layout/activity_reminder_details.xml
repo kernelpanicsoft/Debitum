@@ -53,7 +53,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="Deuda en Sears con una cadena larga que debe"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/title"
                         app:layout_constraintEnd_toStartOf="@+id/fechaPagoTV"
@@ -65,7 +64,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:text="$10310"
                         android:textSize="14sp"
                         app:layout_constraintStart_toEndOf="@+id/deTV"
                         app:layout_constraintTop_toTopOf="@+id/deTV" />
@@ -76,7 +74,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="03/05/2019"
                         android:textColor="@android:color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -99,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="25%"
+                        android:text="0%"
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintBottom_toTopOf="@+id/progressBar"
                         app:layout_constraintEnd_toEndOf="@+id/progressBar"
@@ -111,7 +108,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:text="$250"
                         app:layout_constraintStart_toEndOf="@+id/padagoTV"
                         app:layout_constraintTop_toTopOf="@+id/padagoTV" />
 
@@ -149,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="$34564"
+                        android:text="$0"
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/restanteTV" />
@@ -271,7 +267,7 @@
                         android:layout_marginStart="16dp"
 
                         android:layout_marginTop="8dp"
-                        android:text="Periodo de pago:"
+                        android:text="@string/periodo_de_pago"
                         android:textColor="@android:color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -281,7 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Mensual"
+
                         app:layout_constraintBottom_toBottomOf="@+id/fechaPagoLabelTV"
                         app:layout_constraintStart_toEndOf="@+id/fechaPagoLabelTV"
                         app:layout_constraintTop_toTopOf="@+id/fechaPagoLabelTV" />
@@ -291,7 +287,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Proximo pago:"
+                        android:text="@string/pr_ximo_pago"
                         android:textColor="@android:color/black"
                         app:layout_constraintStart_toStartOf="@+id/fechaPagoLabelTV"
                         app:layout_constraintTop_toBottomOf="@+id/fechaPagoLabelTV" />
@@ -301,7 +297,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="03/05/2019"
                         app:layout_constraintBottom_toBottomOf="@+id/proximoPagoLabelTV"
                         app:layout_constraintStart_toEndOf="@+id/proximoPagoLabelTV"
                         app:layout_constraintTop_toTopOf="@+id/proximoPagoLabelTV" />
@@ -313,7 +308,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Días hasta próximo pago:"
+                        android:text="@string/d_as_hasta_pr_ximo_pago"
                         android:textColor="@android:color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -324,7 +319,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="1"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
                         app:layout_constraintStart_toEndOf="@+id/textView"
                         app:layout_constraintTop_toTopOf="@+id/textView" />
