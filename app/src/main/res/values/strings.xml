@@ -108,15 +108,53 @@
         <item>29</item>
         <item>30</item>
         <item>31</item>
+        <item>Último día del mes</item>
     </string-array>
 
+    <string name="ultimo_dia_mes">Último día del mes</string>
+    <string name="hoy">Hoy</string>
+    <string name="configuracion">Configuración</string>
+
     <array name="daysOfWeek">
+        <item>Domingo</item>
         <item>Lunes</item>
         <item>Martes</item>
         <item>Miércoles</item>
         <item>Jueves</item>
         <item>Viernes</item>
         <item>Sábado</item>
-        <item>Domingo</item>
     </array>
+
+    <array name="moneySign">
+        <item>$</item>
+        <item>€</item>
+        <item>¥</item>
+        <item>£</item>
+        <item>元</item>
+        <item>₩</item>
+        <item>₹</item>
+        <item>₽</item>
+        <item>₪</item>
+        <item>﷼</item>
+    </array>
+
+    <string name="notificacion_antificacion">Sin anticipación</string>
+    <array name="notificationAnticipation">
+        <item>Sin anticipación</item>
+        <item>1 hora</item>
+        <item>5 horas</item>
+        <item>1 día</item>
+    </array>
+    <string name="continuidad_notificacion">Sin anticipación</string>
+    <string name="eliminar_recordatorio">Eliminar recordatorio</string>
+    <string name="esta_seguro_eliminar_recordatorio">¿Está seguro de que desea eliminar el recordatorio?</string>
+    <string name="opciones_recordatorio">Opciones de recordatorio</string>
+
+
+    <string-array name="notificationAnticipationValues">
+        <item>0</item>
+        <item>1</item>
+        <item>5</item>
+        <item>24</item>
+    </string-array>>
 </resources>

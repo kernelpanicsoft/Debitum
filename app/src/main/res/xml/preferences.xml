@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+
+    <PreferenceCategory
+        android:title="Detalles de deudas"
+        android:key="pref_debts"
+        >
+        <ListPreference
+            app:key="moneySign"
+            app:title="Simbolo de moneda"
+            app:entries="@array/moneySign"
+            app:entryValues="@array/moneySign"
+            app:defaultValue="$"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Notificaciones"
+        android:key="pref_notifications">
+        <ListPreference
+            app:key="notificationAnticipation"
+            app:title="Anticipar notificaciones"
+            app:entries="@array/notificationAnticipation"
+            app:entryValues="@array/notificationAnticipationValues"
+            app:defaultValue="0"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="appDetails"
+        app:title="Detalles de la aplicación"
+        >
+
+    </PreferenceCategory>
 </PreferenceScreen>

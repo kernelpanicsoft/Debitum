@@ -28,6 +28,6 @@ interface RecordatorioPagoDAO {
     @Query("SELECT SUM(monto) FROM RecordatorioPago")
     fun getSumaRecordatorios() : LiveData<Float>
 
-    @Query("SELECT RecordatorioPago.nota, RecordatorioPago.fecha, RecordatorioPago.monto, Deuda.titulo from RecordatorioPago JOIN Deuda ON Deuda.id = RecordatorioPago.deudaID")
+    @Query("SELECT RecordatorioPago.id, RecordatorioPago.nota, RecordatorioPago.fecha, RecordatorioPago.monto, Deuda.titulo from RecordatorioPago JOIN Deuda ON Deuda.id = RecordatorioPago.deudaID")
     fun getRecordatoriosPagoDeuda() : LiveData<List<JoinDeudaRecordatorio>>
 }
