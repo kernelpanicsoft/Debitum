@@ -1,6 +1,7 @@
 package com.ga.kps.debitum
 
 import android.content.Context
+import android.preference.PreferenceManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +47,8 @@ class DebtsAdapter(val context: Context?) : ListAdapter<Deuda, DebtsAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val deudaActual = getItem(position)
-        val simboloMoneda = "$"
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val simboloMoneda = prefs.getString("moneySign","NA")
         holder.tituloDeuda.text = deudaActual.titulo
         holder.montoTotalDeuda.text = context?.getString(R.string.simboloMoneda,simboloMoneda,deudaActual.monto)
         holder.montoPagadoDeuda.text = context?.getString(R.string.simboloMoneda,simboloMoneda,deudaActual.pagado)

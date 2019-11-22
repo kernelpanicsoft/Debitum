@@ -20,6 +20,7 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:layout_marginStart="16sp"/>
+
     <TextView
         android:id="@+id/cantidadDeudaTotalTV"
         android:layout_width="wrap_content"
@@ -37,6 +38,8 @@
         app:tabGravity="fill"
         app:tabMode="fixed"/>
 
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/ViewPagerPrincipal"
         android:layout_width="match_parent"
@@ -46,6 +49,21 @@
         />
 
 </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center">
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-4604704883963264/2672249239"/>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewDebtFAB"

@@ -3,6 +3,7 @@ package com.ga.kps.debitum
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +18,16 @@ import room.components.viewModels.PagoViewModel
 class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var pagosViewModel: PagoViewModel
     lateinit var RV: RecyclerView
-    val simboloMoneda = "$"
+    var simboloMoneda = "$"
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_debt_payments_history, container,false)
         RV = v.findViewById(R.id.RecViewHistorialDePagos)
         RV.setHasFixedSize(true)
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        simboloMoneda = prefs.getString("moneySign","NA")
 
         val mLayoutManager = LinearLayoutManager(
             context,

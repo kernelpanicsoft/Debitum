@@ -1,6 +1,7 @@
 package com.ga.kps.debitum
 
 import android.content.Context
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import model.JoinDeudaRecordatorio
 import model.RecordatorioPago
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio, ReminderAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
-
+    private val calendario: Calendar = Calendar.getInstance()
+    private val calendarioRecordatorio: Calendar = Calendar.getInstance()
+    private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
     class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinDeudaRecordatorio>(){
         override fun areItemsTheSame(
             oldItem: JoinDeudaRecordatorio,
@@ -35,6 +41,7 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
         val deudaVinculada = v.findViewById<TextView>(R.id.DeudaAsociadaTV)
         val fechaRecordatorio = v.findViewById<TextView>(R.id.FechaRecordatorioTV)
         val montoRecordatorio = v.findViewById<TextView>(R.id.MontoRecordatorioTV)
+        val diasRestantes = v.findViewById<TextView>(R.id.diasRetantesTV)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,12 +52,96 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val recordatorioPago = getItem(position)
-        val simboloMoneda = "$"
-        holder.tituloRecordatorio.text = recordatorioPago.notaRecordatorio
-        holder.deudaVinculada.text = recordatorioPago.tituloDeuda.toString()
-        holder.fechaRecordatorio.text = recordatorioPago.fechaRecordatorio
-        holder.montoRecordatorio.text = simboloMoneda + " " + recordatorioPago.montoRecordatorio.toString()
+        val it = getItem(position)
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val simboloMoneda = prefs.getString("moneySign","NA")
+        holder.tituloRecordatorio.text = it.notaRecordatorio
+        holder.deudaVinculada.text = it.tituloDeuda.toString()
+        holder.fechaRecordatorio.text = it.fechaRecordatorio
+        holder.montoRecordatorio.text = simboloMoneda + " " + it.montoRecordatorio.toString()
+
+        try {
+            if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() != 0) {
+
+                //variable auxiliar para almacenar el dia del mes
+                var reminderDayOfMonth = 0
+
+                val maxMonthDay = calendario.getActualMaximum(Calendar.DAY_OF_MONTH)
+
+                if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() == maxMonthDay) {
+                    reminderDayOfMonth = maxMonthDay
+                } else {
+                    reminderDayOfMonth = it.fechaRecordatorio?.toInt()!!
+                }
+
+                calendarioRecordatorio.set(Calendar.DAY_OF_MONTH, reminderDayOfMonth)
+
+                when {
+                    calendarioRecordatorio.time.compareTo(calendario.time) == 0 -> holder.fechaRecordatorio.text =
+                        context.getString(R.string.hoy)
+                    calendarioRecordatorio.time.compareTo(calendario.time) < 0 -> {
+                        calendarioRecordatorio.add(Calendar.MONTH, 1)
+                        holder.fechaRecordatorio.text =
+                            sdf.format(calendarioRecordatorio.time)
+                        holder.diasRestantes.text =
+                            (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+                                Calendar.DAY_OF_YEAR
+                            )).toString()
+                    }
+                    calendarioRecordatorio.time.compareTo(calendario.time) > 0 -> {
+                        holder.fechaRecordatorio.text =
+                            sdf.format(calendarioRecordatorio.time)
+                        holder.diasRestantes.text =
+                            (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+                                Calendar.DAY_OF_YEAR
+                            )).toString()
+                    }
+                }
+            }
+        }catch (e: NumberFormatException){
+            holder.fechaRecordatorio.text = context.getString(R.string.semanal)
+
+            val dayList = context.resources.getStringArray(R.array.daysOfWeek)
+
+            when(it.fechaRecordatorio){
+                dayList[0] -> {
+                    holder.fechaRecordatorio.text = dayList[0]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY)
+                    holder.diasRestantes.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
+
+
+                }
+                dayList[1] -> {
+                    holder.fechaRecordatorio.text = dayList[1]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY)
+
+                }
+                dayList[2] -> {
+                    holder.fechaRecordatorio.text = dayList[2]
+
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY)
+                }
+                dayList[3] -> {
+                    holder.fechaRecordatorio.text = dayList[3]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY)
+                }
+                dayList[4] -> {
+                    holder.fechaRecordatorio.text = dayList[4]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY)
+                }
+                dayList[5] -> {
+                    holder.fechaRecordatorio.text = dayList[5]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY)
+                }
+                dayList[6] -> {
+                    holder.fechaRecordatorio.text = dayList[6]
+                    calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY)
+                }
+            }
+
+            holder.diasRestantes.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
+        }
 
     }
 
@@ -64,5 +155,24 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
 
     fun getReminderAt(position: Int): JoinDeudaRecordatorio{
         return getItem(position)
+    }
+
+    private fun countDaysBetweenDates(reminderCalendar: Calendar, calendar: Calendar) : Int{
+        when {
+            reminderCalendar.get(Calendar.DAY_OF_WEEK) == calendar.get(Calendar.DAY_OF_WEEK) -> {
+                return 0
+            }
+            reminderCalendar.get(Calendar.DAY_OF_WEEK) > calendar.get(Calendar.DAY_OF_WEEK) -> return reminderCalendar.get(Calendar.DAY_OF_WEEK) - calendar.get(Calendar.DAY_OF_WEEK)
+            reminderCalendar.get(Calendar.DAY_OF_WEEK) < calendar.get(Calendar.DAY_OF_WEEK) -> {
+                var days =  reminderCalendar.get(Calendar.DAY_OF_WEEK) - calendar.get(Calendar.DAY_OF_WEEK)
+
+                return if(days < 1){
+                    days + 7
+                }else{
+                    days
+                }
+            }
+            else -> return -1
+        }
     }
 }

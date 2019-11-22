@@ -149,6 +149,7 @@
     <string name="eliminar_recordatorio">Eliminar recordatorio</string>
     <string name="esta_seguro_eliminar_recordatorio">¿Está seguro de que desea eliminar el recordatorio?</string>
     <string name="opciones_recordatorio">Opciones de recordatorio</string>
+    <string name="detalles_de_deuda_global">Detalles de deuda global:</string>
 
 
     <string-array name="notificationAnticipationValues">

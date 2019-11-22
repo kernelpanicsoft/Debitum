@@ -2,6 +2,7 @@ package com.ga.kps.debitum
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -45,7 +46,8 @@ class ScheduleFragment : Fragment() {
         })
 
         recordatorioViewModel.getSumaRecordatorios().observe(this, androidx.lifecycle.Observer {
-            val simboloMoneda = "$"
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            val simboloMoneda = prefs.getString("moneySign","NA")
             cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, it)
         })
 

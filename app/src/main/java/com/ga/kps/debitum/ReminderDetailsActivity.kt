@@ -2,6 +2,7 @@ package com.ga.kps.debitum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -11,15 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_add_payment_reminder.*
 import kotlinx.android.synthetic.main.activity_reminder_details.*
-import kotlinx.android.synthetic.main.activity_reminder_details.deudaPagadaTV
-import kotlinx.android.synthetic.main.activity_reminder_details.fechaPagoTV
-import kotlinx.android.synthetic.main.activity_reminder_details.montoPagoTV
-import kotlinx.android.synthetic.main.activity_reminder_details.porcentajeDeudaTextView
-import kotlinx.android.synthetic.main.activity_reminder_details.progressBar
-import kotlinx.android.synthetic.main.activity_reminder_details.tituloDeudaET
-import kotlinx.android.synthetic.main.activity_reminder_details.toolbar
+
 import model.RecordatorioPago
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
@@ -38,7 +32,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
     lateinit var reminderViewModel: RecordatorioPagoViewModel
     lateinit var reminderActualLive : LiveData<RecordatorioPago>
     var reminderID : Int? = null
-    val simboloMoneda = "$"
+    var simboloMoneda = "$"
     private val calendario: Calendar = Calendar.getInstance()
     private val calendarioRecordatorio: Calendar = Calendar.getInstance()
     private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
@@ -52,6 +46,9 @@ class ReminderDetailsActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detalles_de_recordatorio)
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        simboloMoneda = prefs.getString("moneySign","NA")
 
         debtViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
@@ -104,7 +101,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
     }
 
     private fun populateDebtCard(debtID : Int?){
-        val simboloMoneda = "$"
+
         debtViewModel.getDeuda(debtID!!).observe(this, Observer{ deudaActual ->
 
             tituloDeudaET.text = deudaActual.titulo
@@ -113,6 +110,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
             deudaPagadaTV.text = getString(R.string.simboloMoneda,simboloMoneda,deudaActual.pagado)
             progressBar.progress = ((deudaActual.pagado * 100f) / deudaActual.monto).toInt()
             porcentajeDeudaTextView.text = getString(R.string.simboloPorcentaje, ((deudaActual.pagado * 100f) / deudaActual.monto).toInt())
+            deudaRestanteTV.text = getString(R.string.simboloMoneda,simboloMoneda,(deudaActual.monto - deudaActual.pagado))
 
         })
     }
@@ -175,9 +173,6 @@ class ReminderDetailsActivity : AppCompatActivity() {
 
                     val dayList = resources.getStringArray(R.array.daysOfWeek)
 
-                    val currentDayOfWeek = calendario.get(Calendar.DAY_OF_WEEK)
-
-
                     when(it.fecha){
                         dayList[0] -> {
                             fechaPagoRecordatorioTV.text = dayList[0]
@@ -238,13 +233,9 @@ class ReminderDetailsActivity : AppCompatActivity() {
                 }else{
                     days
                 }
-
-
-
             }
             else -> return -1
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
