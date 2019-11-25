@@ -8,3 +8,5 @@ object EstatusDeuda{
 
 const val ANADIR_PAGO_DEUDA = 2
 const val ELEGIR_DEUDA = 3
+
+const val DEFAULT_NOTIFICATION_CHANEL_ID = "primary_notification_channel"

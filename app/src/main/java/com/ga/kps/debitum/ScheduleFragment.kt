@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_schedule.*
+import notifications.NotificationsManager
 import room.components.viewModels.RecordatorioPagoViewModel
 import java.util.*
 
@@ -48,7 +50,14 @@ class ScheduleFragment : Fragment() {
         recordatorioViewModel.getSumaRecordatorios().observe(this, androidx.lifecycle.Observer {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","NA")
-            cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, it)
+            if(it == null){
+                cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, 0f)
+
+
+            }else{
+                cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, it)
+
+            }
         })
 
         adapter.setOnClickListener(View.OnClickListener {
@@ -59,8 +68,14 @@ class ScheduleFragment : Fragment() {
         })
 
         fab.setOnClickListener {
-            val nav = Intent(context, AddPaymentReminderActivity::class.java)
-            startActivity(nav)
+          //  val nav = Intent(context, AddPaymentReminderActivity::class.java)
+          //  startActivity(nav)
+
+            val notification = NotificationsManager(this.context!!)
+            notification.sendNotificationForReminder("Hola","Mundo como estan");
+
+
+
         }
 
         RV.adapter = adapter

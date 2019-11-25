@@ -54,8 +54,12 @@ class DebtsFragment : Fragment() {
         deudaViewModel.getSumaDeudas().observe(this, Observer {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","NA")
-            cantidadDeudaTV.text =
-                getString(R.string.simboloMoneda, simboloMoneda, it)
+            if(it == null){
+                cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, 0f)
+            }else{
+                cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, it)
+            }
+
         })
 
         val fab = v.findViewById<FloatingActionButton>(R.id.addNewDebtFAB)

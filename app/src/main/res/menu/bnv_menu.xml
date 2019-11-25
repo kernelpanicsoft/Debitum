@@ -4,7 +4,7 @@
     <item
         android:id="@+id/debtsItem"
         android:title="@string/deudas"
-        android:icon="@drawable/ic_bomb"
+        android:icon="@drawable/ic_debts_section"
         />
     <item
         android:id="@+id/calendarItem"

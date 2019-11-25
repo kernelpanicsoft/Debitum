@@ -1,7 +1,24 @@
 <resources>
     <array name="tipo_deuda">
-        <item>Yo adeudo</item>
-        <item>Me adeudan</item>
+        <item>Tarjetas de crédito</item>
+        <item>Salud</item>
+        <item>Automóvil</item>
+        <item>Educación</item>
+        <item>Ropa y calzado</item>
+        <item>Gasolina</item>
+        <item>Entretenimiento</item>
+        <item>Comestibles</item>
+        <item>Hipotecas</item>
+        <item>Prestamos</item>
+        <item>Electrodomésticos</item>
+        <item>Comestibles</item>
+        <item>Hipotecas</item>
+        <item>Prestamos</item>
+        <item>Electródomesticos</item>
+        <item>Seguros</item>
+        <item>Viajes</item>
+        <item>Restaurantes</item>
+        <item>Mantenimiento</item>
     </array>
     <array name="editar">
         <item>Editar</item>

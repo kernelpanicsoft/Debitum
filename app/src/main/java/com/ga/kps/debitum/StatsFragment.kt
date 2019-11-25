@@ -15,28 +15,41 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
 
-
 class StatsFragment : Fragment() {
 
     lateinit var debtsChart : PieChart
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_stats, container, false)
 
         debtsChart = v.findViewById(R.id.debtsPieChart)
-        debtsChart.setUsePercentValues(true)
-        debtsChart.description.isEnabled = false
-        debtsChart.setExtraOffsets(5f,10f,5f,5f)
 
-        debtsChart.dragDecelerationFrictionCoef = 0.95f
+        setupPieChart()
 
-        debtsChart.setEntryLabelColor(Color.WHITE)
-        debtsChart.setEntryLabelTypeface(Typeface.DEFAULT)
-        debtsChart.setEntryLabelTextSize(12f)
-
-        setData(5,10f)
         return v;
+    }
+
+    private fun setupPieChart() {
+        // Populating a list of PieEntries
+        val rainFall : FloatArray = floatArrayOf(98.5f,128.8f,161.6f)
+        val monthNames : Array<String> = arrayOf("Jan", "Fab", "Mar")
+
+        val pieEntries = ArrayList<PieEntry>()
+        for(a in 1..2){
+            pieEntries.add(PieEntry(rainFall[a],monthNames[a]))
+        }
+
+        val dataSet = PieDataSet(pieEntries,"Hello world")
+        dataSet.setDrawIcons(false)
+        dataSet.sliceSpace = 3f
+        dataSet.iconsOffset = MPPointF(0f, 40f)
+        dataSet.selectionShift = 5f
+        val data = PieData(dataSet)
+
+        debtsChart.holeRadius = 58f
+        debtsChart.data = data
+        debtsChart.invalidate()
+
     }
 
     fun setData(count: Int, range: Float){
