@@ -38,7 +38,15 @@ class RecordatorioPagoViewModel (application : Application) : AndroidViewModel(a
         return repository.getSumaRecordatorios()
     }
 
+    fun getSumaRecordatoriosSemanales() : LiveData<Float>{
+        return repository.getSumaRecordatoriosSemanales()
+    }
+
     fun getRecordatoriosPagoDeuda() : LiveData<List<JoinDeudaRecordatorio>>{
         return repository.getRecordatoriosPagoDeuda()
+    }
+
+    fun getSumaRecordatorioPagos() : LiveData<Float>{
+        return repository.getSumaRecordatorioPagos()
     }
 }

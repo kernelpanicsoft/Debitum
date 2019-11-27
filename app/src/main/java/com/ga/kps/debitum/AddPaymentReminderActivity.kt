@@ -13,6 +13,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import helpcodes.ELEGIR_DEUDA
+import helpcodes.MENSUAL
+import helpcodes.SEMANAL
+import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.*
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.fechaPagoTV
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.tituloDeudaET
@@ -23,6 +26,7 @@ import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.util.*
 
 
@@ -50,14 +54,24 @@ class AddPaymentReminderActivity : AppCompatActivity() {
             startActivityForResult(nav,helpcodes.ELEGIR_DEUDA)
         }
 
+        val adapterWeekly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfWeek))
+        val adapterMonthly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfMonth))
+
         debtViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
 
         paymentReminder = RecordatorioPago(0)
+        paymentReminder.tipo = MENSUAL
         saveReminderFAB.setOnClickListener {
             paymentReminder.nota = notaRecordatorioET.text.toString()
             paymentReminder.monto =  montoRecordatorioET.text.toString().toFloat()
             paymentReminder.fecha = periodicidiadSpinner.selectedItem.toString()
+            if(periodicidiadSpinner.adapter.equals(adapterWeekly)){
+                paymentReminder.montoMensual = calculateMonthlyPayment(periodicidiadSpinner.selectedItem.toString(),montoRecordatorioET.text.toString().toFloat())
+            }else{
+                paymentReminder.montoMensual = 0f
+            }
+
 
             reminderViewModel.insert(paymentReminder)
             finish()
@@ -65,17 +79,18 @@ class AddPaymentReminderActivity : AppCompatActivity() {
 
 
 
-        val adapterWeekly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfWeek))
-        val adapterMonthly = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.daysOfMonth))
+
         periodicidiadSpinner.adapter = adapterMonthly
 
         PeriodicidadGroup.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.mensualRB ->{
                     periodicidiadSpinner.adapter = adapterMonthly
+                    paymentReminder.tipo = MENSUAL
                 }
                 R.id.semanalRB ->{
                     periodicidiadSpinner.adapter = adapterWeekly
+                    paymentReminder.tipo = SEMANAL
                 }
             }
         }
@@ -120,6 +135,38 @@ class AddPaymentReminderActivity : AppCompatActivity() {
             porcentajeDeudaTextView.text = getString(R.string.simboloPorcentaje, ((deudaActual.pagado * 100f) / deudaActual.monto).toInt())
 
         })
+    }
+
+    private fun calculateMonthlyPayment( dayOfWeek: String, amount: Float) : Float{
+        val calendarHelper = CalendarHelper()
+
+        val dayList = resources.getStringArray(R.array.daysOfWeek)
+        var amountOfMonth = 0f
+
+        when(dayOfWeek){
+            dayList[0] -> {
+                amountOfMonth = amount * calendarHelper.sundaysInMonth
+            }
+            dayList[1] -> {
+                amountOfMonth = amount * calendarHelper.mondaysInMonth
+            }
+            dayList[2] -> {
+                amountOfMonth = amount * calendarHelper.tuesdaysInMonth
+            }
+            dayList[3] -> {
+                amountOfMonth = amount * calendarHelper.wednesdaysInMonth
+            }
+            dayList[4] -> {
+                amountOfMonth = amount * calendarHelper.thursdaysInMonth
+            }
+            dayList[5] -> {
+                amountOfMonth = amount * calendarHelper.fridaysInMonth
+            }
+            dayList[6] -> {
+                amountOfMonth = amount * calendarHelper.saturdaysInMonth
+            }
+        }
+        return amountOfMonth
     }
 
 

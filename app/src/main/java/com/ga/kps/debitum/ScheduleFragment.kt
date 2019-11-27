@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import notifications.NotificationsManager
 import room.components.viewModels.RecordatorioPagoViewModel
@@ -47,16 +48,13 @@ class ScheduleFragment : Fragment() {
 
         })
 
-        recordatorioViewModel.getSumaRecordatorios().observe(this, androidx.lifecycle.Observer {
+        recordatorioViewModel.getSumaRecordatorioPagos().observe(this, androidx.lifecycle.Observer {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","NA")
             if(it == null){
                 cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, 0f)
-
-
             }else{
                 cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, it)
-
             }
         })
 
@@ -68,13 +66,14 @@ class ScheduleFragment : Fragment() {
         })
 
         fab.setOnClickListener {
-          //  val nav = Intent(context, AddPaymentReminderActivity::class.java)
-          //  startActivity(nav)
+            val nav = Intent(context, AddPaymentReminderActivity::class.java)
+            startActivity(nav)
 
-            val notification = NotificationsManager(this.context!!)
-            notification.sendNotificationForReminder("Hola","Mundo como estan");
+         //   val notification = NotificationsManager(this.context!!)
+         //   notification.sendNotificationForReminder("Hola","Mundo como estan");
 
-
+         //    val calendarHelper : CalendarHelper = CalendarHelper()
+         //    Toast.makeText(context,"Valores: " + calendarHelper.toString(), Toast.LENGTH_SHORT).show()
 
         }
 

@@ -28,6 +28,14 @@ class RecordatorioPagoRepository (application: Application) {
         return recordatorioPagoDAO.getSumaRecordatorios()
     }
 
+    fun getSumaRecordatoriosSemanales() : LiveData<Float>{
+        return recordatorioPagoDAO.getSumaPagosSemanales()
+    }
+
+    fun getSumaRecordatorioPagos() : LiveData<Float>{
+        return recordatorioPagoDAO.getSunaPagos()
+    }
+
     fun delete(recordatorioPago: RecordatorioPago){
         DeleteRecordatorioPagoAsyncTask(recordatorioPagoDAO).execute(recordatorioPago)
     }
