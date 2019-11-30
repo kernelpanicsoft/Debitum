@@ -44,6 +44,11 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
+
+        <service android:name="schedulers.ReminderNotificationsJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 </manifest>

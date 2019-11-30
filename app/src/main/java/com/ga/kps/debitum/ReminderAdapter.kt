@@ -2,6 +2,7 @@ package com.ga.kps.debitum
 
 import android.content.Context
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import helpcodes.MENSUAL
 import model.JoinDeudaRecordatorio
 import model.RecordatorioPago
 import java.text.DateFormat
@@ -62,7 +64,7 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
         holder.montoRecordatorio.text = simboloMoneda + " " + it.montoRecordatorio.toString()
 
         try {
-            if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() != 0) {
+            if (it.tipoRecordatorio == MENSUAL ||it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() != 0) {
 
                 //variable auxiliar para almacenar el dia del mes
                 var reminderDayOfMonth = 0
@@ -103,38 +105,37 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
             holder.fechaRecordatorio.text = context.getString(R.string.semanal)
 
             val dayList = context.resources.getStringArray(R.array.daysOfWeek)
-
+            Log.d("Dia", it.fechaRecordatorio + " | " + it.tipoRecordatorio )
             when(it.fechaRecordatorio){
-                dayList[0] -> {
+                Calendar.SUNDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[0]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY)
                     holder.diasRestantes.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
 
-
                 }
-                dayList[1] -> {
+                Calendar.MONDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[1]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY)
 
                 }
-                dayList[2] -> {
+                Calendar.TUESDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[2]
 
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY)
                 }
-                dayList[3] -> {
+                Calendar.WEDNESDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[3]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY)
                 }
-                dayList[4] -> {
+                Calendar.THURSDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[4]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY)
                 }
-                dayList[5] -> {
+                Calendar.FRIDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[5]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY)
                 }
-                dayList[6] -> {
+                Calendar.SATURDAY.toString() -> {
                     holder.fechaRecordatorio.text = dayList[6]
                     calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY)
                 }

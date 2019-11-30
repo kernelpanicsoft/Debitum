@@ -42,13 +42,10 @@ class AddDebtActivity : AppCompatActivity() {
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
 
 
-
         tipoDeudaSP.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_deuda))
         tipoDeudaSP.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                tipo = position
             }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import helpcodes.MENSUAL
 import kotlinx.android.synthetic.main.activity_reminder_details.*
 
 import model.RecordatorioPago
@@ -122,9 +123,9 @@ class ReminderDetailsActivity : AppCompatActivity() {
             notaRecordatioTV.text = it.nota
             montoRecodatorioTV.text = getString(R.string.simboloMoneda,simboloMoneda,it.monto)
 
-
+                Log.d("Recordatorio", it.fecha + " | " + it.tipo)
                 try {
-                    if (it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() != 0) {
+                    if (it.tipo == MENSUAL && (it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() != 0)){
 
                         //Mostramos el día de pago
                         periodoPagoTV.text = getString(R.string.mensual)

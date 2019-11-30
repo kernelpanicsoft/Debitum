@@ -1,9 +1,14 @@
 package com.ga.kps.debitum
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
+import android.content.Context.JOB_SCHEDULER_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,6 +20,7 @@ import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import notifications.NotificationsManager
 import room.components.viewModels.RecordatorioPagoViewModel
+import schedulers.ReminderNotificationsJobService
 import java.util.*
 
 class ScheduleFragment : Fragment() {
@@ -69,6 +75,7 @@ class ScheduleFragment : Fragment() {
             val nav = Intent(context, AddPaymentReminderActivity::class.java)
             startActivity(nav)
 
+          //  scheduleJob()
          //   val notification = NotificationsManager(this.context!!)
          //   notification.sendNotificationForReminder("Hola","Mundo como estan");
 
@@ -81,5 +88,30 @@ class ScheduleFragment : Fragment() {
         return v
     }
 
+
+    fun scheduleJob(){
+        val componentName = ComponentName(context, ReminderNotificationsJobService::class.java)
+        val info = JobInfo.Builder(123,componentName)
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+            .setPersisted(true)
+            .setPeriodic(15 * 60 * 1000)
+            .build()
+
+        val scheduler = context?.getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+        val resultCode = scheduler.schedule(info)
+        if(resultCode == JobScheduler.RESULT_SUCCESS){
+            Log.d("EXITO", "Job Schedule")
+
+        }else{
+            Log.d("EXITO", "Job scheduling failed")
+        }
+    }
+
+    fun cancelJob(){
+        val scheduler = context?.getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+        scheduler.cancel(123)
+        Log.d("EXITO", "Job cancelled")
+    }
 
 }

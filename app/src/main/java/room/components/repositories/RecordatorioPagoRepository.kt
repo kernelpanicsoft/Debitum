@@ -33,7 +33,7 @@ class RecordatorioPagoRepository (application: Application) {
     }
 
     fun getSumaRecordatorioPagos() : LiveData<Float>{
-        return recordatorioPagoDAO.getSunaPagos()
+        return recordatorioPagoDAO.getSumaPagos()
     }
 
     fun delete(recordatorioPago: RecordatorioPago){

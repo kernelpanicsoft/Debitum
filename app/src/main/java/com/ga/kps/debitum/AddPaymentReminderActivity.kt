@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import helpcodes.ELEGIR_DEUDA
 import helpcodes.MENSUAL
 import helpcodes.SEMANAL
@@ -24,6 +26,7 @@ import model.Deuda
 import model.RecordatorioPago
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
+import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
@@ -64,21 +67,29 @@ class AddPaymentReminderActivity : AppCompatActivity() {
         paymentReminder.tipo = MENSUAL
         saveReminderFAB.setOnClickListener {
             paymentReminder.nota = notaRecordatorioET.text.toString()
-            paymentReminder.monto =  montoRecordatorioET.text.toString().toFloat()
-            paymentReminder.fecha = periodicidiadSpinner.selectedItem.toString()
-            if(periodicidiadSpinner.adapter.equals(adapterWeekly)){
-                paymentReminder.montoMensual = calculateMonthlyPayment(periodicidiadSpinner.selectedItem.toString(),montoRecordatorioET.text.toString().toFloat())
-            }else{
-                paymentReminder.montoMensual = 0f
+            try{
+                paymentReminder.monto =  montoRecordatorioET.text.toString().toFloat()
+                paymentReminder.fecha = periodicidiadSpinner.selectedItem.toString()
+                if(periodicidiadSpinner.adapter.equals(adapterWeekly)){
+                    paymentReminder.montoMensual = calculateMonthlyPayment(periodicidiadSpinner.selectedItem.toString(),montoRecordatorioET.text.toString().toFloat())
+                    paymentReminder.fecha = setDayOfWeekForReminder(periodicidiadSpinner.selectedItem.toString()).toString()
+
+                }else{
+                    paymentReminder.montoMensual = 0f
+                }
+
+                if(paymentReminder.deudaID == null) {
+                    Snackbar.make(it,getString(R.string.es_necesario_asociar_deuda_recordatori), Snackbar.LENGTH_LONG).show()
+                }else{
+                    reminderViewModel.insert(paymentReminder)
+                    finish()
+                }
+            }catch (e: Exception){
+                Snackbar.make(it,getString(R.string.es_necesario_indicar_monto_recordatorio), Snackbar.LENGTH_LONG).show()
+
             }
 
-
-            reminderViewModel.insert(paymentReminder)
-            finish()
         }
-
-
-
 
         periodicidiadSpinner.adapter = adapterMonthly
 
@@ -122,7 +133,8 @@ class AddPaymentReminderActivity : AppCompatActivity() {
 
 
     private fun populateDebtCard(debtID : Int?){
-        val simboloMoneda = "$"
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val simboloMoneda = prefs.getString("moneySign","NA")
         cardView.visibility = View.VISIBLE
 
         debtViewModel.getDeuda(debtID!!).observe(this, Observer{ deudaActual ->
@@ -133,6 +145,7 @@ class AddPaymentReminderActivity : AppCompatActivity() {
             deudaPagadaTV.text = getString(R.string.simboloMoneda,simboloMoneda,deudaActual.pagado)
             progressBar.progress = ((deudaActual.pagado * 100f) / deudaActual.monto).toInt()
             porcentajeDeudaTextView.text = getString(R.string.simboloPorcentaje, ((deudaActual.pagado * 100f) / deudaActual.monto).toInt())
+            deudaRestanteTV.text =  getString(R.string.simboloMoneda,simboloMoneda,(deudaActual.monto - deudaActual.pagado))
 
         })
     }
@@ -169,7 +182,18 @@ class AddPaymentReminderActivity : AppCompatActivity() {
         return amountOfMonth
     }
 
-
-
+    private fun setDayOfWeekForReminder(day: String) : Int{
+        val dayList = resources.getStringArray(R.array.daysOfWeek)
+        return when(day){
+            dayList[0] -> Calendar.SUNDAY
+            dayList[1] -> Calendar.MONDAY
+            dayList[2] -> Calendar.TUESDAY
+            dayList[3] -> Calendar.WEDNESDAY
+            dayList[4] -> Calendar.THURSDAY
+            dayList[5] -> Calendar.FRIDAY
+            dayList[6] -> Calendar.SATURDAY
+            else -> Calendar.SUNDAY
+        }
+    }
 
 }
