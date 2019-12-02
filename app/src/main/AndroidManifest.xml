@@ -47,6 +47,9 @@
 
         <service android:name="schedulers.ReminderNotificationsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <receiver android:name="notifications.AlarmReceiver"
+            android:exported="false"/>
     </application>
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>

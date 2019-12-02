@@ -13,11 +13,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import helpcodes.MENSUAL
+import helpcodes.SEMANAL
 import kotlinx.android.synthetic.main.activity_reminder_details.*
 
 import model.RecordatorioPago
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
+import java.lang.Exception
 import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -123,88 +125,91 @@ class ReminderDetailsActivity : AppCompatActivity() {
             notaRecordatioTV.text = it.nota
             montoRecodatorioTV.text = getString(R.string.simboloMoneda,simboloMoneda,it.monto)
 
-                Log.d("Recordatorio", it.fecha + " | " + it.tipo)
-                try {
-                    if (it.tipo == MENSUAL && (it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() != 0)){
+            when(it.tipo){
+                MENSUAL ->{
+                    try{
+                        if(it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() != 0){
+                            //Mostramos el día de pago
+                            periodoPagoTV.text = getString(R.string.mensual)
 
-                        //Mostramos el día de pago
-                        periodoPagoTV.text = getString(R.string.mensual)
+                            //variable auxiliar para almacenar el dia del mes
+                            var reminderDayOfMonth = 0
 
-                        //variable auxiliar para almacenar el dia del mes
-                        var reminderDayOfMonth = 0
+                            //Calculamos el proximo pago
+                            //calendarioRecordatorio.set(Calendar.DAY_OF_MONTH,31)
+                            val maxMonthDay = calendario.getActualMaximum(Calendar.DAY_OF_MONTH)
 
-                        //Calculamos el proximo pago
-                        //calendarioRecordatorio.set(Calendar.DAY_OF_MONTH,31)
-                        val maxMonthDay = calendario.getActualMaximum(Calendar.DAY_OF_MONTH)
-
-                        if (it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() == maxMonthDay) {
-                            reminderDayOfMonth = maxMonthDay
-                        } else {
-                            reminderDayOfMonth = it.fecha?.toInt()!!
-                        }
-
-                        calendarioRecordatorio.set(Calendar.DAY_OF_MONTH, reminderDayOfMonth)
-
-                        when {
-                            calendarioRecordatorio.time.compareTo(calendario.time) == 0 -> fechaPagoRecordatorioTV.text =
-                                getString(R.string.hoy)
-                            calendarioRecordatorio.time.compareTo(calendario.time) < 0 -> {
-                                calendarioRecordatorio.add(Calendar.MONTH, 1)
-                                fechaPagoRecordatorioTV.text =
-                                    sdf.format(calendarioRecordatorio.time)
-                                cuentaDiasPagoTV.text =
-                                    (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
-                                        Calendar.DAY_OF_YEAR
-                                    )).toString()
-                            }
-                            calendarioRecordatorio.time.compareTo(calendario.time) > 0 -> {
-                                fechaPagoRecordatorioTV.text =
-                                    sdf.format(calendarioRecordatorio.time)
-                                cuentaDiasPagoTV.text =
-                                    (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
-                                        Calendar.DAY_OF_YEAR
-                                    )).toString()
+                            if (it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() == maxMonthDay) {
+                                reminderDayOfMonth = maxMonthDay
+                            } else {
+                                reminderDayOfMonth = it.fecha?.toInt()!!
                             }
 
+                            calendarioRecordatorio.set(Calendar.DAY_OF_MONTH, reminderDayOfMonth)
+
+                            when {
+                                calendarioRecordatorio.time.compareTo(calendario.time) == 0 -> fechaPagoRecordatorioTV.text =
+                                    getString(R.string.hoy)
+                                calendarioRecordatorio.time.compareTo(calendario.time) < 0 -> {
+                                    calendarioRecordatorio.add(Calendar.MONTH, 1)
+                                    fechaPagoRecordatorioTV.text =
+                                        sdf.format(calendarioRecordatorio.time)
+                                    cuentaDiasPagoTV.text =
+                                        (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+                                            Calendar.DAY_OF_YEAR
+                                        )).toString()
+                                }
+                                calendarioRecordatorio.time.compareTo(calendario.time) > 0 -> {
+                                    fechaPagoRecordatorioTV.text =
+                                        sdf.format(calendarioRecordatorio.time)
+                                    cuentaDiasPagoTV.text =
+                                        (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+                                            Calendar.DAY_OF_YEAR
+                                        )).toString()
+                                }
+
+                            }
                         }
+                    }catch (e: Exception){
 
                     }
-                }catch (e: NumberFormatException){
+                }
+                SEMANAL ->{
                     periodoPagoTV.text = getString(R.string.semanal)
 
                     val dayList = resources.getStringArray(R.array.daysOfWeek)
 
                     when(it.fecha){
-                        dayList[0] -> {
+                        Calendar.SUNDAY.toString()-> {
                             fechaPagoRecordatorioTV.text = dayList[0]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY)
                             cuentaDiasPagoTV.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
 
 
                         }
-                        dayList[1] -> {
+                        Calendar.MONDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[1]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY)
 
                         }
-                        dayList[2] -> {
+                        Calendar.TUESDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[2]
 
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY)
                         }
-                        dayList[3] -> {
+                        Calendar.WEDNESDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[3]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY)
                         }
-                        dayList[4] -> {
+                        Calendar.THURSDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[4]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY)
                         }
-                        dayList[5] -> {
+                        Calendar.FRIDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[5]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY)
                         }
-                        dayList[6] -> {
+                        Calendar.SATURDAY.toString() -> {
                             fechaPagoRecordatorioTV.text = dayList[6]
                             calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY)
                         }
@@ -212,6 +217,8 @@ class ReminderDetailsActivity : AppCompatActivity() {
 
                     cuentaDiasPagoTV.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
                 }
+            }
+
 
             populateDebtCard(it.deudaID)
 
