@@ -38,6 +38,7 @@ class AddPaymentReminderActivity : AppCompatActivity() {
     lateinit var debtViewModel: DeudaViewModel
     lateinit var reminderViewModel: RecordatorioPagoViewModel
     lateinit var  paymentReminder: RecordatorioPago
+    var reminderID : Int = 0
 
     var fecha = ""
     private val calendario: Calendar = Calendar.getInstance()
@@ -46,6 +47,8 @@ class AddPaymentReminderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_payment_reminder)
+
+
 
         setSupportActionBar(toolbar)
         val ab  = supportActionBar
@@ -62,6 +65,13 @@ class AddPaymentReminderActivity : AppCompatActivity() {
 
         debtViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
+
+
+        reminderID = intent.getIntExtra("ID", -1)
+        if(reminderID != -1) {
+            populateFieldsForEdit()
+        }
+
 
         paymentReminder = RecordatorioPago(0)
         paymentReminder.tipo = MENSUAL
@@ -194,6 +204,27 @@ class AddPaymentReminderActivity : AppCompatActivity() {
             dayList[6] -> Calendar.SATURDAY
             else -> Calendar.SUNDAY
         }
+    }
+
+    private fun populateFieldsForEdit(){
+        reminderViewModel.getRecordatorio(reminderID).observe(this, Observer {
+            notaRecordatorioET.setText(it?.nota, TextView.BufferType.EDITABLE)
+            montoRecordatorioET.setText(it?.monto.toString(), TextView.BufferType.EDITABLE)
+
+            when (it.tipo) {
+                MENSUAL -> {
+                    PeriodicidadGroup.check(R.id.mensualRB)
+
+                }
+                SEMANAL -> {
+                    PeriodicidadGroup.check(R.id.semanalRB)
+                }
+            }
+
+            populateDebtCard(it.deudaID)
+
+
+        })
     }
 
 }

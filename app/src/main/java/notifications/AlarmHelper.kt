@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import java.util.*
 
 class AlarmHelper (val context: Context) {
     lateinit var alarmIntent: PendingIntent
@@ -18,6 +19,18 @@ class AlarmHelper (val context: Context) {
             intent.putExtra("ReminderID", reminderID)
             PendingIntent.getBroadcast(context, reminderID!!,intent,PendingIntent.FLAG_ONE_SHOT)
         }
+
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, hourOfDay)
+            set(Calendar.MINUTE, minute)
+        }
+
+        alarmManager?.set(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            alarmIntent
+        )
 
     }
 }

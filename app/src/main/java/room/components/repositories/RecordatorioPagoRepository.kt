@@ -56,6 +56,10 @@ class RecordatorioPagoRepository (application: Application) {
         return recordatorioPagoDAO.getRecordatoriosPagoDeuda()
     }
 
+    fun getRecordatoriosDia() : LiveData<List<RecordatorioPago>>{
+        return recordatorioPagoDAO.getRemindersOfTheDay()
+    }
+
     private class InsertRecordatorioPagoAsyncTask constructor(private val recordatorioPagoDAO: RecordatorioPagoDAO) : AsyncTask<RecordatorioPago, Void, Void>(){
         override fun doInBackground(vararg params: RecordatorioPago): Void? {
             recordatorioPagoDAO.insert(params[0])

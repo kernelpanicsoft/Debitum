@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -73,7 +74,9 @@ class ReminderDetailsActivity : AppCompatActivity() {
                 builder.setItems(R.array.editar){ _, which ->
                     when(which){
                         0 ->{
-
+                            val nav = Intent(this, AddPaymentReminderActivity::class.java)
+                            nav.putExtra("ID", reminderID)
+                            startActivity(nav)
                         }
                         1 ->{
                             val builder = AlertDialog.Builder(this)
@@ -87,6 +90,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
 
                             builder.setNegativeButton(getString(R.string.cancelar)){
                                     _,_ ->
+
                             }
 
                             val dialog = builder.create()
@@ -234,7 +238,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
             reminderCalendar.get(Calendar.DAY_OF_WEEK) > calendar.get(Calendar.DAY_OF_WEEK) -> return reminderCalendar.get(Calendar.DAY_OF_WEEK) - calendar.get(Calendar.DAY_OF_WEEK)
             reminderCalendar.get(Calendar.DAY_OF_WEEK) < calendar.get(Calendar.DAY_OF_WEEK) -> {
                 Log.d("DIAS: " ,""+  calendar.get(Calendar.DAY_OF_WEEK) + " # " + reminderCalendar.get(Calendar.DAY_OF_WEEK))
-                var days =  reminderCalendar.get(Calendar.DAY_OF_WEEK) - calendar.get(Calendar.DAY_OF_WEEK)
+                val days =  reminderCalendar.get(Calendar.DAY_OF_WEEK) - calendar.get(Calendar.DAY_OF_WEEK)
 
                 return if(days < 1){
                     days + 7

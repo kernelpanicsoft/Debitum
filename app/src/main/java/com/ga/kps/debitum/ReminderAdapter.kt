@@ -76,7 +76,7 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
                         var reminderDayOfMonth = 0
 
                         //Calculamos el proximo pago
-                        //calendarioRecordatorio.set(Calendar.DAY_OF_MONTH,31)
+
                         val maxMonthDay = calendario.getActualMaximum(Calendar.DAY_OF_MONTH)
 
                         if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio.toInt() == maxMonthDay) {
@@ -123,7 +123,6 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
                         calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY)
                         holder.diasRestantes.text = countDaysBetweenDates(calendarioRecordatorio,calendario).toString()
 
-
                     }
                     Calendar.MONDAY.toString() -> {
                         holder.fechaRecordatorio.text = dayList[1]
@@ -132,11 +131,10 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
                     }
                     Calendar.TUESDAY.toString() -> {
                         holder.fechaRecordatorio.text = dayList[2]
-
                         calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY)
                     }
                     Calendar.WEDNESDAY.toString() -> {
-                        holder.fechaRecordatorio.text = "TEST"//dayList[3]
+                        holder.fechaRecordatorio.text = dayList[3]
                         calendarioRecordatorio.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY)
                     }
                     Calendar.THURSDAY.toString() -> {

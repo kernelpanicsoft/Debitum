@@ -30,6 +30,9 @@ class RecordatorioPagoViewModel (application : Application) : AndroidViewModel(a
        return repository.getAllRecordatoriosPago()
     }
 
+    fun getRecordatoriosDelDia() : LiveData<List<RecordatorioPago>>{
+        return repository.getRecordatoriosDia()
+    }
     fun getRecordatorio(id: Int) : LiveData<RecordatorioPago>{
         return repository.getRecordatorioPago(id)
     }
