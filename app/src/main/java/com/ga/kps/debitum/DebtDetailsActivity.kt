@@ -86,7 +86,9 @@ class DebtDetailsActivity : AppCompatActivity() {
                 builder.setItems(R.array.editar){ _, which ->
                     when(which){
                         0 ->{
-
+                            val nav = Intent(this, AddDebtActivity::class.java)
+                            nav.putExtra("ID", debtID)
+                            startActivity(nav)
                         }
                         1 ->{
                             val builder = AlertDialog.Builder(this)

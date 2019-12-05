@@ -73,8 +73,8 @@ class ScheduleFragment : Fragment() {
         })
 
         fab.setOnClickListener {
-          //  val nav = Intent(context, AddPaymentReminderActivity::class.java)
-          //  startActivity(nav)
+            val nav = Intent(context, AddPaymentReminderActivity::class.java)
+            startActivity(nav)
 
           //  scheduleJob()
          //   val notification = NotificationsManager(this.context!!)
@@ -85,10 +85,7 @@ class ScheduleFragment : Fragment() {
 
          //   val alarmHelper  = AlarmHelper(context!!)
          //   alarmHelper.createAlarmForNotifications(19,55,"HOla","Desde el helper", 23)
-            recordatorioViewModel.getRecordatoriosDelDia().observe(this, androidx.lifecycle.Observer {
-                Log.d("RECORDATORIOS", it.toString())
-                Log.d("RECORDATORIOS", it.size.toString())
-            })
+
 
 
         }

@@ -91,7 +91,11 @@ class AddPaymentReminderActivity : AppCompatActivity() {
                 if(paymentReminder.deudaID == null) {
                     Snackbar.make(it,getString(R.string.es_necesario_asociar_deuda_recordatori), Snackbar.LENGTH_LONG).show()
                 }else{
+                    if(paymentReminder.id == 0){
                     reminderViewModel.insert(paymentReminder)
+                    }else{
+                        reminderViewModel.update(paymentReminder)
+                    }
                     finish()
                 }
             }catch (e: Exception){
@@ -214,13 +218,17 @@ class AddPaymentReminderActivity : AppCompatActivity() {
             when (it.tipo) {
                 MENSUAL -> {
                     PeriodicidadGroup.check(R.id.mensualRB)
-
+                    val daysOfMonth = this.resources.getStringArray(R.array.daysOfMonth)
+                        periodicidiadSpinner.setSelection(daysOfMonth.indexOf(it.fecha))
                 }
                 SEMANAL -> {
                     PeriodicidadGroup.check(R.id.semanalRB)
+
+                    periodicidiadSpinner.setSelection(it.fecha!!.toInt() - 1)
                 }
             }
-
+            paymentReminder.id = it.id
+            paymentReminder.deudaID = it.deudaID
             populateDebtCard(it.deudaID)
 
 
