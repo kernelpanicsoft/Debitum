@@ -8,6 +8,7 @@ data class JoinDeudaRecordatorio (
     @ColumnInfo(name = "titulo") val tituloDeuda : String?,
     @ColumnInfo(name = "nota") val notaRecordatorio : String?,
     @ColumnInfo(name = "monto") val montoRecordatorio : Float?,
+    @ColumnInfo(name = "montoMensual") val montoMensualRecordatorio: Float,
     @ColumnInfo(name = "fecha") val fechaRecordatorio : String,
     @ColumnInfo(name = "tipo") val tipoRecordatorio : Int?
     )

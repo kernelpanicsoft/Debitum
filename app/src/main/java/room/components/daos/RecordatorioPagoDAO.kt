@@ -28,13 +28,14 @@ interface RecordatorioPagoDAO {
     @Query("SELECT SUM(monto) FROM RecordatorioPago")
     fun getSumaRecordatorios() : LiveData<Float>
 
-    @Query("SELECT RecordatorioPago.id, RecordatorioPago.tipo, RecordatorioPago.nota, RecordatorioPago.fecha, RecordatorioPago.monto, Deuda.titulo from RecordatorioPago JOIN Deuda ON Deuda.id = RecordatorioPago.deudaID")
+    @Query("SELECT RecordatorioPago.id, RecordatorioPago.tipo, RecordatorioPago.nota, RecordatorioPago.fecha, RecordatorioPago.monto, RecordatorioPago.montoMensual, Deuda.titulo from RecordatorioPago JOIN Deuda ON Deuda.id = RecordatorioPago.deudaID")
     fun getRecordatoriosPagoDeuda() : LiveData<List<JoinDeudaRecordatorio>>
 
     @Query("SELECT SUM(montoMensual) FROM RECORDATORIOPAGO")
     fun getSumaPagosSemanales() : LiveData<Float>
 
-    @Query("SELECT SUM(montoMensual) + (SELECT monto FROM RECORDATORIOPAGO WHERE RecordatorioPago.tipo = 1 ) FROM RecordatorioPago")
+    //@Query("SELECT SUM(montoMensual) + (SELECT monto FROM RECORDATORIOPAGO WHERE RecordatorioPago.tipo = 1 ) FROM RecordatorioPago")
+    @Query("SELECT (SELECT SUM(monto) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 1) + (SELECT SUM(montoMensual) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 2)")
     fun getSumaPagos() : LiveData<Float>
 
     @Query("SELECT id, fecha FROM RecordatorioPago WHERE  strftime('%w', 'now') = fecha")
