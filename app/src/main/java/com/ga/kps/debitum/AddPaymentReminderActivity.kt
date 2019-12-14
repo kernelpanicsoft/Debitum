@@ -67,13 +67,15 @@ class AddPaymentReminderActivity : AppCompatActivity() {
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
 
 
+
+
+
+        paymentReminder = RecordatorioPago(0)
         reminderID = intent.getIntExtra("ID", -1)
         if(reminderID != -1) {
             populateFieldsForEdit()
         }
 
-
-        paymentReminder = RecordatorioPago(0)
         paymentReminder.tipo = MENSUAL
         saveReminderFAB.setOnClickListener {
             paymentReminder.nota = notaRecordatorioET.text.toString()

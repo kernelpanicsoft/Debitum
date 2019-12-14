@@ -4,12 +4,14 @@ import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProviders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_add_debt.*
 import model.Deuda
 import room.components.viewModels.DeudaViewModel
@@ -23,10 +25,13 @@ import java.text.DateFormat
 class AddDebtActivity : AppCompatActivity() {
     lateinit var deudaViewModel : DeudaViewModel
     lateinit var cuentaViewModel: CuentaViewModel
+    lateinit var deuda: Deuda
     var tipo = 0
     var fecha = ""
     private val calendario: Calendar = Calendar.getInstance()
     private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
+
+    var debtID: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +45,12 @@ class AddDebtActivity : AppCompatActivity() {
 
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
+
+        debtID = intent.getIntExtra("ID", -1)
+        deuda = Deuda(0)
+        if(debtID != -1){
+            populateFieldsForEdit()
+        }
 
 
         tipoDeudaSP.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,this.resources.getStringArray(R.array.tipo_deuda))
@@ -73,22 +84,25 @@ class AddDebtActivity : AppCompatActivity() {
             if(tituloDeudaET.text.isNullOrEmpty() || montoPagoET.text.isNullOrEmpty()){
                 Snackbar.make(it,getString(R.string.titulo_y_monto_requerido), Snackbar.LENGTH_LONG).show()
             }else {
-                if(Integer.parseInt(montoPagoET.text.toString()) == 0){
+                if((montoPagoET.text.toString().toFloat()) == 0.0f){
                     Snackbar.make(it, getString(R.string.monto_mayor_cero), Snackbar.LENGTH_LONG).show()
                 }else{
-                    val deuda = Deuda(
-                        0,
-                        tituloDeudaET.text.toString(),
-                        tipo,
-                        montoPagoET.text.toString().toFloat(),
-                        notaPagoET.text.toString(),
-                        fechaPagoBT.text.toString(),
-                        0f,
-                        EstatusDeuda.ACTIVA,
-                        1
-                    )
-                    deudaViewModel.insert(deuda)
-                    actualizaDeudaTotal(deuda.monto)
+                    deuda.titulo = tituloDeudaET.text.toString()
+                    deuda.tipo = tipo
+                    deuda.monto = montoPagoET.text.toString().toFloat()
+                    deuda.fecha_adquision = fechaPagoBT.text.toString()
+                    deuda.pagado = 0f
+                    deuda.estado = EstatusDeuda.ACTIVA
+                    deuda.nota = notaPagoET.text.toString()
+                    deuda.cuenta_id = 1
+
+                    if(deuda.id == 0){
+                        deudaViewModel.insert(deuda)
+                        actualizaDeudaTotal(deuda.monto)
+                    }else{
+                        deudaViewModel.update(deuda)
+                    }
+
                     finish()
                 }
             }
@@ -108,5 +122,20 @@ class AddDebtActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun populateFieldsForEdit(){
+        val debtTypes = this.resources.getStringArray(R.array.tipo_deuda)
+        deudaViewModel.getDeuda(debtID).observe(this, androidx.lifecycle.Observer {
+            tituloDeudaET.setText(it?.titulo,TextView.BufferType.EDITABLE)
+            tipoDeudaSP.setSelection(it.tipo)
+            montoPagoET.setText(it.monto.toString(), TextView.BufferType.EDITABLE)
+            notaPagoET.setText(it.nota, TextView.BufferType.EDITABLE)
+            fechaPagoBT.setText(it.fecha_adquision)
+
+            deuda.id = it.id
+
+
+        })
     }
 }

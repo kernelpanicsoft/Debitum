@@ -73,7 +73,7 @@ class DeudaRepository(application: Application) {
 
     private class UpdateDeudaAsyncTask constructor(private val deudaDAO: DeudaDAO) : AsyncTask<Deuda, Void, Void>(){
         override fun doInBackground(vararg params: Deuda): Void? {
-            deudaDAO.insert(params[0])
+            deudaDAO.update(params[0])
             return null
         }
     }

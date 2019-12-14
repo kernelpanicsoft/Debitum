@@ -26,11 +26,14 @@
         <activity android:name=".MainActivity"/>
 
 
-        <activity android:name=".ReminderDetailsActivity"
+        <activity
+            android:name=".ReminderDetailsActivity"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".SelectDebtActivity"
+        <activity
+            android:name=".SelectDebtActivity"
             android:parentActivityName=".MainActivity"/>
-        <activity android:name=".AddPaymentReminderActivity"
+        <activity
+            android:name=".AddPaymentReminderActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AddDebtActivity"

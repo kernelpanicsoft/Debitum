@@ -39,6 +39,7 @@ class DebtDetailsFragment: Fragment() {
     var montoRestanteTextView: TextView? = null
     var tipoDeudaTextView: TextView? = null
     var arcoProgresso: ArcProgress? = null
+    var notaDeudaTextView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,7 @@ class DebtDetailsFragment: Fragment() {
         montoRestanteTextView = v.findViewById(R.id.montoRestanteTV)
         tipoDeudaTextView = v.findViewById(R.id.tipoDeudaTV)
         arcoProgresso = v.findViewById(R.id.arc_progress)
+        notaDeudaTextView = v.findViewById(R.id.notaDeudaTV)
 
         val fab = (activity as DebtDetailsActivity).findViewById<FloatingActionButton>(R.id.anadirPagoDeudadFAB)
         fab.setOnClickListener {
@@ -90,6 +92,7 @@ class DebtDetailsFragment: Fragment() {
         montoPagadoTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.pagado)
         montoRestanteTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,(debt!!.monto - debt.pagado))
         arcoProgresso?.progress = ((debt!!.pagado * 100f) / debt.monto).toInt()
+        notaDeudaTextView?.text = debt?.nota
 
         val tipoDeudaArray = context?.resources?.getStringArray(R.array.tipo_deuda)
         tipoDeudaTextView?.text =  tipoDeudaArray?.get(debt.tipo)

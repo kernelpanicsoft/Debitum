@@ -7,8 +7,6 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -21,14 +19,9 @@ import model.RecordatorioPago
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
 import java.lang.Exception
-import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.ZoneId
 import java.util.*
-import java.time.temporal.ChronoUnit
 
 
 class ReminderDetailsActivity : AppCompatActivity() {
@@ -66,7 +59,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
         when(item.itemId){
             android.R.id.home ->{
                 onBackPressed()
-
+                return true
             }
             R.id.itemEditDelete ->{
                 val builder = AlertDialog.Builder(this)
@@ -127,7 +120,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
 
         reminderActualLive.observe(this, Observer {
             notaRecordatioTV.text = it.nota
-            montoRecodatorioTV.text = getString(R.string.simboloMoneda,simboloMoneda,it.monto)
+            notaDeudaTV.text = getString(R.string.simboloMoneda,simboloMoneda,it.monto)
 
             when(it.tipo){
                 MENSUAL ->{
