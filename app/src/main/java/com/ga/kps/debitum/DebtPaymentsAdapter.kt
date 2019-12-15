@@ -41,7 +41,7 @@ class DebtPaymentsAdapter(val context: Context?) : ListAdapter<Pago, DebtPayment
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pagoActual = getItem(position)
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val simboloMoneda = prefs.getString("moneySign","NA")
+        val simboloMoneda = prefs.getString("moneySign","$")
         holder.montoPago.text = context?.getString(R.string.simboloMoneda,simboloMoneda,pagoActual.monto)
         holder.fechaPago.text = pagoActual.fecha
 

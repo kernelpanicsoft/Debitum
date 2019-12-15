@@ -45,7 +45,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
         title = getString(R.string.detalles_de_recordatorio)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        simboloMoneda = prefs.getString("moneySign","NA")
+        simboloMoneda = prefs.getString("moneySign","$")
 
         debtViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
@@ -151,10 +151,17 @@ class ReminderDetailsActivity : AppCompatActivity() {
                                     calendarioRecordatorio.add(Calendar.MONTH, 1)
                                     fechaPagoRecordatorioTV.text =
                                         sdf.format(calendarioRecordatorio.time)
-                                    cuentaDiasPagoTV.text =
-                                        (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+
+                                    var daysToPayment =   (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
                                             Calendar.DAY_OF_YEAR
-                                        )).toString()
+                                    ))
+
+                                    if (daysToPayment < 0){
+                                        daysToPayment += calendarioRecordatorio.getActualMaximum(
+                                            Calendar.DAY_OF_YEAR
+                                        ) - 1
+                                    }
+                                    cuentaDiasPagoTV.text = daysToPayment.toString()
                                 }
                                 calendarioRecordatorio.time.compareTo(calendario.time) > 0 -> {
                                     fechaPagoRecordatorioTV.text =

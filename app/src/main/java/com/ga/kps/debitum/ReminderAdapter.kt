@@ -21,7 +21,7 @@ import java.util.*
 class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio, ReminderAdapter.ViewHolder>(DIFF_CALLBACK()), View.OnClickListener {
     private var listener : View.OnClickListener? = null
     private val calendario: Calendar = Calendar.getInstance()
-    private val calendarioRecordatorio: Calendar = Calendar.getInstance()
+    private var calendarioRecordatorio: Calendar = Calendar.getInstance()
     private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
     class DIFF_CALLBACK : DiffUtil.ItemCallback<JoinDeudaRecordatorio>(){
         override fun areItemsTheSame(
@@ -58,7 +58,7 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
         val it = getItem(position)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val simboloMoneda = prefs.getString("moneySign","NA")
+        val simboloMoneda = prefs.getString("moneySign","$")
         holder.tituloRecordatorio.text = it.notaRecordatorio
         holder.deudaVinculada.text = it.tituloDeuda.toString()
         holder.fechaRecordatorio.text = it.fechaRecordatorio
@@ -66,26 +66,27 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
 
 
 
+
         when(it.tipoRecordatorio){
             MENSUAL ->{
                 try{
-                    if(it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio.toInt() != 0){
-                        //Mostramos el día de pago
+                    if(it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() != 0){
 
                         //variable auxiliar para almacenar el dia del mes
                         var reminderDayOfMonth = 0
 
                         //Calculamos el proximo pago
-
+                        //calendarioRecordatorio.set(Calendar.DAY_OF_MONTH,31)
                         val maxMonthDay = calendario.getActualMaximum(Calendar.DAY_OF_MONTH)
 
-                        if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio.toInt() == maxMonthDay) {
+                        if (it.fechaRecordatorio.equals(context.getString(R.string.ultimo_dia_mes)) || it.fechaRecordatorio?.toInt() == maxMonthDay) {
                             reminderDayOfMonth = maxMonthDay
                         } else {
-                            reminderDayOfMonth = it.fechaRecordatorio.toInt()!!
+                            reminderDayOfMonth = it.fechaRecordatorio?.toInt()!!
                         }
-
+                        calendarioRecordatorio = Calendar.getInstance()
                         calendarioRecordatorio.set(Calendar.DAY_OF_MONTH, reminderDayOfMonth)
+
 
                         when {
                             calendarioRecordatorio.time.compareTo(calendario.time) == 0 -> holder.fechaRecordatorio.text =
@@ -94,10 +95,17 @@ class ReminderAdapter (val context: Context) : ListAdapter<JoinDeudaRecordatorio
                                 calendarioRecordatorio.add(Calendar.MONTH, 1)
                                 holder.fechaRecordatorio.text =
                                     sdf.format(calendarioRecordatorio.time)
-                                holder.diasRestantes.text =
-                                    (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+
+                                var daysToPayment =   (calendarioRecordatorio.get(Calendar.DAY_OF_YEAR) - calendario.get(
+                                    Calendar.DAY_OF_YEAR
+                                ))
+
+                                if (daysToPayment < 0){
+                                    daysToPayment += calendarioRecordatorio.getActualMaximum(
                                         Calendar.DAY_OF_YEAR
-                                    )).toString()
+                                    )
+                                }
+                                holder.diasRestantes.text = daysToPayment.toString()
                             }
                             calendarioRecordatorio.time.compareTo(calendario.time) > 0 -> {
                                 holder.fechaRecordatorio.text =

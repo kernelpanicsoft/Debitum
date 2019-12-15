@@ -48,7 +48,7 @@ class DebtsAdapter(val context: Context?) : ListAdapter<Deuda, DebtsAdapter.View
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val deudaActual = getItem(position)
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val simboloMoneda = prefs.getString("moneySign","NA")
+        val simboloMoneda = prefs.getString("moneySign","$")
         holder.tituloDeuda.text = deudaActual.titulo
         holder.montoTotalDeuda.text = context?.getString(R.string.simboloMoneda,simboloMoneda,deudaActual.monto)
         holder.montoPagadoDeuda.text = context?.getString(R.string.simboloMoneda,simboloMoneda,deudaActual.pagado)

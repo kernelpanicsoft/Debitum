@@ -44,7 +44,7 @@ class DebtDetailsFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        simboloMoneda = prefs.getString("moneySign","NA")
+        simboloMoneda = prefs.getString("moneySign","$")
     }
 
 
