@@ -13,10 +13,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import room.components.viewModels.CuentaViewModel
+import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.PagoViewModel
 
 class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var pagosViewModel: PagoViewModel
+    lateinit var deudaViewModel: DeudaViewModel
+    lateinit var cuentaViewModel: CuentaViewModel
     lateinit var RV: RecyclerView
     var simboloMoneda = "$"
 
@@ -27,7 +31,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
         RV.setHasFixedSize(true)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        simboloMoneda = prefs.getString("moneySign","NA")
+        simboloMoneda = prefs.getString("moneySign","$")
 
         val mLayoutManager = LinearLayoutManager(
             context,
@@ -39,6 +43,9 @@ class DebtPaymentsHistoryFragment: Fragment() {
 
         val adapter = DebtPaymentsAdapter(context)
         pagosViewModel = ViewModelProviders.of(this).get(PagoViewModel::class.java)
+        deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+        cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
+
         pagosViewModel.getAllPagosDeuda((activity as DebtDetailsActivity).debtID).observe(this, Observer {
             adapter.submitList(it)
         })
@@ -64,8 +71,19 @@ class DebtPaymentsHistoryFragment: Fragment() {
             paymentDetails.setPositiveButton(getString(R.string.entendido)){ _, _->
 
             }
-            paymentDetails.setNeutralButton(getString(R.string.modificar)){ _, _ ->
-
+            paymentDetails.setNeutralButton(getString(R.string.eliminar)){ _, _ ->
+                val builder = AlertDialog.Builder(context!!)
+                builder.setTitle(getString(R.string.esta_seguro_eliminar_pago))
+                builder.setMessage(getString(R.string.eliminar_pago_es_irreversible))
+                builder.setPositiveButton(getString(R.string.eliminar)){_, _ ->
+                    actualizaDeuda((activity as DebtDetailsActivity).debtID, -selectPayment.monto)
+                    actualizaDeudaTotal(-selectPayment.monto)
+                    pagosViewModel.delete(selectPayment)
+                }
+                builder.setNegativeButton(getString(R.string.cancelar)){ _, _ ->
+                }
+                val innerDialog = builder.create()
+                innerDialog.show()
             }
             val paymentDetailsDialog = paymentDetails.create()
             paymentDetailsDialog.show()
@@ -75,5 +93,12 @@ class DebtPaymentsHistoryFragment: Fragment() {
         return v
     }
 
+    private fun actualizaDeuda(id: Int, monto: Float){
+        deudaViewModel.updateDeuda(id,monto)
+    }
+
+    private fun actualizaDeudaTotal(monto: Float){
+        cuentaViewModel.updateDeudaTotal(monto)
+    }
 
 }

@@ -169,6 +169,8 @@
     <string name="detalles_de_deuda_global">Detalles de deuda global:</string>
     <string name="es_necesario_indicar_monto_recordatorio">Es necesario indicar un monto distinto de cero para guardar el recordatorio.</string>
     <string name="es_necesario_asociar_deuda_recordatori">Es necesario asociar una deuda para poder registrar el recordatorio.</string>
+    <string name="esta_seguro_eliminar_pago">¿Está seguro de eliminar este pago?</string>
+    <string name="eliminar_pago_es_irreversible">Eliminar un pago es un proceso irreversible que incrementa la deuda</string>
 
 
     <string-array name="notificationAnticipationValues">
