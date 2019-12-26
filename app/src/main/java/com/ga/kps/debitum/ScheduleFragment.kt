@@ -22,7 +22,6 @@ import notifications.AlarmHelper
 import notifications.NotificationsManager
 import room.components.viewModels.RecordatorioPagoViewModel
 import schedulers.ReminderNotificationsJobService
-import java.util.*
 
 class ScheduleFragment : Fragment() {
 

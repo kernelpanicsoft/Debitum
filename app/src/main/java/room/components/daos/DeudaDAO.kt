@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import model.Deuda
 import helpcodes.EstatusDeuda
+import model.CantidadTipoDeuda
 
 @Dao
 interface DeudaDAO {
@@ -42,5 +43,8 @@ interface DeudaDAO {
 
     @Query("SELECT (SUM(monto) - SUM(pagado)) FROM DEUDA")
     fun getSumaDeudas() : LiveData<Float>
+
+    @Query("SELECT COUNT(Deuda.id) FROM Deuda GROUP BY Deuda.tipo")
+    fun getCuentaTiposDeuda() : LiveData<List<CantidadTipoDeuda>>
 
 }

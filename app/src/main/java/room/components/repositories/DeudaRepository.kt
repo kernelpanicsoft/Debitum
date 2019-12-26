@@ -3,6 +3,7 @@ package room.components.repositories
 import android.app.Application
 import androidx.lifecycle.LiveData
 import android.os.AsyncTask
+import model.CantidadTipoDeuda
 import model.Deuda
 import room.components.DebitumDataBase
 import room.components.daos.DeudaDAO
@@ -61,6 +62,10 @@ class DeudaRepository(application: Application) {
 
     fun getSumaCuentas() : LiveData<Float>{
         return deudaDao.getSumaDeudas()
+    }
+
+    fun getCuentaTiposDeuda() : LiveData<List<CantidadTipoDeuda>>{
+        return deudaDao.getCuentaTiposDeuda()
     }
 
 

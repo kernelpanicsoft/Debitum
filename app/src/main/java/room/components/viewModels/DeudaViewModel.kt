@@ -3,6 +3,7 @@ package room.components.viewModels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import model.CantidadTipoDeuda
 import model.Deuda
 import room.components.repositories.DeudaRepository
 
@@ -55,5 +56,10 @@ class DeudaViewModel (application: Application) : AndroidViewModel(application) 
 
     fun getSumaDeudas() : LiveData<Float>{
         return repository.getSumaCuentas()
+    }
+
+
+    fun getCuentaDeTiposDeDeuda()  : LiveData<List<CantidadTipoDeuda>>{
+        return repository.getCuentaTiposDeuda()
     }
 }

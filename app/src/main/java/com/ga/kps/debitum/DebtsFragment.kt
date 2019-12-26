@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
@@ -24,7 +25,8 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 class DebtsFragment : Fragment() {
     lateinit var deudaViewModel: DeudaViewModel
-    lateinit var mAdView : AdView
+
+    private lateinit var collectionPagerAdapter: CollectionPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +40,13 @@ class DebtsFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_debts,container, false)
         val viewPager = v.findViewById<ViewPager>(R.id.ViewPagerPrincipal)
         val tabLayout = v.findViewById<TabLayout>(R.id.TabLayoutPrincipal)
-        val cantidadDeudaTV = v.findViewById<TextView>(R.id.cantidadDeudaTotalTV)
+        //val cantidadDeudaTV = v.findViewById<TextView>(R.id.cantidadDeudaTotalTV)
 
+        
 
-        mAdView = v.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-
-        setupViewPager(viewPager)
+        //setupViewPager(viewPager)
+        collectionPagerAdapter = CollectionPagerAdapter(childFragmentManager)
+        viewPager.adapter = collectionPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
@@ -55,9 +55,9 @@ class DebtsFragment : Fragment() {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","$")
             if(it == null){
-                cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, 0f)
+        //        cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, 0f)
             }else{
-                cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, it)
+        //        cantidadDeudaTV.text = getString(R.string.simboloMoneda, simboloMoneda, it)
             }
 
         })
@@ -71,36 +71,22 @@ class DebtsFragment : Fragment() {
         return v
     }
 
-    private fun setupViewPager(pager: ViewPager){
-        val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(ActualDebtsFragment(),getString(R.string.actuales))
-        adapter.addFragment(PassDebtsFragment(),getString(R.string.pasadas))
 
-        pager.adapter = adapter
+    private  val ARG_OBJECT = "object"
 
+    private inner class CollectionPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm){
+        override fun getCount(): Int = 4
 
-    }
-
-    private inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){
-        private val mFragmentList = ArrayList<Fragment>()
-        private val mFragmentTitleList = ArrayList<String>()
-
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList[position]
-        }
-
-        override fun getCount(): Int {
-            return mFragmentTitleList.size
-        }
-
-        fun addFragment(fragment: Fragment, title: String){
-            mFragmentList.add(fragment)
-            mFragmentTitleList.add(title)
+        override fun getItem(i: Int): Fragment{
+            val fragment = ActualDebtsFragment()
+            fragment.arguments = Bundle().apply {
+                putInt(ARG_OBJECT,i + 1)
+            }
+            return fragment
         }
 
         override fun getPageTitle(position: Int): CharSequence{
-            return mFragmentTitleList[position]
+            return "OBJECT ${(position + 1)}"
         }
     }
 }
