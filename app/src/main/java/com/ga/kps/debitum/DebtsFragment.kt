@@ -3,9 +3,7 @@ package com.ga.kps.debitum
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -26,11 +24,12 @@ import com.google.android.gms.ads.AdView
 class DebtsFragment : Fragment() {
     lateinit var deudaViewModel: DeudaViewModel
 
+
     private lateinit var collectionPagerAdapter: CollectionPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
 
         MobileAds.initialize(context){}
 
@@ -40,6 +39,7 @@ class DebtsFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_debts,container, false)
         val viewPager = v.findViewById<ViewPager>(R.id.ViewPagerPrincipal)
         val tabLayout = v.findViewById<TabLayout>(R.id.TabLayoutPrincipal)
+
         //val cantidadDeudaTV = v.findViewById<TextView>(R.id.cantidadDeudaTotalTV)
 
         
@@ -47,6 +47,12 @@ class DebtsFragment : Fragment() {
         //setupViewPager(viewPager)
         collectionPagerAdapter = CollectionPagerAdapter(childFragmentManager)
         viewPager.adapter = collectionPagerAdapter
+
+        val cantidadDeudaTV = v.findViewById<TextView>(R.id.cantidadDeudaTotalTV)
+
+
+        setupViewPager(viewPager)
+
         tabLayout.setupWithViewPager(viewPager)
 
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
@@ -62,11 +68,12 @@ class DebtsFragment : Fragment() {
 
         })
 
+        /*
         val fab = v.findViewById<FloatingActionButton>(R.id.addNewDebtFAB)
         fab.setOnClickListener {
             val nav = Intent(context,AddDebtActivity::class.java)
             startActivity(nav)
-        }
+        }*/
 
         return v
     }
@@ -88,5 +95,22 @@ class DebtsFragment : Fragment() {
         override fun getPageTitle(position: Int): CharSequence{
             return "OBJECT ${(position + 1)}"
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_add_payment, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.itemAddPayment ->{
+                val nav = Intent(context,AddDebtActivity::class.java)
+                startActivity(nav)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 }

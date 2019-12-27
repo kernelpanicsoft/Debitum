@@ -25,6 +25,8 @@ class StatsFragment : Fragment() {
     lateinit var debtsChart : PieChart
     lateinit var deudasViewModel:  DeudaViewModel
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_stats, container, false)
 

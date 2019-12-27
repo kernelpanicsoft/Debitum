@@ -52,6 +52,7 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addReminderFAB"
         android:layout_width="wrap_content"
@@ -61,4 +62,6 @@
         android:layout_margin="16dp"
 
         />
+
+        -->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
