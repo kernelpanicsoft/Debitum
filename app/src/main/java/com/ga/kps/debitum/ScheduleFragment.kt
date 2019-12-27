@@ -31,11 +31,11 @@ class ScheduleFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_schedule, container, false)
-        val fab = v.findViewById<FloatingActionButton>(R.id.addReminderFAB)
+        //val fab = v.findViewById<FloatingActionButton>(R.id.addReminderFAB)
 
         RV = v.findViewById(R.id.RecViewRecordatorios)
         RV.setHasFixedSize(true)
@@ -72,9 +72,8 @@ class ScheduleFragment : Fragment() {
             startActivity(nav)
         })
 
+        /*
         fab.setOnClickListener {
-            val nav = Intent(context, AddPaymentReminderActivity::class.java)
-            startActivity(nav)
 
           //  scheduleJob()
          //   val notification = NotificationsManager(this.context!!)
@@ -89,7 +88,7 @@ class ScheduleFragment : Fragment() {
 
 
         }
-
+*/
         RV.adapter = adapter
         return v
     }
@@ -118,6 +117,21 @@ class ScheduleFragment : Fragment() {
         val scheduler = context?.getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
         scheduler.cancel(123)
         Log.d("EXITO", "Job cancelled")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_add_payment_reminder, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.itemAddPaymentReminder ->{
+                val nav = Intent(context, AddPaymentReminderActivity::class.java)
+                startActivity(nav)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

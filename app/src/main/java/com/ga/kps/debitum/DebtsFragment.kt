@@ -3,9 +3,7 @@ package com.ga.kps.debitum
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -24,11 +22,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 class DebtsFragment : Fragment() {
     lateinit var deudaViewModel: DeudaViewModel
-    lateinit var mAdView : AdView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
 
         MobileAds.initialize(context){}
 
@@ -39,11 +37,6 @@ class DebtsFragment : Fragment() {
         val viewPager = v.findViewById<ViewPager>(R.id.ViewPagerPrincipal)
         val tabLayout = v.findViewById<TabLayout>(R.id.TabLayoutPrincipal)
         val cantidadDeudaTV = v.findViewById<TextView>(R.id.cantidadDeudaTotalTV)
-
-
-        mAdView = v.findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
 
         setupViewPager(viewPager)
@@ -62,11 +55,12 @@ class DebtsFragment : Fragment() {
 
         })
 
+        /*
         val fab = v.findViewById<FloatingActionButton>(R.id.addNewDebtFAB)
         fab.setOnClickListener {
             val nav = Intent(context,AddDebtActivity::class.java)
             startActivity(nav)
-        }
+        }*/
 
         return v
     }
@@ -102,5 +96,22 @@ class DebtsFragment : Fragment() {
         override fun getPageTitle(position: Int): CharSequence{
             return mFragmentTitleList[position]
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_add_payment, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.itemAddPayment ->{
+                val nav = Intent(context,AddDebtActivity::class.java)
+                startActivity(nav)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 }
