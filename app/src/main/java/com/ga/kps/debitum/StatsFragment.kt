@@ -26,9 +26,6 @@ class StatsFragment : Fragment() {
     lateinit var deudasViewModel:  DeudaViewModel
 
 
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_stats, container, false)
 
@@ -36,6 +33,7 @@ class StatsFragment : Fragment() {
 
         deudasViewModel.getCuentaDeTiposDeDeuda().observe(this, Observer {
             Log.d("CuentaTipoDeuda", it.toString())
+
         })
         val tituloTV = v.findViewById<TextView>(R.id.tituloSeccionTV)
 
@@ -44,16 +42,16 @@ class StatsFragment : Fragment() {
 
         setupPieChart()
 
-        return v;
+        return v
     }
 
     private fun setupPieChart() {
         // Populating a list of PieEntries
-        val rainFall : FloatArray = floatArrayOf(98.5f,128.8f,161.6f)
-        val monthNames : Array<String> = arrayOf("Jan", "Fab", "Mar")
+        val rainFall : FloatArray = floatArrayOf(98.5f,128.8f,161.6f,132.5f)
+        val monthNames : Array<String> = arrayOf("Jan", "Fab", "Mar","May")
 
         val pieEntries = ArrayList<PieEntry>()
-        for(a in 1..2){
+        for(a in 1..4){
             pieEntries.add(PieEntry(rainFall[a],monthNames[a]))
         }
 
