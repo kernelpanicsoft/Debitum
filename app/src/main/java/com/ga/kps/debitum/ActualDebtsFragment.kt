@@ -15,12 +15,12 @@ import room.components.viewModels.DeudaViewModel
 
 class ActualDebtsFragment: Fragment() {
     lateinit var deudasViewModel : DeudaViewModel
-   // lateinit var RV : RecyclerView
+    lateinit var RV : RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_actual_debts, container, false)
-        //RV = v.findViewById(R.id.RecViewDeudasActuales)
-       // RV.setHasFixedSize(true)
+        RV = v.findViewById(R.id.RecViewDeudasActuales)
+        RV.setHasFixedSize(true)
 
         return v
     }
@@ -34,10 +34,10 @@ class ActualDebtsFragment: Fragment() {
             true
         )
         mLayoutManager.stackFromEnd = true
-       // RV.layoutManager = mLayoutManager
+        RV.layoutManager = mLayoutManager
 
 
-/*
+
 
         val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
@@ -54,7 +54,7 @@ class ActualDebtsFragment: Fragment() {
 
 
         RV.adapter = adapter
-*/
+
     }
 
 }
