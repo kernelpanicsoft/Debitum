@@ -44,7 +44,7 @@ interface DeudaDAO {
     @Query("SELECT (SUM(monto) - SUM(pagado)) FROM DEUDA")
     fun getSumaDeudas() : LiveData<Float>
 
-    @Query("SELECT Deuda.tipo, COUNT(Deuda.id) as cantidad FROM Deuda GROUP BY Deuda.tipo")
+    @Query("SELECT Deuda.tipo, COUNT(Deuda.id) as cantidad, SUM(Deuda.monto) - SUM(Deuda.pagado) as deudaPorTipo FROM Deuda GROUP BY Deuda.tipo")
     fun getCuentaTiposDeuda() : LiveData<List<CantidadTipoDeuda>>
 
 
