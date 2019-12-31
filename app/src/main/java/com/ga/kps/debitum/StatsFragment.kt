@@ -51,7 +51,14 @@ class StatsFragment : Fragment() {
 
         val pieEntries = ArrayList<PieEntry>()
         for(a in debtsList.indices){
-            pieEntries.add(PieEntry(debtsList[a].deudaPorTipo!!,getNameOfType(debtsList[a].tipo)))
+            if((debtsList[a].deudaPorTipo!! - debtsList[a].pagadoPorTipo!!) > 0f) {
+                pieEntries.add(
+                    PieEntry(
+                        (debtsList[a].deudaPorTipo!! - debtsList[a].pagadoPorTipo!!),
+                        getNameOfType(debtsList[a].tipo)
+                    )
+                )
+            }
         }
 
         val dataSet = PieDataSet(pieEntries,"")
@@ -82,9 +89,9 @@ class StatsFragment : Fragment() {
 
 
         debtsChart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-       // debtsChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        debtsChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         debtsChart.legend.orientation = Legend.LegendOrientation.VERTICAL
-
+        debtsChart.legend.setDrawInside(false)
     }
 
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/categoriaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/tipo_de_deuda"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/categoriaLabelTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Tarjetas de credito"
+            app:layout_constraintBottom_toBottomOf="@+id/categoriaTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/categoriaTV"
+            app:layout_constraintTop_toTopOf="@+id/categoriaTV" />
+
+        <TextView
+            android:id="@+id/pagadoTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/pagado"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numeroDeudasTV" />
+
+        <TextView
+            android:id="@+id/cantidadPagadoLabelTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="$25"
+            app:layout_constraintBottom_toBottomOf="@+id/pagadoTV"
+            app:layout_constraintStart_toEndOf="@+id/pagadoTV"
+            app:layout_constraintTop_toTopOf="@+id/pagadoTV" />
+
+        <TextView
+            android:id="@+id/deLabelTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="de"
+            app:layout_constraintBottom_toBottomOf="@+id/cantidadPagadoLabelTV"
+            app:layout_constraintStart_toEndOf="@+id/cantidadPagadoLabelTV"
+            app:layout_constraintTop_toTopOf="@+id/cantidadPagadoLabelTV" />
+
+        <TextView
+            android:id="@+id/cantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="$50"
+            app:layout_constraintBottom_toBottomOf="@+id/deLabelTV"
+            app:layout_constraintStart_toEndOf="@+id/deLabelTV"
+            app:layout_constraintTop_toTopOf="@+id/deLabelTV" />
+
+        <TextView
+            android:id="@+id/restanteTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/restante"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cantidadRestanteTV"
+            app:layout_constraintTop_toBottomOf="@+id/cantidad" />
+
+        <TextView
+            android:id="@+id/cantidadRestanteTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="2134"
+            app:layout_constraintBottom_toBottomOf="@+id/restanteTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/restanteTV" />
+
+        <TextView
+            android:id="@+id/numeroDeudasTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/deudas_asociadas"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@+id/pagadoTV"
+            app:layout_constraintTop_toBottomOf="@+id/categoriaTV" />
+
+        <TextView
+            android:id="@+id/numeroDeudasLabelTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="10"
+            app:layout_constraintBottom_toBottomOf="@+id/numeroDeudasTV"
+            app:layout_constraintStart_toEndOf="@+id/numeroDeudasTV"
+            app:layout_constraintTop_toTopOf="@+id/numeroDeudasTV" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
