@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -27,19 +29,39 @@ class StatsFragment : Fragment() {
 
     lateinit var debtsChart : PieChart
     lateinit var deudasViewModel:  DeudaViewModel
+    lateinit var RV: RecyclerView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_stats, container, false)
+
+        RV = v.findViewById(R.id.RecViewEstadisticas)
+        RV.setHasFixedSize(true)
+
+        val mLayoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            true
+        )
+        mLayoutManager.stackFromEnd = true
+        RV.layoutManager = mLayoutManager
+
+        val adapter = DebtByTypeAdapter(context)
+
 
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
         deudasViewModel.getCuentaDeTiposDeDeuda().observe(this, Observer {
             Log.d("CuentaTipoDeuda", it.toString())
             setupPieChart(it)
+            adapter.submitList(it)
         })
 
+        adapter.setOnClickListener(View.OnClickListener {
 
+        })
+
+        RV.adapter = adapter
         debtsChart = v.findViewById(R.id.debtsPieChart)
 
 

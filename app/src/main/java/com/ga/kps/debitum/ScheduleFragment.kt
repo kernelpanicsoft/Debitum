@@ -71,23 +71,7 @@ class ScheduleFragment : Fragment() {
             startActivity(nav)
         })
 
-        /*
-        fab.setOnClickListener {
 
-          //  scheduleJob()
-         //   val notification = NotificationsManager(this.context!!)
-         //   notification.sendNotificationForReminder("Hola","Mundo como estan");
-
-         //    val calendarHelper : CalendarHelper = CalendarHelper()
-         //    Toast.makeText(context,"Valores: " + calendarHelper.toString(), Toast.LENGTH_SHORT).show()
-
-         //   val alarmHelper  = AlarmHelper(context!!)
-         //   alarmHelper.createAlarmForNotifications(19,55,"HOla","Desde el helper", 23)
-
-
-
-        }
-*/
         RV.adapter = adapter
         return v
     }

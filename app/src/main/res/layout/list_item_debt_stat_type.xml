@@ -67,13 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="de"
+            android:text="@string/de"
             app:layout_constraintBottom_toBottomOf="@+id/cantidadPagadoLabelTV"
             app:layout_constraintStart_toEndOf="@+id/cantidadPagadoLabelTV"
             app:layout_constraintTop_toTopOf="@+id/cantidadPagadoLabelTV" />
 
         <TextView
-            android:id="@+id/cantidad"
+            android:id="@+id/cantidadTotalLabelTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -93,7 +93,7 @@
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/cantidadRestanteTV"
-            app:layout_constraintTop_toBottomOf="@+id/cantidad" />
+            app:layout_constraintTop_toBottomOf="@+id/cantidadTotalLabelTV" />
 
         <TextView
             android:id="@+id/cantidadRestanteTV"

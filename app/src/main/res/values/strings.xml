@@ -168,6 +168,7 @@
     <string name="esta_seguro_eliminar_pago">¿Está seguro de eliminar este pago?</string>
     <string name="eliminar_pago_es_irreversible">Eliminar un pago es un proceso irreversible que incrementa la deuda</string>
     <string name="deudas_asociadas">Deudas asociadas:</string>
+    <string name="detalles">Detalles:</string>
 
 
     <string-array name="notificationAnticipationValues">
