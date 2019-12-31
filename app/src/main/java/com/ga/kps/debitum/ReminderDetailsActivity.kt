@@ -127,7 +127,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
                     try{
                         if(it.fecha.equals(getString(R.string.ultimo_dia_mes)) || it.fecha?.toInt() != 0){
                             //Mostramos el día de pago
-                            periodoPagoTV.text = getString(R.string.mensual)
+                            periodoPagoTV.text = getString(R.string.mensual) + " " + it.tipo
 
                             //variable auxiliar para almacenar el dia del mes
                             var reminderDayOfMonth = 0

@@ -35,7 +35,7 @@ interface RecordatorioPagoDAO {
     fun getSumaPagosSemanales() : LiveData<Float>
 
     //@Query("SELECT SUM(montoMensual) + (SELECT monto FROM RECORDATORIOPAGO WHERE RecordatorioPago.tipo = 1 ) FROM RecordatorioPago")
-    @Query("SELECT (SELECT SUM(monto) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 1) + (SELECT SUM(montoMensual) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 2)")
+    @Query("SELECT ifnull((SELECT SUM(monto) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 1),0) + ifnull((SELECT SUM(montoMensual) FROM RecordatorioPago WHERE RecordatorioPago.tipo = 2),0)")
     fun getSumaPagos() : LiveData<Float>
 
     @Query("SELECT id, fecha FROM RecordatorioPago WHERE  strftime('%w', 'now') = fecha")

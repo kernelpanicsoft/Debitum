@@ -57,6 +57,7 @@ class ScheduleFragment : Fragment() {
         recordatorioViewModel.getSumaRecordatorioPagos().observe(this, androidx.lifecycle.Observer {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","$")
+
             if(it == null){
                 cantidadGastoMensualTV.text =  getString(R.string.simboloMoneda, simboloMoneda, 0f)
             }else{
