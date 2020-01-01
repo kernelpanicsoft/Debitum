@@ -169,6 +169,12 @@
     <string name="eliminar_pago_es_irreversible">Eliminar un pago es un proceso irreversible que incrementa la deuda</string>
     <string name="deudas_asociadas">Deudas asociadas:</string>
     <string name="detalles">Detalles:</string>
+    <string name="acerca_de">Acerca de:</string>
+    <string name="version">Versión</string>
+    <string name="politica_de_privacidad">Política de Privacidad</string>
+    <string name="leer_politica_privacidad_y_terminos">Leer la política privacidad y términos de uso de la aplicación.</string>
+    <string name="calificanos_en_play_store">Califícanos en la Play Store</string>
+    <string name="tu_opinion_es_importante_para_nosotros">Tu opinión es muy importante para nosotros.</string>
 
 
     <string-array name="notificationAnticipationValues">

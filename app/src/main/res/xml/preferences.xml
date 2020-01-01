@@ -31,8 +31,20 @@
 
     <PreferenceCategory
         app:key="appDetails"
-        app:title="Detalles de la aplicación"
+        app:title="@string/acerca_de"
         >
+        <PreferenceScreen
+            android:title="@string/politica_de_privacidad"
+            android:key="policitica_de_privacidad"
+            android:summary="@string/leer_politica_privacidad_y_terminos"/>
+        <PreferenceScreen
+            android:title="@string/calificanos_en_play_store"
+            android:key="calificar_play_store"
+            android:summary="@string/tu_opinion_es_importante_para_nosotros"/>
+        <PreferenceScreen
+            android:title="@string/version"
+            android:key="version_app"
+            android:summary="1.0"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
