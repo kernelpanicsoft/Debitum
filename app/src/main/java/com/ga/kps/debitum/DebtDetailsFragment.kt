@@ -124,6 +124,8 @@ class DebtDetailsFragment: Fragment() {
         removeObservers()
         val deudaAux = Deuda((activity as DebtDetailsActivity).debtID)
         deudasViewModel.delete(deudaAux)
+        Toast.makeText(context,getString(R.string.deuda_eliminada), Toast.LENGTH_SHORT).show()
+        (activity as DebtDetailsActivity).finish()
     }
 
     private fun removeObservers(){

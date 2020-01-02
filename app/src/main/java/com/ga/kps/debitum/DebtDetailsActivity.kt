@@ -15,14 +15,19 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import helpcodes.ANADIR_PAGO_DEUDA
 import helpcodes.EstatusDeuda
 import kotlinx.android.synthetic.main.activity_debt_details.*
+import model.Deuda
 import room.components.viewModels.DeudaViewModel
 
 class DebtDetailsActivity : AppCompatActivity() {
     var debtID: Int = -1
     private lateinit var adapter : ViewPagerAdapter
+    private lateinit var deudaViewModel : DeudaViewModel
+    private lateinit var currentDebt : LiveData<Deuda>
+
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -36,6 +41,10 @@ class DebtDetailsActivity : AppCompatActivity() {
             setupViewPager(ViewPagerDetallesDeuda)
             tabLayoutDebtTomas.setupWithViewPager(ViewPagerDetallesDeuda)
             debtID = intent.getIntExtra("DEBT_ID", -1)
+
+            deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
+          //  currentDebt = deudaViewModel.getDeuda(debtID)
+          //  currentDebt.observe(this, Observer {  })
     }
 
     private fun setupViewPager(pager: ViewPager){
@@ -95,18 +104,48 @@ class DebtDetailsActivity : AppCompatActivity() {
                             builder.setTitle(getString(R.string.eliminar_deuda))
                             builder.setMessage(getString(R.string.esta_seguro_eliminar_deuda))
                             builder.setPositiveButton(getString(R.string.eliminar)){
-                                _, _ ->
+                                    _, _ ->
                                 deleteDebt()
 
                             }
 
                             builder.setNegativeButton(getString(R.string.cancelar)){
-                                _,_ ->
+                                    _,_ ->
                             }
 
                             val dialog = builder.create()
                             dialog.show()
                         }
+                    }
+
+                }
+                val alertDialog = builder.create()
+                alertDialog.show()
+                return true
+            }
+            R.id.itemDelete->{
+                val builder = AlertDialog.Builder(this@DebtDetailsActivity)
+                builder.setTitle(getString(R.string.opciones_de_deuda))
+                builder.setItems(R.array.solo_eliminar){ _, which ->
+                    when(which){
+                        0 ->{
+                            val builder = AlertDialog.Builder(this)
+                            builder.setTitle(getString(R.string.eliminar_deuda))
+                            builder.setMessage(getString(R.string.esta_seguro_eliminar_deuda))
+                            builder.setPositiveButton(getString(R.string.eliminar)){
+                                    _, _ ->
+                                deleteDebt()
+
+                            }
+
+                            builder.setNegativeButton(getString(R.string.cancelar)){
+                                    _,_ ->
+                            }
+
+                            val dialog = builder.create()
+                            dialog.show()
+                        }
+
                     }
 
                 }
@@ -127,6 +166,7 @@ class DebtDetailsActivity : AppCompatActivity() {
                 val alertDialog = builder.create()
                 alertDialog.show()
             }
+            /*
             R.id.itemUnlockDebt->{
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(getString(R.string.abrir_deuda))
@@ -143,24 +183,28 @@ class DebtDetailsActivity : AppCompatActivity() {
                 alertDialog.show()
 
             }
-
+            */
 
         }
         return super.onOptionsItemSelected(item)
     }
 
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val lockDebtItem = menu?.findItem(R.id.itemLockDebt)
-        val unlockDebtItem = menu?.findItem(R.id.itemUnlockDebt)
+        val deleteDebtItem = menu?.findItem(R.id.itemDelete)
+        val editDeleteDebtItem = menu?.findItem(R.id.itemEditDelete)
 
         val deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         deudaViewModel.getDeuda(debtID).observe(this, Observer {
             if(it?.estado == EstatusDeuda.PAGADA){
                 lockDebtItem?.isVisible = false
-                unlockDebtItem?.isVisible = true
+                deleteDebtItem?.isVisible = true
+                editDeleteDebtItem?.isVisible = false
             }else{
                 lockDebtItem?.isVisible = true
-                unlockDebtItem?.isVisible = false
+                deleteDebtItem?.isVisible = false
+                editDeleteDebtItem?.isVisible = true
             }
         })
 
@@ -181,8 +225,7 @@ class DebtDetailsActivity : AppCompatActivity() {
     private fun deleteDebt(){
         val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
         detailsFragment.deleteDebt()
-        Toast.makeText(this,getString(R.string.deuda_eliminada), Toast.LENGTH_SHORT).show()
-        finish()
+
     }
 
 

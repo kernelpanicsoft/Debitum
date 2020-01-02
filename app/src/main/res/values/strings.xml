@@ -20,6 +20,9 @@
         <item>Editar</item>
         <item>Eliminar</item>
     </array>
+    <array name="solo_eliminar">
+        <item>Eliminar</item>
+    </array>
     <string name="app_name">Debitum</string>
     <string name="anadir_nueva_deuda">Añadir nueva deuda</string>
     <string name="titulo_de_la_deuda">Titulo de la deuda</string>
@@ -68,7 +71,7 @@
     <string name="continuar_pagando">Continuar pagando</string>
     <string name="pago_ingresado_liquida_superando_monto_inicial">El pago ingresado liquidaría la deuda superando el monto inicial registrado, el cual se actualizará para mantener la congruencia de los datos  ¿Desea cerrar la deuda o continuar pagando?</string>
     <string name="pago_ingresado_liquida_deuda">El pago ingresado liquidaría la deuda original registrada, ¿Desea cerrarla o continuar pagando?</string>
-    <string name="cerrar_la_deuda_dialog">Cerrar la deuda toma los valores actuales de la deuda y cambia su estado a pagada, no será posible registrar pagos a menos de que vuelva a abrir la deuda</string>
+    <string name="cerrar_la_deuda_dialog">Cerrar la deuda toma los valores actuales de la misma y cambia su estado a pagada, no será posible registrar pagos, editarla, ni figurará más en las estadísticas.</string>
     <string name="abrir_la_deuda_dialog">Abrir la deuda permitirá seguir realizando pagos a esta así ya se haya cubierto el monto inicial ¿Deseá abrir la deuda?</string>
 
 
