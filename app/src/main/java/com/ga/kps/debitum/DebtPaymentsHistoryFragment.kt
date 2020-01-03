@@ -13,6 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import helpcodes.EstatusDeuda
 import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.PagoViewModel

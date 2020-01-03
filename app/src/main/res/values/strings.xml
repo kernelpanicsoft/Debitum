@@ -178,6 +178,7 @@
     <string name="leer_politica_privacidad_y_terminos">Leer la política privacidad y términos de uso de la aplicación.</string>
     <string name="calificanos_en_play_store">Califícanos en la Play Store</string>
     <string name="tu_opinion_es_importante_para_nosotros">Tu opinión es muy importante para nosotros.</string>
+    <string name="no_es_posible_eliminar_pago">No es posible eliminar pagos de deudas cerradas.</string>
 
 
     <string-array name="notificationAnticipationValues">
