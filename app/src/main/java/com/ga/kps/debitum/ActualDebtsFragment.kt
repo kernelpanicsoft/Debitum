@@ -10,17 +10,25 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import helpcodes.EstatusDeuda
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import room.components.viewModels.DeudaViewModel
 
 class ActualDebtsFragment: Fragment() {
     lateinit var deudasViewModel : DeudaViewModel
     lateinit var RV : RecyclerView
+    lateinit var mAdView : AdView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_actual_debts, container, false)
         RV = v.findViewById(R.id.RecViewDeudasActuales)
         RV.setHasFixedSize(true)
+
+        MobileAds.initialize(context) {}
+        mAdView = v.findViewById(R.id.adViewActualDebts)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         return v
     }

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +14,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.github.lzyzsd.circleprogress.ArcProgress
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import helpcodes.EstatusDeuda
 import helpcodes.EstatusDeuda.ACTIVA
 import helpcodes.ANADIR_PAGO_DEUDA
 import helpcodes.EstatusDeuda.PAGADA
@@ -29,7 +30,7 @@ class DebtDetailsFragment: Fragment() {
     lateinit var RV: RecyclerView
     lateinit var deudasViewModel: DeudaViewModel
     lateinit var deudaActualLive : LiveData<Deuda>
-
+    lateinit var mAdView : AdView
     var simboloMoneda = "$"
 
     var tituloDeudaTextView: TextView? = null
@@ -45,6 +46,9 @@ class DebtDetailsFragment: Fragment() {
         super.onCreate(savedInstanceState)
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         simboloMoneda = prefs.getString("moneySign","$")
+
+
+
     }
 
 
@@ -60,6 +64,11 @@ class DebtDetailsFragment: Fragment() {
         tipoDeudaTextView = v.findViewById(R.id.tipoDeudaTV)
         arcoProgresso = v.findViewById(R.id.arc_progress)
         notaDeudaTextView = v.findViewById(R.id.notaDeudaTV)
+
+        MobileAds.initialize(context) {}
+        mAdView = v.findViewById(R.id.adViewDebtDetails)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val fab = (activity as DebtDetailsActivity).findViewById<FloatingActionButton>(R.id.anadirPagoDeudadFAB)
         fab.setOnClickListener {

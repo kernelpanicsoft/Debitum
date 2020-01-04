@@ -48,7 +48,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
         title = getString(R.string.detalles_de_recordatorio)
 
         MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.adViewReminder)
+        mAdView = findViewById(R.id.adViewDebtDetails)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
 

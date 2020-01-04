@@ -145,7 +145,7 @@
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/debtAmmountCV">
+            app:layout_constraintTop_toBottomOf="@+id/adViewDebtDetails">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -272,8 +272,18 @@
         </androidx.cardview.widget.CardView>
 
 
-
-
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewDebtDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/debtAmmountCV" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

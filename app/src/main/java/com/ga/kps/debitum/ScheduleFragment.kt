@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.fragment_schedule.*
@@ -27,6 +30,8 @@ class ScheduleFragment : Fragment() {
 
     lateinit var RV : RecyclerView
     lateinit var recordatorioViewModel : RecordatorioPagoViewModel
+    lateinit var mAdView : AdView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,11 @@ class ScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_schedule, container, false)
         //val fab = v.findViewById<FloatingActionButton>(R.id.addReminderFAB)
+
+        MobileAds.initialize(context) {}
+        mAdView = v.findViewById(R.id.adViewRemindersList)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         RV = v.findViewById(R.id.RecViewRecordatorios)
         RV.setHasFixedSize(true)

@@ -14,6 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import helpcodes.EstatusDeuda
 import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
@@ -25,12 +28,17 @@ class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var cuentaViewModel: CuentaViewModel
     lateinit var RV: RecyclerView
     var simboloMoneda = "$"
-
+    lateinit var mAdView : AdView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_debt_payments_history, container,false)
         RV = v.findViewById(R.id.RecViewHistorialDePagos)
         RV.setHasFixedSize(true)
+
+        MobileAds.initialize(context) {}
+        mAdView = v.findViewById(R.id.adViewDebtPaymentList)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         simboloMoneda = prefs.getString("moneySign","$")
