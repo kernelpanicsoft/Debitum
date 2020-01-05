@@ -1,5 +1,6 @@
 package com.ga.kps.debitum
 
+import android.content.ComponentCallbacks
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -42,12 +43,12 @@ class DebtDetailsFragment: Fragment() {
     var arcoProgresso: ArcProgress? = null
     var notaDeudaTextView: TextView? = null
 
+    internal var callback: DebtStatusExposer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         simboloMoneda = prefs.getString("moneySign","$")
-
-
 
     }
 
@@ -75,6 +76,7 @@ class DebtDetailsFragment: Fragment() {
             val nav = Intent(context, AddDebtPaymentActivity::class.java)
             nav.putExtra("DEBT_ID", (activity as DebtDetailsActivity).debtID)
             startActivityForResult(nav, ANADIR_PAGO_DEUDA)
+
         }
 
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
@@ -82,6 +84,8 @@ class DebtDetailsFragment: Fragment() {
         deudaActualLive = deudasViewModel.getDeuda((activity as DebtDetailsActivity).debtID)
         deudaActualLive.observe(this, Observer {
             populateDebtUI(it)
+
+            callback?.getDebtStatus(it.estado)
 
             if(it.estado == PAGADA){
                 fab.hide()
@@ -94,8 +98,9 @@ class DebtDetailsFragment: Fragment() {
         return v
     }
 
+
     fun populateDebtUI(debt: Deuda?){
-        tituloDeudaTextView?.text = debt?.titulo.toString()
+        tituloDeudaTextView?.text = debt?.titulo.toString() + "  " + debt?.estado
         fechaDeudaTextView?.text = debt?.fecha_adquision
         deudaTotalTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.monto)
         montoPagadoTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.pagado)
@@ -106,23 +111,6 @@ class DebtDetailsFragment: Fragment() {
         val tipoDeudaArray = context?.resources?.getStringArray(R.array.tipo_deuda)
         tipoDeudaTextView?.text =  tipoDeudaArray?.get(debt.tipo)
 
-
-        /*
-        if((debt.pagado >= debt.monto) && debt.estado == EstatusDeuda.ACTIVA){
-            val builder = AlertDialog.Builder(context!!)
-            val negativeButton = builder.setTitle(getString(R.string.deuda_pagado))
-                .setMessage(getString(R.string.deuda_ha_sido_pagada))
-                .setPositiveButton(getString(R.string.cambiar_estado)) { _, _ ->
-                    deudasViewModel.updateEstatusDeuda((activity as DebtDetailsActivity).debtID, EstatusDeuda.PAGADA)
-                }
-                .setNegativeButton(getString(R.string.seguir_pagando)) { _, _ ->
-                    deudasViewModel.updateEstatusDeuda((activity as DebtDetailsActivity).debtID, EstatusDeuda.SEGUIR)
-                }
-            val dialog = builder.create()
-            dialog.show()
-        }
-
-         */
 
     }
 
@@ -158,6 +146,16 @@ class DebtDetailsFragment: Fragment() {
 
         }
     }
+
+    fun setDebtStatusExporserListener(callbacks: DebtStatusExposer){
+        callback = callbacks
+    }
+
+    interface DebtStatusExposer{
+        fun getDebtStatus(debtStatus: Int?)
+    }
+
+
 
 
 }

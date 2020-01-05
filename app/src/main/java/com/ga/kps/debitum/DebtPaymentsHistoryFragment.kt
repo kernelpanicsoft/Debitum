@@ -29,6 +29,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var RV: RecyclerView
     var simboloMoneda = "$"
     lateinit var mAdView : AdView
+    var debtStatus: Int = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         val v = inflater.inflate(R.layout.fragment_debt_payments_history, container,false)
@@ -81,19 +82,24 @@ class DebtPaymentsHistoryFragment: Fragment() {
             paymentDetails.setPositiveButton(getString(R.string.entendido)){ _, _->
 
             }
-            paymentDetails.setNeutralButton(getString(R.string.eliminar)){ _, _ ->
-                val builder = AlertDialog.Builder(context!!)
-                builder.setTitle(getString(R.string.esta_seguro_eliminar_pago))
-                builder.setMessage(getString(R.string.eliminar_pago_es_irreversible))
-                builder.setPositiveButton(getString(R.string.eliminar)){_, _ ->
-                    actualizaDeuda((activity as DebtDetailsActivity).debtID, -selectPayment.monto)
-                    actualizaDeudaTotal(-selectPayment.monto)
-                    pagosViewModel.delete(selectPayment)
+            if(debtStatus != EstatusDeuda.PAGADA) {
+                paymentDetails.setNeutralButton(getString(R.string.eliminar)) { _, _ ->
+                    val builder = AlertDialog.Builder(context!!)
+                    builder.setTitle(getString(R.string.esta_seguro_eliminar_pago))
+                    builder.setMessage(getString(R.string.eliminar_pago_es_irreversible))
+                    builder.setPositiveButton(getString(R.string.eliminar)) { _, _ ->
+                        actualizaDeuda(
+                            (activity as DebtDetailsActivity).debtID,
+                            -selectPayment.monto
+                        )
+                        actualizaDeudaTotal(-selectPayment.monto)
+                        pagosViewModel.delete(selectPayment)
+                    }
+                    builder.setNegativeButton(getString(R.string.cancelar)) { _, _ ->
+                    }
+                    val innerDialog = builder.create()
+                    innerDialog.show()
                 }
-                builder.setNegativeButton(getString(R.string.cancelar)){ _, _ ->
-                }
-                val innerDialog = builder.create()
-                innerDialog.show()
             }
             val paymentDetailsDialog = paymentDetails.create()
             paymentDetailsDialog.show()

@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_debt_details.*
 import model.Deuda
 import room.components.viewModels.DeudaViewModel
 
-class DebtDetailsActivity : AppCompatActivity() {
+class DebtDetailsActivity : AppCompatActivity(), DebtDetailsFragment.DebtStatusExposer {
     var debtID: Int = -1
     private lateinit var adapter : ViewPagerAdapter
     private lateinit var deudaViewModel : DeudaViewModel
@@ -75,6 +75,7 @@ class DebtDetailsActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence{
             return mFragmentTitleList[position]
         }
+
 
     }
 
@@ -226,6 +227,18 @@ class DebtDetailsActivity : AppCompatActivity() {
         val detailsFragment = adapter.getItem(0) as DebtDetailsFragment
         detailsFragment.deleteDebt()
 
+
+    }
+
+    override fun onAttachFragment(fragment: Fragment) {
+        if(fragment is DebtDetailsFragment){
+            fragment.setDebtStatusExporserListener(this)
+        }
+    }
+
+    override fun getDebtStatus(status: Int?) {
+        val paymentListFragment = adapter.getItem(1) as DebtPaymentsHistoryFragment
+        paymentListFragment.debtStatus = status!!
     }
 
 
