@@ -100,7 +100,7 @@ class DebtDetailsFragment: Fragment() {
 
 
     fun populateDebtUI(debt: Deuda?){
-        tituloDeudaTextView?.text = debt?.titulo.toString() + "  " + debt?.estado
+        tituloDeudaTextView?.text = debt?.titulo.toString()
         fechaDeudaTextView?.text = debt?.fecha_adquision
         deudaTotalTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.monto)
         montoPagadoTextView?.text = context?.getString(R.string.simboloMoneda,simboloMoneda,debt?.pagado)

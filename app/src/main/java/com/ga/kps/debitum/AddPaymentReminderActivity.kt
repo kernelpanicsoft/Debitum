@@ -150,7 +150,7 @@ class AddPaymentReminderActivity : AppCompatActivity() {
 
     private fun populateDebtCard(debtID : Int?){
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val simboloMoneda = prefs.getString("moneySign","NA")
+        val simboloMoneda = prefs.getString("moneySign","$")
         cardView.visibility = View.VISIBLE
 
         debtViewModel.getDeuda(debtID!!).observe(this, Observer{ deudaActual ->
