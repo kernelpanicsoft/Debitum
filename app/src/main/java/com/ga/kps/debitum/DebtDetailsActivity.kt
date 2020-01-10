@@ -96,7 +96,9 @@ class DebtDetailsActivity : AppCompatActivity(), DebtDetailsFragment.DebtStatusE
                 builder.setItems(R.array.editar){ _, which ->
                     when(which){
                         0 ->{
+                           // val nav = Intent(this, EditDebtActivity::class.java)
                             val nav = Intent(this, AddDebtActivity::class.java)
+
                             nav.putExtra("ID", debtID)
                             startActivity(nav)
                         }

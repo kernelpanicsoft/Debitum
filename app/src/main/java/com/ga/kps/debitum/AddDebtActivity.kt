@@ -91,7 +91,6 @@ class AddDebtActivity : AppCompatActivity() {
                     deuda.tipo = tipo
                     deuda.monto = montoPagoET.text.toString().toFloat()
                     deuda.fecha_adquision = fechaPagoBT.text.toString()
-                    deuda.pagado = 0f
                     deuda.estado = EstatusDeuda.ACTIVA
                     deuda.nota = notaPagoET.text.toString()
                     deuda.cuenta_id = 1
@@ -134,6 +133,7 @@ class AddDebtActivity : AppCompatActivity() {
             fechaPagoBT.setText(it.fecha_adquision)
 
             deuda.id = it.id
+            deuda.pagado = it.pagado
 
 
         })

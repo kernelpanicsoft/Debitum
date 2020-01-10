@@ -179,6 +179,8 @@
     <string name="calificanos_en_play_store">Califícanos en la Play Store</string>
     <string name="tu_opinion_es_importante_para_nosotros">Tu opinión es muy importante para nosotros.</string>
     <string name="no_es_posible_eliminar_pago">No es posible eliminar pagos de deudas cerradas.</string>
+    <string name="editar_deuda">Editar deuda</string>
+    <string name="monto_pagado">Monto pagado:</string>
 
 
     <string-array name="notificationAnticipationValues">
@@ -186,5 +188,6 @@
         <item>1</item>
         <item>5</item>
         <item>24</item>
-    </string-array>>
+    </string-array>
+    >
 </resources>
