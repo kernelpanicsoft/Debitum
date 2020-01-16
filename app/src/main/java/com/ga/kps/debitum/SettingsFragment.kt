@@ -38,6 +38,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         }
 
+        val rateUSPreference = findPreference<PreferenceScreen>("calificar_play_store")
+        rateUSPreference?.setOnPreferenceClickListener {
+            val uris = Uri.parse("https://play.google.com/store/apps/details?id=com.ga.kps.debitum")
+            val intent = Intent(Intent.ACTION_VIEW, uris)
+            val b = Bundle()
+            b.putBoolean("new_window",true)
+            intent.putExtras(b)
+            context?.startActivity(intent)
+            false
+        }
+
     }
 
 }

@@ -76,7 +76,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Dias restantes para pago:"
+            android:text="@string/d_as_hasta_pr_ximo_pago"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/diasRetantesTV"
             app:layout_constraintHorizontal_bias="0.0"

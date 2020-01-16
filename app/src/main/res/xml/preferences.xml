@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="Detalles de deudas"
+        android:title="@string/detalles_de_deudas"
         android:key="pref_debts"
         >
         <ListPreference

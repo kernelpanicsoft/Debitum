@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="tipo_deuda">
+        <item>Tarjetas de crédito</item>
+        <item>Salud</item>
+        <item>Automóvil</item>
+        <item>Educación</item>
+        <item>Ropa y calzado</item>
+        <item>Gasolina</item>
+        <item>Entretenimiento</item>
+        <item>Comestibles</item>
+        <item>Hipotecas</item>
+        <item>Prestamos</item>
+        <item>Electródomesticos</item>
+        <item>Seguros</item>
+        <item>Viajes</item>
+        <item>Restaurantes</item>
+        <item>Mantenimiento</item>
+    </array>
+    <array name="editar">
+        <item>Editar</item>
+        <item>Eliminar</item>
+    </array>
+    <array name="solo_eliminar">
+        <item>Eliminar</item>
+    </array>
+    <string name="app_name">Debitum</string>
+    <string name="anadir_nueva_deuda">Añadir nueva deuda</string>
+    <string name="titulo_de_la_deuda">Titulo de la deuda</string>
+    <string name="tipo_de_deuda">Tipo de deuda:</string>
+    <string name="monto">Monto:</string>
+    <string name="nota">Nota:</string>
+    <string name="fecha_de_adquisicion">Fecha de adquisición:</string>
+    <string name="detalles_de_la_deuda">Detalles de la deuda</string>
+    <string name="resumen">Resumen</string>
+    <string name="historial_de_pagos">Historial de pagos</string>
+    <string name="deuda_actual">Deuda actual:</string>
+    <string name="pagado">Pagado:</string>
+    <string name="restante">Restante:</string>
+    <string name="de">de</string>
+    <string name="actuales">Actuales</string>
+    <string name="pasadas">Pasadas</string>
+    <string name="simboloPorcentaje">%1$d%%</string>
+    <string name="simboloMoneda">%1$s%2$.2f</string>
+    <string name="fecha_de_pago">Fecha de pago:</string>
+    <string name="anadir_pago">Añadir pago</string>
+    <string name="editar">Editar</string>
+    <string name="pagado_arc">PAGADO</string>
+    <string name="detalles_de_pago">Detalles de pago</string>
+    <string name="entendido">Entendido</string>
+    <string name="titulo_y_monto_requerido">Es necesario especificar el titulo y monto para guardar una nueva deuda</string>
+    <string name="monto_mayor_cero">Es necesario que el monto sea mayor a cero para guardar una nueva deuda</string>
+    <string name="el_monto_del_pago">El monto del pago no puede ser cero</string>
+    <string name="especifique_monto_pago">Por favor especifique una cantidad para el monto del pago</string>
+    <string name="pago_registrado">Pago registrado correctamente</string>
+    <string name="eliminar_deuda">Eliminar deuda</string>
+    <string name="esta_seguro_eliminar_deuda">¿Está seguro de que desea eliminar la deuda?, Al eliminarla puede que la deuda total cambie, esta acción es irreversible.</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="seguir_pagando">Seguir Pagando</string>
+    <string name="cambiar_estado">Cambiar estado</string>
+    <string name="deuda_pagado">Deuda pagada</string>
+    <string name="deuda_eliminada">Deuda eliminada correctamente</string>
+    <string name="deuda_ha_sido_pagada">La deuda ha sido pagada en su totalidad, ¿Desea cambiar su estado a "Pagada"?</string>
+    <string name="opciones_de_deuda">Opciones de deuda</string>
+    <string name="modificar">Modificar</string>
+    <string name="cerrar_deuda">Cerrar deuda</string>
+    <string name="abrir_deuda">Abrir deuda</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="abrir">Abrir</string>
+    <string name="liquidacion_de_la_deuda">Liquidación de la deuda</string>
+    <string name="continuar_pagando">Continuar pagando</string>
+    <string name="pago_ingresado_liquida_superando_monto_inicial">El pago ingresado liquidaría la deuda superando el monto inicial registrado, el cual se actualizará para mantener la congruencia de los datos  ¿Desea cerrar la deuda o continuar pagando?</string>
+    <string name="pago_ingresado_liquida_deuda">El pago ingresado liquidaría la deuda original registrada, ¿Desea cerrarla o continuar pagando?</string>
+    <string name="cerrar_la_deuda_dialog">Cerrar la deuda toma los valores actuales de la misma y cambia su estado a pagada, no será posible registrar pagos, editarla, ni figurará más en las estadísticas.</string>
+    <string name="abrir_la_deuda_dialog">Abrir la deuda permitirá seguir realizando pagos a esta así ya se haya cubierto el monto inicial ¿Deseá abrir la deuda?</string>
+
+
+    <string name="deudas">Deudas</string>
+
+    <string name="gasto_mensual">Gasto mensual:</string>
+    <string name="a_adir_nuevo_recordatorio_de_pago">Añadir nuevo recordatorio de pago</string>
+    <string name="anadir_recordatorio_de_pago">Añanadir recordatorio de pago</string>
+    <string name="deuda_asociada">Deuda asociada</string>
+    <string name="fecha_de_recordatorio">Fecha de recordatorio</string>
+    <string name="elegir_deuda">Elegir deuda</string>
+    <string name="periodicidad">Periodicidad:</string>
+    <string name="semanal">Semanal</string>
+    <string name="mensual">Mensual</string>
+    <string name="dia">Día:</string>
+    <string name="detalles_de_recordatorio">Detalles de recordatorio</string>
+    <string name="periodo_de_pago">Periodo de pago:</string>
+    <string name="pr_ximo_pago">Próximo pago:</string>
+    <string name="d_as_hasta_pr_ximo_pago">Días hasta próximo pago:</string>
+
+    <string-array name="daysOfMonth">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>Último día del mes</item>
+    </string-array>
+
+    <string name="ultimo_dia_mes">Último día del mes</string>
+    <string name="hoy">Hoy</string>
+    <string name="configuracion">Configuración</string>
+
+    <array name="daysOfWeek">
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+    </array>
+
+    <array name="moneySign">
+        <item>$</item>
+        <item>€</item>
+        <item>¥</item>
+        <item>£</item>
+        <item>元</item>
+        <item>₩</item>
+        <item>₹</item>
+        <item>₽</item>
+        <item>₪</item>
+        <item>﷼</item>
+    </array>
+
+    <string name="notificacion_antificacion">Sin anticipación</string>
+    <array name="notificationAnticipation">
+        <item>Sin anticipación</item>
+        <item>1 hora</item>
+        <item>5 horas</item>
+        <item>1 día</item>
+    </array>
+    <string name="continuidad_notificacion">Sin anticipación</string>
+    <string name="eliminar_recordatorio">Eliminar recordatorio</string>
+    <string name="esta_seguro_eliminar_recordatorio">¿Está seguro de que desea eliminar el recordatorio?</string>
+    <string name="opciones_recordatorio">Opciones de recordatorio</string>
+    <string name="detalles_de_deuda_global">Caracteristicas de la deuda</string>
+    <string name="es_necesario_indicar_monto_recordatorio">Es necesario indicar un monto distinto de cero para guardar el recordatorio.</string>
+    <string name="es_necesario_asociar_deuda_recordatori">Es necesario asociar una deuda para poder registrar el recordatorio.</string>
+    <string name="esta_seguro_eliminar_pago">¿Está seguro de eliminar este pago?</string>
+    <string name="eliminar_pago_es_irreversible">Eliminar un pago es un proceso irreversible que incrementa la deuda</string>
+    <string name="deudas_asociadas">Deudas asociadas:</string>
+    <string name="detalles">Detalles:</string>
+    <string name="acerca_de">Acerca de:</string>
+    <string name="version">Versión</string>
+    <string name="politica_de_privacidad">Política de Privacidad</string>
+    <string name="leer_politica_privacidad_y_terminos">Leer la política privacidad y términos de uso de la aplicación.</string>
+    <string name="calificanos_en_play_store">Califícanos en la Play Store</string>
+    <string name="tu_opinion_es_importante_para_nosotros">Tu opinión es muy importante para nosotros.</string>
+    <string name="no_es_posible_eliminar_pago">No es posible eliminar pagos de deudas cerradas.</string>
+    <string name="editar_deuda">Editar deuda</string>
+    <string name="monto_pagado">Monto pagado:</string>
+
+
+    <string-array name="notificationAnticipationValues">
+        <item>0</item>
+        <item>1</item>
+        <item>5</item>
+        <item>24</item>
+    </string-array>
+    <string name="deuda_total">Deuda total:</string>
+    <string name="detalles_de_deudas">Detalles de deudas</string>
+    <string name="estadisticas">Estadísticas</string>
+    <string name="agenda">Agenda</string>
+
+</resources>

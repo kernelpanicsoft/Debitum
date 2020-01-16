@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="tipo_deuda">
+        <item>Credit cards</item>
+        <item>Health</item>
+        <item>Car</item>
+        <item>Education</item>
+        <item>Clothes and shoes</item>
+        <item>Gas</item>
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Mortages</item>
+        <item>Loans</item>
+        <item>Home appliances</item>
+        <item>Insurances</item>
+        <item>Travels</item>
+        <item>Restaurants</item>
+        <item>Maintenance</item>
+    </array>
+    <array name="editar">
+        <item>Edit</item>
+        <item>Delete</item>
+    </array>
+    <array name="solo_eliminar">
+        <item>Delete</item>
+    </array>
+    <string name="app_name">Debitum</string>
+    <string name="anadir_nueva_deuda">Add new debt</string>
+    <string name="titulo_de_la_deuda">Debt title</string>
+    <string name="tipo_de_deuda">Debt type:</string>
+    <string name="monto">Amount:</string>
+    <string name="nota">Note:</string>
+    <string name="fecha_de_adquisicion">Adquisition date:</string>
+    <string name="detalles_de_la_deuda">Debt details</string>
+    <string name="resumen">Summary</string>
+    <string name="historial_de_pagos">Payment history</string>
+    <string name="deuda_actual">Actual debt:</string>
+    <string name="pagado">Paid:</string>
+    <string name="restante">Remaining:</string>
+    <string name="de">of</string>
+    <string name="actuales">Actual</string>
+    <string name="pasadas">Pass</string>
+    <string name="simboloPorcentaje">%1$d%%</string>
+    <string name="simboloMoneda">%1$s%2$.2f</string>
+    <string name="fecha_de_pago">Pay date:</string>
+    <string name="anadir_pago">Add payment</string>
+    <string name="editar">Edit</string>
+    <string name="pagado_arc">PAID</string>
+    <string name="detalles_de_pago">Payment details</string>
+    <string name="entendido">Agreed</string>
+    <string name="titulo_y_monto_requerido">A title and the amount are needed to save a new debt</string>
+    <string name="monto_mayor_cero">The amount must be more than 0 to save a new debt</string>
+    <string name="el_monto_del_pago">The payment amount cannot be zero </string>
+    <string name="especifique_monto_pago">Please specify the amount for the payment</string>
+    <string name="pago_registrado">Payment saved successfully </string>
+    <string name="eliminar_deuda">Delete debt</string>
+    <string name="esta_seguro_eliminar_deuda">Are you sure you want to eliminate the debt? By eliminating it, the total debt may change, this action is irreversible..</string>
+    <string name="eliminar">Delete</string>
+    <string name="cancelar">Cancel</string>
+    <string name="seguir_pagando">Keep paying</string>
+    <string name="cambiar_estado">Change state</string>
+    <string name="deuda_pagado">Debt paid</string>
+    <string name="deuda_eliminada">Debt deleted successfully</string>
+    <string name="deuda_ha_sido_pagada">The debt has been paid fully, do you want to change your status to Paid?</string>
+    <string name="opciones_de_deuda">Debt options</string>
+    <string name="modificar">Modify</string>
+    <string name="cerrar_deuda">Close debt</string>
+    <string name="abrir_deuda">Open debt</string>
+    <string name="cerrar">Close</string>
+    <string name="abrir">Open</string>
+    <string name="liquidacion_de_la_deuda">Debt settlement</string>
+    <string name="continuar_pagando">Keep paying</string>
+    <string name="pago_ingresado_liquida_superando_monto_inicial">The payment entered would settle the debt exceeding the initial amount recorded, which will be updated to maintain the consistency of the data. Do you want to close the debt or continue paying?</string>
+    <string name="pago_ingresado_liquida_deuda">The payment entered would settle the original debt registered, do you want to close it or continue paying?</string>
+    <string name="cerrar_la_deuda_dialog">Closing the debt takes the actual values and changes their state to paid, it is not possible</string>
+    <string name="abrir_la_deuda_dialog">Opening the debt allows you keep making payments to it, even if the initial amount has been covered, do you want open the debt?</string>
+
+
+    <string name="deudas">Debts</string>
+
+    <string name="gasto_mensual">Monthly expenditure:</string>
+    <string name="a_adir_nuevo_recordatorio_de_pago">Add new payment reminder</string>
+    <string name="anadir_recordatorio_de_pago">Add payment reminder</string>
+    <string name="deuda_asociada">Associated debt</string>
+    <string name="fecha_de_recordatorio">Reminder date:</string>
+    <string name="elegir_deuda">Choose debt</string>
+    <string name="periodicidad">Periodicity:</string>
+    <string name="semanal">Weekly</string>
+    <string name="mensual">Monthly</string>
+    <string name="dia">Day:</string>
+    <string name="detalles_de_recordatorio">Reminder details</string>
+    <string name="periodo_de_pago">Payment period:</string>
+    <string name="pr_ximo_pago">Next payment:</string>
+    <string name="d_as_hasta_pr_ximo_pago">Days until next payment:</string>
+
+    <string-array name="daysOfMonth">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>Last day of month</item>
+    </string-array>
+
+    <string name="ultimo_dia_mes">Last day of month</string>
+    <string name="hoy">Today</string>
+    <string name="configuracion">Settings</string>
+
+    <array name="daysOfWeek">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </array>
+
+    <array name="moneySign">
+        <item>$</item>
+        <item>€</item>
+        <item>¥</item>
+        <item>£</item>
+        <item>元</item>
+        <item>₩</item>
+        <item>₹</item>
+        <item>₽</item>
+        <item>₪</item>
+        <item>﷼</item>
+    </array>
+
+    <string name="notificacion_antificacion">No anticipation</string>
+    <array name="notificationAnticipation">
+        <item>No anticipation</item>
+        <item>1 hour</item>
+        <item>5 hour</item>
+        <item>1 day</item>
+    </array>
+    <string name="continuidad_notificacion">No anticipation</string>
+    <string name="eliminar_recordatorio">Delete reminder</string>
+    <string name="esta_seguro_eliminar_recordatorio">Are you sure that you want to delete this reminder?</string>
+    <string name="opciones_recordatorio">Reminder options</string>
+    <string name="detalles_de_deuda_global">Debt details</string>
+    <string name="es_necesario_indicar_monto_recordatorio">It is necessary to indicate a non-zero amount to save the reminder.</string>
+    <string name="es_necesario_asociar_deuda_recordatori">It is necessary to associate a debt to be able to record the reminder.</string>
+    <string name="esta_seguro_eliminar_pago">Are you sure that you want to delete this payment?</string>
+    <string name="eliminar_pago_es_irreversible">Deleting a payment is an irreversible process that increments the debt</string>
+    <string name="deudas_asociadas">Related debts:</string>
+    <string name="detalles">Details:</string>
+    <string name="acerca_de">About:</string>
+    <string name="version">Version</string>
+    <string name="politica_de_privacidad">Policy of privacy</string>
+    <string name="leer_politica_privacidad_y_terminos">Read the policy of privacy and terms of service.</string>
+    <string name="calificanos_en_play_store">Rate us on the Play Store</string>
+    <string name="tu_opinion_es_importante_para_nosotros">Your opinions it’s important to us. </string>
+    <string name="no_es_posible_eliminar_pago">It is not possible delete payments once that the debt has been closed.</string>
+    <string name="editar_deuda">Edit debt</string>
+    <string name="monto_pagado">Paid amount:</string>
+
+
+    <string-array name="notificationAnticipationValues">
+        <item>0</item>
+        <item>1</item>
+        <item>5</item>
+        <item>24</item>
+    </string-array>
+    <string name="deuda_total">Total debt:</string>
+    <string name="detalles_de_deudas">Debts details</string>
+    <string name="estadisticas">Stats</string>
+    <string name="agenda">Schedule</string>
+
+</resources>

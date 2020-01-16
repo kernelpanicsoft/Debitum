@@ -71,7 +71,7 @@
     <string name="continuar_pagando">Continuar pagando</string>
     <string name="pago_ingresado_liquida_superando_monto_inicial">El pago ingresado liquidaría la deuda superando el monto inicial registrado, el cual se actualizará para mantener la congruencia de los datos  ¿Desea cerrar la deuda o continuar pagando?</string>
     <string name="pago_ingresado_liquida_deuda">El pago ingresado liquidaría la deuda original registrada, ¿Desea cerrarla o continuar pagando?</string>
-    <string name="cerrar_la_deuda_dialog">Cerrar la deuda toma los valores actuales de la misma y cambia su estado a pagada, no será posible registrar pagos, editarla, ni figurará más en las estadísticas.</string>
+    <string name="cerrar_la_deuda_dialog">Cerrar la deuda toma los valores actuales de la misma y cambia su estado a pagada, it will not be possible to record payments, edit it, or appear more in the statistics.</string>
     <string name="abrir_la_deuda_dialog">Abrir la deuda permitirá seguir realizando pagos a esta así ya se haya cubierto el monto inicial ¿Deseá abrir la deuda?</string>
 
 
@@ -181,6 +181,10 @@
     <string name="no_es_posible_eliminar_pago">No es posible eliminar pagos de deudas cerradas.</string>
     <string name="editar_deuda">Editar deuda</string>
     <string name="monto_pagado">Monto pagado:</string>
+    <string name="deuda_total">Deuda total:</string>
+    <string name="detalles_de_deudas">Detalles de deudas</string>
+    <string name="estadisticas">Estadísticas</string>
+    <string name="agenda">Agenda</string>
 
 
     <string-array name="notificationAnticipationValues">
@@ -189,5 +193,5 @@
         <item>5</item>
         <item>24</item>
     </string-array>
-    >
+
 </resources>

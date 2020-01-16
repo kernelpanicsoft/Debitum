@@ -8,12 +8,12 @@
         />
     <item
         android:id="@+id/calendarItem"
-        android:title="Agenda"
+        android:title="@string/agenda"
         android:icon="@drawable/ic_calendar_multiselect"
         />
     <item
         android:id="@+id/statsItem"
-        android:title="Estadisticas"
+        android:title="@string/estadisticas"
         android:icon="@drawable/ic_chart_areaspline"
         />
 
