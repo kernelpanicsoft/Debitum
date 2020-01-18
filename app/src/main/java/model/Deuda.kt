@@ -2,10 +2,13 @@ package model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 
-@Entity(foreignKeys = arrayOf(
+@Entity(
+    indices = arrayOf(Index("cuenta_id")),
+    foreignKeys = arrayOf(
     ForeignKey(entity = Cuenta::class,
     parentColumns = arrayOf("id"),
     childColumns = arrayOf("cuenta_id"),

@@ -2,10 +2,12 @@ package model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(foreignKeys = arrayOf(
-    ForeignKey(entity = Deuda::class,
+@Entity(
+    indices = arrayOf(Index("deudaID")),
+    foreignKeys = arrayOf(ForeignKey(entity = Deuda::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("deudaID"),
         onDelete = ForeignKey.CASCADE)
