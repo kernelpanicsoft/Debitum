@@ -15,11 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import room.components.viewModels.DeudaViewModel
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
+
 class DebtsFragment : Fragment() {
     lateinit var deudaViewModel: DeudaViewModel
 
@@ -28,7 +24,7 @@ class DebtsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        MobileAds.initialize(context){}
+
 
     }
 

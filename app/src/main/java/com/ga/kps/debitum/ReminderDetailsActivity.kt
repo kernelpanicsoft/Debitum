@@ -11,8 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
+
 import helpcodes.MENSUAL
 import helpcodes.SEMANAL
 import kotlinx.android.synthetic.main.activity_reminder_details.*
@@ -24,7 +23,7 @@ import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import com.google.android.gms.ads.MobileAds;
+
 
 
 class ReminderDetailsActivity : AppCompatActivity() {
@@ -36,7 +35,7 @@ class ReminderDetailsActivity : AppCompatActivity() {
     private val calendario: Calendar = Calendar.getInstance()
     private val calendarioRecordatorio: Calendar = Calendar.getInstance()
     private val sdf: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT)
-    lateinit var mAdView : AdView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,13 +46,9 @@ class ReminderDetailsActivity : AppCompatActivity() {
         ab?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detalles_de_recordatorio)
 
-        MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.adViewDebtDetails)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        simboloMoneda = prefs.getString("moneySign","$")
+        simboloMoneda = prefs.getString("moneySign","$")!!
 
         debtViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         reminderViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)

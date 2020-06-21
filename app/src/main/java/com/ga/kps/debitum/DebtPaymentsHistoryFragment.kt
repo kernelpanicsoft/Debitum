@@ -14,9 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+
 import helpcodes.EstatusDeuda
 import room.components.viewModels.CuentaViewModel
 import room.components.viewModels.DeudaViewModel
@@ -28,7 +26,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
     lateinit var cuentaViewModel: CuentaViewModel
     lateinit var RV: RecyclerView
     var simboloMoneda = "$"
-    lateinit var mAdView : AdView
+
     var debtStatus: Int = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
@@ -36,13 +34,10 @@ class DebtPaymentsHistoryFragment: Fragment() {
         RV = v.findViewById(R.id.RecViewHistorialDePagos)
         RV.setHasFixedSize(true)
 
-        MobileAds.initialize(context) {}
-        mAdView = v.findViewById(R.id.adViewDebtPaymentList)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        simboloMoneda = prefs.getString("moneySign","$")
+        simboloMoneda = prefs.getString("moneySign","$")!!
 
         val mLayoutManager = LinearLayoutManager(
             context,
@@ -57,7 +52,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
 
-        pagosViewModel.getAllPagosDeuda((activity as DebtDetailsActivity).debtID).observe(this, Observer {
+        pagosViewModel.getAllPagosDeuda((activity as DebtDetailsActivity).debtID).observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
@@ -65,7 +60,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
         adapter.setOnClickListener(View.OnClickListener {
             val selectPayment = adapter.getPaymentAt(RV.getChildAdapterPosition(it))
 
-            val paymentDetails = AlertDialog.Builder(context!!)
+            val paymentDetails = AlertDialog.Builder(requireContext())
             paymentDetails.setTitle(getString(R.string.detalles_de_pago))
             paymentDetails.setView(R.layout.payment_details_dialog)
 
@@ -84,7 +79,7 @@ class DebtPaymentsHistoryFragment: Fragment() {
             }
             if(debtStatus != EstatusDeuda.PAGADA) {
                 paymentDetails.setNeutralButton(getString(R.string.eliminar)) { _, _ ->
-                    val builder = AlertDialog.Builder(context!!)
+                    val builder = AlertDialog.Builder(requireContext())
                     builder.setTitle(getString(R.string.esta_seguro_eliminar_pago))
                     builder.setMessage(getString(R.string.eliminar_pago_es_irreversible))
                     builder.setPositiveButton(getString(R.string.eliminar)) { _, _ ->

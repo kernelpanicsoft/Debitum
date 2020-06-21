@@ -15,9 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.fragment_schedule.*
@@ -30,7 +28,6 @@ class ScheduleFragment : Fragment() {
 
     lateinit var RV : RecyclerView
     lateinit var recordatorioViewModel : RecordatorioPagoViewModel
-    lateinit var mAdView : AdView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,10 +38,7 @@ class ScheduleFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_schedule, container, false)
         //val fab = v.findViewById<FloatingActionButton>(R.id.addReminderFAB)
 
-        MobileAds.initialize(context) {}
-        mAdView = v.findViewById(R.id.adViewRemindersList)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+
 
         RV = v.findViewById(R.id.RecViewRecordatorios)
         RV.setHasFixedSize(true)
@@ -57,14 +51,14 @@ class ScheduleFragment : Fragment() {
         mLayoutManager.stackFromEnd = true
         RV.layoutManager = mLayoutManager
 
-        val adapter = ReminderAdapter(context!!)
+        val adapter = ReminderAdapter(requireContext())
         recordatorioViewModel = ViewModelProviders.of(this).get(RecordatorioPagoViewModel::class.java)
-        recordatorioViewModel.getRecordatoriosPagoDeuda().observe(this, androidx.lifecycle.Observer {
+        recordatorioViewModel.getRecordatoriosPagoDeuda().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
 
         })
 
-        recordatorioViewModel.getSumaRecordatorioPagos().observe(this, androidx.lifecycle.Observer {
+        recordatorioViewModel.getSumaRecordatorioPagos().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val simboloMoneda = prefs.getString("moneySign","$")
 
@@ -89,7 +83,7 @@ class ScheduleFragment : Fragment() {
 
 
     fun scheduleJob(){
-        val componentName = ComponentName(context, ReminderNotificationsJobService::class.java)
+        val componentName = ComponentName(requireContext(), ReminderNotificationsJobService::class.java)
         val info = JobInfo.Builder(123,componentName)
             .setRequiresCharging(true)
             .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)

@@ -22,9 +22,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+
 import model.CantidadTipoDeuda
 import room.components.viewModels.DeudaViewModel
 
@@ -33,16 +31,12 @@ class StatsFragment : Fragment() {
     lateinit var debtsChart : PieChart
     lateinit var deudasViewModel:  DeudaViewModel
     lateinit var RV: RecyclerView
-    lateinit var mAdView : AdView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_stats, container, false)
 
-        MobileAds.initialize(context) {}
-        mAdView = v.findViewById(R.id.adViewStats)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+
 
         RV = v.findViewById(R.id.RecViewEstadisticas)
         RV.setHasFixedSize(true)
@@ -60,7 +54,7 @@ class StatsFragment : Fragment() {
 
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
-        deudasViewModel.getCuentaDeTiposDeDeuda().observe(this, Observer {
+        deudasViewModel.getCuentaDeTiposDeDeuda().observe(viewLifecycleOwner, Observer {
             Log.d("CuentaTipoDeuda", it.toString())
             setupPieChart(it)
             adapter.submitList(it)
