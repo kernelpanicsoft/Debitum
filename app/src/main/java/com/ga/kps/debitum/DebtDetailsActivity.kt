@@ -14,8 +14,11 @@ import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.LiveData
+import com.facebook.ads.AdSize
+import com.facebook.ads.AdView
 import helpcodes.ANADIR_PAGO_DEUDA
 import helpcodes.EstatusDeuda
 import kotlinx.android.synthetic.main.activity_debt_details.*
@@ -27,7 +30,7 @@ class DebtDetailsActivity : AppCompatActivity(), DebtDetailsFragment.DebtStatusE
     private lateinit var adapter : ViewPagerAdapter
     private lateinit var deudaViewModel : DeudaViewModel
     private lateinit var currentDebt : LiveData<Deuda>
-
+    private lateinit var adView: AdView
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -37,6 +40,11 @@ class DebtDetailsActivity : AppCompatActivity(), DebtDetailsFragment.DebtStatusE
             val ab = supportActionBar
             ab!!.setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.detalles_de_la_deuda)
+
+            adView = AdView(this, "189318145820313_189425335809594", AdSize.BANNER_HEIGHT_50)
+            val adContainer = findViewById<LinearLayout>(R.id.banner_container)
+            adContainer.addView(adView)
+            adView.loadAd()
 
             setupViewPager(ViewPagerDetallesDeuda)
             tabLayoutDebtTomas.setupWithViewPager(ViewPagerDetallesDeuda)

@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
+import com.facebook.ads.AdSize
+import com.facebook.ads.AdView
 import kotlinx.android.synthetic.main.activity_main.*
 import model.Cuenta
 import model.Deuda
@@ -20,7 +23,7 @@ import room.components.viewModels.DeudaViewModel
 
 class MainActivity : AppCompatActivity() {
 
-
+    private lateinit var adView: AdView
     lateinit var deudaViewModel: DeudaViewModel
     lateinit var cuentaViewModel: CuentaViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +38,11 @@ class MainActivity : AppCompatActivity() {
         cuentaViewModel = ViewModelProviders.of(this).get(CuentaViewModel::class.java)
         deudaViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
 
+        adView = AdView(this, "189318145820313_189320145820113", AdSize.BANNER_HEIGHT_50)
+        val adContainer = findViewById<LinearLayout>(R.id.banner_container)
+        adContainer.addView(adView)
+        adView.loadAd()
 
-        /*
-        cuentaViewModel.getCuenta(1).observe(this, Observer {
-            val simboloMoneda = "$"
-            cantidadDeudaTotalTV.text =
-                getString(R.string.simboloMoneda, simboloMoneda, it?.deuda_total)
-        })
-        */
         if(savedInstanceState == null){
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.fragmentContainer, DebtsFragment(), "Estadisticas").commit()
