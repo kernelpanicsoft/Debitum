@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false"
+    >
 
     <PreferenceCategory
         android:title="@string/detalles_de_deudas"
         android:key="pref_debts"
+        app:iconSpaceReserved="false"
         >
         <ListPreference
             app:key="moneySign"
             app:title="Simbolo de moneda"
             app:entries="@array/moneySign"
             app:entryValues="@array/moneySign"
-            app:defaultValue="$"/>
+            app:defaultValue="$"
+            app:iconSpaceReserved="false"/>
     </PreferenceCategory>
 
-    <!--
-    <PreferenceCategory
-        android:title="Notificaciones"
-        android:key="pref_notifications">
-        <ListPreference
-            app:key="notificationAnticipation"
-            app:title="Anticipar notificaciones"
-            app:entries="@array/notificationAnticipation"
-            app:entryValues="@array/notificationAnticipationValues"
-            app:defaultValue="0"
-            />
 
-    </PreferenceCategory>
-    -->
 
     <PreferenceCategory
         app:key="appDetails"
         app:title="@string/acerca_de"
+        app:iconSpaceReserved="false"
         >
         <PreferenceScreen
             android:title="@string/politica_de_privacidad"
             android:key="policitica_de_privacidad"
-            android:summary="@string/leer_politica_privacidad_y_terminos"/>
+            android:summary="@string/leer_politica_privacidad_y_terminos"
+            app:iconSpaceReserved="false"/>
+        <!--
         <PreferenceScreen
             android:title="@string/calificanos_en_play_store"
             android:key="calificar_play_store"
-            android:summary="@string/tu_opinion_es_importante_para_nosotros"/>
+            android:summary="@string/tu_opinion_es_importante_para_nosotros"
+            app:iconSpaceReserved="false"/>
+            -->
         <PreferenceScreen
             android:title="@string/version"
             android:key="version_app"
-            android:summary="1.0"/>
+            android:summary="1.0"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
