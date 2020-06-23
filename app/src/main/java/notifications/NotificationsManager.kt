@@ -8,9 +8,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.ga.kps.debitum.MainActivity
-import com.ga.kps.debitum.R
-import com.ga.kps.debitum.SplashScreenActivity
+import com.ga.kps.debitumag.R
+import com.ga.kps.debitumag.SplashScreenActivity
 import helpcodes.DEFAULT_NOTIFICATION_CHANEL_ID
 import java.text.SimpleDateFormat
 import java.util.*

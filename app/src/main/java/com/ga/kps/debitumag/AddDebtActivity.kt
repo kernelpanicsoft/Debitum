@@ -1,12 +1,10 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProviders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.snackbar.Snackbar
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView

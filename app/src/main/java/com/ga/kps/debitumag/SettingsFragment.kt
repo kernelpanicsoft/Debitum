@@ -1,10 +1,8 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceScreen
 import java.lang.Exception

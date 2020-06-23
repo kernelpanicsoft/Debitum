@@ -1,4 +1,4 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.app.Activity
 import androidx.lifecycle.Observer
@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AlertDialog
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast

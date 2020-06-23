@@ -1,4 +1,4 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

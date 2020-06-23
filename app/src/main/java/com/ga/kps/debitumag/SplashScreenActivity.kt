@@ -1,8 +1,7 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import notifications.NotificationsManager
 

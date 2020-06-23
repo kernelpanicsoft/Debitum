@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ga.kps.debitum">
+    package="com.ga.kps.debitumag">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_icono_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditDebtActivity"></activity>
+        <activity android:name="com.ga.kps.debitumag.EditDebtActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4604704883963264~1985853520" />
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.ga.kps.debitumag.SplashScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -27,28 +27,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".ReminderDetailsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.ReminderDetailsActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".SelectDebtActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.SelectDebtActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".AddPaymentReminderActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.AddPaymentReminderActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".AddDebtActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.AddDebtActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".DebtDetailsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.DebtDetailsActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
         <activity
-            android:name=".AddDebtPaymentActivity"
-            android:parentActivityName=".DebtDetailsActivity" />
+            android:name="com.ga.kps.debitumag.AddDebtPaymentActivity"
+            android:parentActivityName="com.ga.kps.debitumag.DebtDetailsActivity" />
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.ga.kps.debitumag.SettingsActivity"
+            android:parentActivityName="com.ga.kps.debitumag.MainActivity" />
 
         <service
             android:name="schedulers.ReminderNotificationsJobService"

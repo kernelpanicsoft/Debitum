@@ -1,26 +1,20 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
-import android.content.Context
 import android.content.Context.JOB_SCHEDULER_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import helpers.CalendarHelper
 import kotlinx.android.synthetic.main.fragment_schedule.*
-import notifications.AlarmHelper
-import notifications.NotificationsManager
 import room.components.viewModels.RecordatorioPagoViewModel
 import schedulers.ReminderNotificationsJobService
 

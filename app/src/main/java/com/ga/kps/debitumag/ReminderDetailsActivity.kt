@@ -1,4 +1,4 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

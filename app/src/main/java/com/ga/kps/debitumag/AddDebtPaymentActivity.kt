@@ -1,4 +1,4 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import kotlinx.android.synthetic.main.add_debt_payment_activity.*

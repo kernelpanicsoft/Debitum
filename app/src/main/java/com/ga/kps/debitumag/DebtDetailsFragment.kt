@@ -1,6 +1,5 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
-import android.content.ComponentCallbacks
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

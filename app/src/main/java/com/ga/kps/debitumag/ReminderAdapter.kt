@@ -1,8 +1,7 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.content.Context
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import helpcodes.MENSUAL
 import helpcodes.SEMANAL
 import model.JoinDeudaRecordatorio
-import model.RecordatorioPago
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*

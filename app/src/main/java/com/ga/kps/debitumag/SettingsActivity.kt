@@ -1,20 +1,24 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_edit_debt.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_settings.*
 
-class EditDebtActivity : AppCompatActivity() {
-
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_debt)
+        setContentView(R.layout.activity_settings)
 
         setSupportActionBar(toolbar)
         val ab = supportActionBar
-        ab!!.setDisplayHomeAsUpEnabled(true)
-        title = getString(R.string.editar_deuda)
+        ab?.setDisplayHomeAsUpEnabled(true)
+        title = getString(R.string.configuracion)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.miFragmento, SettingsFragment())
+            .commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

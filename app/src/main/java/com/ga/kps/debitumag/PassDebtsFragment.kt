@@ -1,4 +1,4 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,21 +11,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import helpcodes.EstatusDeuda
 import room.components.viewModels.DeudaViewModel
 
-class ActualDebtsFragment: Fragment() {
-    lateinit var deudasViewModel : DeudaViewModel
-    lateinit var RV : RecyclerView
+class PassDebtsFragment: Fragment() {
+    lateinit var deudasViewModel: DeudaViewModel
+    lateinit var RV: RecyclerView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
-        val v = inflater.inflate(R.layout.fragment_actual_debts, container, false)
-        RV = v.findViewById(R.id.RecViewDeudasActuales)
+        val v = inflater.inflate(R.layout.fragment_pass_debts,container, false)
+        RV = v.findViewById(R.id.RecViewDeudasPasadas)
         RV.setHasFixedSize(true)
 
 
-
         return v
+
     }
 
     override fun onResume() {
@@ -40,11 +41,9 @@ class ActualDebtsFragment: Fragment() {
         RV.layoutManager = mLayoutManager
 
 
-
-
         val adapter = DebtsAdapter(context)
         deudasViewModel = ViewModelProviders.of(this).get(DeudaViewModel::class.java)
-        deudasViewModel.getAllDeudasActivas().observe(this, Observer {
+        deudasViewModel.getAllDeudasByState(EstatusDeuda.PAGADA).observe(this, Observer {
             adapter.submitList(it)
         })
         adapter.setOnClickListener(View.OnClickListener {
@@ -57,7 +56,5 @@ class ActualDebtsFragment: Fragment() {
 
 
         RV.adapter = adapter
-
     }
-
 }

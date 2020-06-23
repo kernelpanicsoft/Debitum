@@ -1,7 +1,6 @@
-package com.ga.kps.debitum
+package com.ga.kps.debitumag
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
@@ -22,14 +20,12 @@ import kotlinx.android.synthetic.main.activity_add_payment_reminder.*
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.fechaPagoTV
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.tituloDeudaET
 import kotlinx.android.synthetic.main.activity_add_payment_reminder.toolbar
-import model.Deuda
 import model.RecordatorioPago
 import room.components.viewModels.DeudaViewModel
 import room.components.viewModels.RecordatorioPagoViewModel
 import java.lang.Exception
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
 import java.util.*
 
 
